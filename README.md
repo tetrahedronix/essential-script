@@ -1,21 +1,12 @@
-=== Essential Script ===
-Contributors: tetravalente
-Tags: scripting, javascript, css, adsense, code, embed
-Requires at least: 4.0
-Tested up to: 4.8.1
-Stable tag: 4.8.1
-Requires PHP: 5.3
-License: GPLv3 or later
-License URI: https://www.gnu.org/licenses/gpl-3.0.html
+# Essential Script
 
 Essential Script adds client-side script to individual areas of your Web site.
 
-== Description ==
 Essential Script plugin offers you the ability to enqueue and manage your client-side script, which is an essential part of your website, through a versatile text editor.
 
 For example, through Essential Script interface you can add your banner in one location and configure what code is allowed to display on the Web page.
 
-== Features ==
+## Features
 1. Streamlined Option Panel.
 2. Setup in minutes.
 3. Uses [Codemirror](http://codemirror.net/) for syntax highlighting.
@@ -23,7 +14,10 @@ For example, through Essential Script interface you can add your banner in one l
 5. Support JavaScript/XML/HTML
 6. Free as in speech.
 
-== Installation ==
+## Contributors
+* tetravalente
+
+## Installation
 This section describes how to install the plugin and get it working:
 
 1. Upload the `essential-script` folder to  the `/wp-content/plugins/` directory.
@@ -39,7 +33,6 @@ Or install the plugin through the WordPress plugins screen directly.
 ### TODO
 - [ ] Allow the use of wp_enqueue_scripts where is possible. It requires a checkbox.
 
-==Screenshots==
+## Screenshots
 1. Essential Script admin dashboard
-
-== Changelog ==
+![Text block](https://ps.w.org/essential-script/assets/screenshot-1.png?rev=1723343)
