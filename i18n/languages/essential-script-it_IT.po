@@ -1,0 +1,133 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Essential Script\n"
+"POT-Creation-Date: 2017-08-28 22:28+0200\n"
+"PO-Revision-Date: 2017-08-28 22:28+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: it_IT\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.1\n"
+"X-Poedit-Basepath: ../..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: __;_e;esc_html_e\n"
+"X-Poedit-SearchPath-0: classes\n"
+"X-Poedit-SearchPath-1: lib\n"
+"X-Poedit-SearchPathExcluded-0: i18n\n"
+
+#: classes/EssentialScript/Admin/Menu.php:87
+msgid "Script saved"
+msgstr "Script salvato"
+
+#: classes/EssentialScript/Admin/Menu.php:98
+msgid ""
+"Essential Script plugin offers you the ability to enqueue and manage your "
+"essential scripts through a basic input interface."
+msgstr ""
+"Essential Script plugin offre la possibilità di accodare e gestire i tuoi "
+"script essenziali per mezzo di una interfaccia di input basilare."
+
+#: classes/EssentialScript/Admin/Menu.php:107
+msgid "Save Script"
+msgstr "Salva Script"
+
+#: classes/EssentialScript/Admin/Page.php:66
+#: classes/EssentialScript/Admin/Page.php:217
+msgid "Choose where to enqueue the script"
+msgstr "Scegli dove accodare lo script"
+
+#: classes/EssentialScript/Admin/Page.php:71
+msgid "Head"
+msgstr "Intestazione"
+
+#: classes/EssentialScript/Admin/Page.php:76
+msgid "Content"
+msgstr "Contenuto"
+
+#: classes/EssentialScript/Admin/Page.php:81
+msgid "Foot"
+msgstr "Piè di pagina"
+
+#: classes/EssentialScript/Admin/Page.php:91
+#: classes/EssentialScript/Admin/Page.php:229
+msgid "Choose where to store the script"
+msgstr "Scegli dove memorizzare lo script"
+
+#: classes/EssentialScript/Admin/Page.php:96
+msgid "File (Recommended)"
+msgstr "File (Raccomandato)"
+
+#: classes/EssentialScript/Admin/Page.php:99
+msgid "Enter the filename"
+msgstr "Inserisci il nome del file"
+
+#: classes/EssentialScript/Admin/Page.php:105
+msgid "Wordpress DB"
+msgstr "Wordpress DB"
+
+#: classes/EssentialScript/Admin/Page.php:115
+#: classes/EssentialScript/Admin/Page.php:223
+msgid "Pages to exclude"
+msgstr "Pagine da escludere"
+
+#: classes/EssentialScript/Admin/Page.php:119
+msgid "Default Homepage"
+msgstr "Default pagina principale"
+
+#: classes/EssentialScript/Admin/Page.php:125
+msgid "Single Post"
+msgstr "Post Singolo"
+
+#: classes/EssentialScript/Admin/Page.php:131
+msgid "Pages"
+msgstr "Pagine"
+
+#: classes/EssentialScript/Admin/Page.php:136
+msgid "Archive"
+msgstr "Archivio\t"
+
+#: classes/EssentialScript/Admin/Page.php:160
+msgid "File "
+msgstr "File"
+
+#: classes/EssentialScript/Admin/Page.php:175
+msgid ""
+"Max 512 chars. The allowed tags are listed in settings_sanitize(). You can "
+"add or remove tags as required."
+msgstr ""
+"Massimo 512 caratteri. I tags permessi sono elencati in settings_sanitize(). "
+"Puoi aggiungere o rimuovere i tags a piacimento."
+
+#: classes/EssentialScript/Admin/Page.php:195
+msgid "Enter your script settings below: script code, position and storage."
+msgstr ""
+"Inserisci le impostazioni per il tuo script qui sotto: codice, posizione e "
+"supporto di memoria dello script."
+
+#: classes/EssentialScript/Admin/Page.php:211
+msgid "Enter the script code here"
+msgstr "Inserisci qui il codice dello script"
+
+#: classes/EssentialScript/Core/Setup.php:90
+#, php-format
+msgid "The plugin Essential Script requires PHP %s or later. "
+msgstr "Il plugin Essential Script richiede PHP %s o superiore."
+
+#: classes/EssentialScript/Core/Setup.php:92
+msgid "Contact your system admin about updating your PHP interpreter"
+msgstr ""
+"Contatta l'amministratore del tuo sistema per aggiornare il tuo interprete "
+"PHP"
+
+#: classes/EssentialScript/Core/Setup.php:109
+#, php-format
+msgid "The plugin Essential Script requires Wordpress %s or later "
+msgstr "Il plugin Essential Script richiede Wordpress %s o superiore"
+
+#: classes/EssentialScript/Core/Setup.php:111
+msgid "Contact your system admin about updating your Wordpress copy"
+msgstr ""
+"Contatta l'amministratore del tuo sistema per aggiornare la tua copia di "
+"Wordpress"
