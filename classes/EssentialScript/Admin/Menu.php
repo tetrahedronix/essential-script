@@ -42,7 +42,7 @@ class Menu {
 	 * 
 	 * @return string
 	 */
-	public function get_slug() {
+	public static function get_slug() {
 		return self::$submenu_page;
 	}
 	/**
@@ -51,7 +51,7 @@ class Menu {
 	 * Adds Essential Script submenu page to tools menu then it sets the
 	 * submenu_page property.
 	 */
-	public function init() {
+	public static function init() {
 		// Checks if we are displaying the Dashboard or the admin's panel.
 		if ( is_admin() ) {
 			self::$submenu_page = add_submenu_page(
