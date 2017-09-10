@@ -52,14 +52,21 @@ new \EssentialScript\Core\Setup;
 
 // Generic actions and filters go here using anonymous function from PHP 5.3
 if ( is_admin() ) {
+	// Prepares options for the Page object
 	add_action( 'admin_init', function() {
 		$opts = new \EssentialScript\Core\Options;
 		new \EssentialScript\Admin\Page( $opts );
 	} ); 
+	// Creating the menu.
 	add_action( 'admin_menu', function() {
 		\EssentialScript\Admin\Menu::init();
 	} ); 
+	// Registering a Wordpress Widget.
+	add_action( 'widgets_init', function() {
+		register_widget( '\EssentialScript\Admin\Widget' );
+	} );
 }
+// If !admin then it's frontend.
 add_action( 'wp', function() { 
 	/* The wp action hook runs immediately after the global WP class
 	 * object is set up. Notice that init hook does not the job here

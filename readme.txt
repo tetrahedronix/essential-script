@@ -38,6 +38,7 @@ Or install the plugin through the WordPress plugins screen directly.
 
 ### TODO
 - [ ] Allow the use of wp_enqueue_scripts where is possible. It requires a checkbox.
+. [x] Support for Widgets.
 
 ==Screenshots==
 1. Essential Script admin dashboard
