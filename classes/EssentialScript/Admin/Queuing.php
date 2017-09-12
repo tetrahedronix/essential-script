@@ -26,10 +26,19 @@ namespace EssentialScript\Admin;
  * @author docwho
  */
 class Queuing {
-    /**
+	const CODEMIRROR_VER = '5.29.0';
+	/**
+	 * @var string Current page slug. 
+	 */
+	private $slug;
+
+	/**
 	 * Enqueue scripts.
 	 */
-	public function init() {
+	public function init( $submenu_page) {
+		
+		$this->slug = $submenu_page;
+		
 		add_action( 'admin_enqueue_scripts', array ( $this, 'register_scripts' ) );
 	}
 	
@@ -37,8 +46,11 @@ class Queuing {
 	 * Load scripts and styles for the administration interface
 	 */
 	public function register_scripts( $hook ) {
-		
-		if ( 'tools_page_essentialscript' !== $hook ) {
+	
+		/* if ( 'tools_page_essentialscript' !== $hook ) {
+			return;
+		} */
+		if ( $this->slug !== $hook ) {
 			return;
 		}
 
@@ -49,7 +61,7 @@ class Queuing {
 				'codemirror-script', 
 				plugins_url( 'lib/codemirror.js', ESSENTIAL_SCRIPT1_PLUGIN_FILE ), 
 				array(), 
-				'5.23.0', 
+				self::CODEMIRROR_VER, 
 				false 
 		);
 		// Codemirror mode script for javascript language.
@@ -57,7 +69,7 @@ class Queuing {
 				'codemirror-mode-js',
 				plugins_url( 'lib/mode/javascript/javascript.js', ESSENTIAL_SCRIPT1_PLUGIN_FILE ),
 				array(),
-				'5.23.0',
+				self::CODEMIRROR_VER,
 				false
 		);
 		// Codemirror mode script for XML/HTML language.
@@ -65,7 +77,7 @@ class Queuing {
 				'codemirror-mode-xml',
 				plugins_url( 'lib/mode/xml/xml.js', ESSENTIAL_SCRIPT1_PLUGIN_FILE ),
 				array(),
-				'5.23.0',
+				self::CODEMIRROR_VER,
 				false
 		);
 		// Codemirror style
@@ -73,14 +85,14 @@ class Queuing {
 				'codemirror-style',
 				plugins_url( 'lib/codemirror.css', ESSENTIAL_SCRIPT1_PLUGIN_FILE ),
 				array(),
-				'5.23.0',
+				self::CODEMIRROR_VER,
 				false 
 		);
 		wp_register_style(
 				'codemirror-style-override',
 				plugins_url( 'css/codemirror-override.css', ESSENTIAL_SCRIPT1_PLUGIN_FILE ),
 				array(),
-				'5.23.0',
+				self::CODEMIRROR_VER,
 				false
 		);
 		// Plugin style
