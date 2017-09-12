@@ -32,6 +32,13 @@ This section describes how to install the plugin and get it working:
 
 Or install the plugin through the WordPress plugins screen directly.
 
+== Development ==
+
+Sources of this plugin are available both in SVN and Git:
+
+* [WordPress SVN repository](https://plugins.svn.wordpress.org/essential-script/)
+* [GitHub](https://github.com/tetravalence/essential-script)
+
 ### Known issue
 
 * This plugin has known conflit with JetPack Embedded Shortcode. You need to disable Embedded Shortcode if you want to use Essential Script and JetPack together.
