@@ -31,7 +31,7 @@ namespace EssentialScript\Admin;
 class Widget extends \WP_Widget {
 	
 	private $options;
-	
+
 	/**
 	 * Sets up the widget.
 	 */
@@ -43,19 +43,108 @@ class Widget extends \WP_Widget {
 			/* According mathiasbynens.be/demo/crazy-class,
 			 * __CLASS__ is valid css name.
 			 */
-			'classname' => __CLASS__,   // class name added to the <li> element.
-			'description' => 'Essential Script Widget'
+			'classname' => __CLASS__,   // Class name added to the <li> element.
+			'description' => esc_html__( // Description for the Widget Screen.
+				'Arbitrary Javascript/XML code.', 'essential-script')
 		);
-		parent::__construct( __CLASS__, 'Essential Script', $widget_opts );
+		/* __CLASS__: ID for the tag <li>
+		 * 'Essential Script': widget title displayed in the Widgets screen.
+		 * $widget_opts: widget options.
+		 */
+		parent::__construct( 
+				__CLASS__, 
+				esc_html__( 'Essential Script', 'essential-script' ), 
+				$widget_opts 
+		);
+		$enqueued = new \EssentialScript\Admin\Queuing;
+		$enqueued->init( 'widgets.php' );
 	}
 	
 	/**
 	 * Displays the widget form in Apparence/Widgets menu.
 	 * 
-	 * @param array $instance
+	 * @see WP_Widget::form()
+	 * @param array $instance Previously saved values from database.
 	 */
 	public function form( $instance ) {
-		echo __CLASS__;
+		$title = !empty( $instance['title'] ) ? $instance['title'] :
+			esc_html__( 'New Title', 'essential-script' );
+?>
+<p>
+	<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>">
+		<?php esc_attr_e( 'Title', 'essential-script' ); ?>:
+	</label>
+	<input class="widefat" 
+		   id="<?php echo esc_attr(	$this->get_field_id( 'title' ) ) ;?>"
+		   name="<?php echo esc_attr( $this->get_field_name( 'title' ) ) ?>"
+		   type="text"
+		   value="<?php echo esc_attr( $title ); ?>">
+</p>
+<p>
+	<label for="<?php echo esc_attr( $this->get_field_id( 'content' ) ); ?>">
+		<?php echo esc_attr_e( 'Content', 'essential-script' ); ?>:
+	</label>
+	<textarea class="widefat code"
+			  rows="16" cols="20"
+			  id="<?php echo esc_attr( $this->get_field_id( 'content' ) ); ?>"
+			  name="<?php echo esc_attr( $this->get_field_name( 'content' ) ); ?>">
+<?php echo $this->gettextarea(); ?></textarea>
+</p>
+<!-- Codemirror -->   
+<script>
+	//var selector = "widget-essentialscript\\admin\\widget-__i__-content";
+	//var textarea_node=document.getElementById(selector);
+	var selector = 'textarea[id$="-content"';
+	var textarea_node=document.querySelectorAll(selector);
+	var editor = CodeMirror.fromTextArea(textarea_node[2], {
+		lineNumbers: true,
+		mode: { name: "xml", htmlMode: true },
+		viewportMargin: Infinity 
+});
+</script> 
+<?php
+		//return '';
+	}
+	
+	public function gettextarea() {
+		$textarea = '';
+		$storage = 'file';
+		$script = '';
+		
+		if ( $this->options->offsetExists('storage') ) {
+			$storage = $this->options->offsetGet( 'storage' );
+		}
+		
+		if ( $this->options->offsetExists( 'script' ) ) {
+			$script = $this->options->offsetGet( 'script' ); 
+		}
+		
+		switch ( $storage ) {
+			case 'wpdb':
+				$textarea = $script;
+				break;
+			case 'file':
+				$f = $this->options['path'] . '/' . $this->options['filename'];
+				if ( file_exists( $f ) ) {
+					$textarea = file_get_contents( $f );
+				} else {
+					add_settings_error(
+						// slug title for our settings.
+						'es_messages',
+						// slug name for this error/event
+						'es_file_error',
+						// The formatted message text to display.
+						__('File ' . $f . ' Not found', 'essential-script'),
+						// The type of message it is: error/updated
+						'error'								
+					);
+					settings_errors();
+					$textarea = '';
+				}
+					break;
+		}
+
+		return $textarea; 
 	}
 	
 	/**
