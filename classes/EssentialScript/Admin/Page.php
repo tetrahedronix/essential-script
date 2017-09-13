@@ -49,7 +49,7 @@ final class Page {
 		
 		if ( $this->submenu_page ) {
 			$enqueued = new \EssentialScript\Admin\Queuing;
-			$enqueued->init();
+			$enqueued->init( $this->submenu_page );
 			// Register a new setting for "essentialscript" page.
 			register_setting( 'essentialscript_options', 
 				'essentialscript_options',
