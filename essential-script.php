@@ -61,11 +61,11 @@ if ( is_admin() ) {
 	add_action( 'admin_menu', function() {
 		\EssentialScript\Admin\Menu::init();
 	} ); 
-	// Registering a Wordpress Widget.
-	add_action( 'widgets_init', function() {
-		register_widget( '\EssentialScript\Admin\Widget' );
-	} );
 }
+// Registering a Wordpress Widget.
+add_action( 'widgets_init', function() {
+	register_widget( 'EssentialScript\Admin\Widget' );
+} );
 // If !admin then it's frontend.
 add_action( 'wp', function() { 
 	/* The wp action hook runs immediately after the global WP class
