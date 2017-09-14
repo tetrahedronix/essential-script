@@ -27,6 +27,7 @@ namespace EssentialScript\Admin;
  */
 class Queuing {
 	const CODEMIRROR_VER = '5.29.0';
+	const ESSENTIALSCRIPT_VER = '0.3';
 	/**
 	 * @var string Current page slug. 
 	 */
@@ -80,6 +81,15 @@ class Queuing {
 				self::CODEMIRROR_VER,
 				false
 		);
+		if ( 'widgets.php' === $this-> slug ) {
+			wp_register_script(
+				'essential-script-widgets',
+				plugins_url( 'lib/essential-script-widgets.js', ESSENTIAL_SCRIPT1_PLUGIN_FILE ),
+				array(),
+				self::ESSENTIALSCRIPT_VER,
+				false 
+			);
+		}
 		// Codemirror style
 		wp_register_style(
 				'codemirror-style',
@@ -88,24 +98,28 @@ class Queuing {
 				self::CODEMIRROR_VER,
 				false 
 		);
-		wp_register_style(
+		if ( 'widgets.php' !== $this->slug ) {
+			wp_register_style(
 				'codemirror-style-override',
 				plugins_url( 'css/codemirror-override.css', ESSENTIAL_SCRIPT1_PLUGIN_FILE ),
 				array(),
 				self::CODEMIRROR_VER,
 				false
-		);
-		// Plugin style
-		wp_register_style(
+			);
+			// Plugin style
+			wp_register_style(
 				'essentialscript-plugin-style',
 				plugins_url( 'css/essentialscript-admin.css', ESSENTIAL_SCRIPT1_PLUGIN_FILE ),
 				array(),
 				'0.1',
 				false 
-		);
+			);
+		} 
+
 		wp_enqueue_script( 'codemirror-script' );
 		wp_enqueue_script( 'codemirror-mode-js' );
 		wp_enqueue_script( 'codemirror-mode-xml' );
+		wp_enqueue_script( 'essential-script-widgets' );
 		wp_enqueue_style( 'codemirror-style' );
 		wp_enqueue_style( 'codemirror-style-override' );
 		wp_enqueue_style( 'essentialscript-plugin-style' );		
