@@ -26,7 +26,17 @@ namespace EssentialScript\Admin;
  * @author docwho
  */
 class Queuing {
+	/**
+	 * CodeMirror Version for upgrade purposes. 
+	 * 
+	 * @since 0.2
+	 */
 	const CODEMIRROR_VER = '5.29.0';
+	/**
+	 * Essential Script Version for upgrade purposes.
+	 * 
+	 * @since 0.2
+	 */
 	const ESSENTIALSCRIPT_VER = '0.3';
 	/**
 	 * @var string Current page slug. 
@@ -35,6 +45,8 @@ class Queuing {
 
 	/**
 	 * Enqueue scripts.
+	 * 
+	 * @param type $submenu_page  Slug of the menu where to register the script.
 	 */
 	public function init( $submenu_page) {
 		
@@ -47,10 +59,7 @@ class Queuing {
 	 * Load scripts and styles for the administration interface
 	 */
 	public function register_scripts( $hook ) {
-	
-		/* if ( 'tools_page_essentialscript' !== $hook ) {
-			return;
-		} */
+
 		if ( $this->slug !== $hook ) {
 			return;
 		}
@@ -81,11 +90,12 @@ class Queuing {
 				self::CODEMIRROR_VER,
 				false
 		);
+		// Javascript script for using with Widgets API.
 		if ( 'widgets.php' === $this-> slug ) {
 			wp_register_script(
 				'essential-script-widgets',
 				plugins_url( 'lib/essential-script-widgets.js', ESSENTIAL_SCRIPT1_PLUGIN_FILE ),
-				array(),
+				array( 'jquery', 'codemirror-script' ),
 				self::ESSENTIALSCRIPT_VER,
 				false 
 			);
@@ -98,6 +108,7 @@ class Queuing {
 				self::CODEMIRROR_VER,
 				false 
 		);
+		// Doesn't register on Widgets menu.
 		if ( 'widgets.php' !== $this->slug ) {
 			wp_register_style(
 				'codemirror-style-override',
@@ -111,7 +122,7 @@ class Queuing {
 				'essentialscript-plugin-style',
 				plugins_url( 'css/essentialscript-admin.css', ESSENTIAL_SCRIPT1_PLUGIN_FILE ),
 				array(),
-				'0.1',
+				self::ESSENTIALSCRIPT_VER,
 				false 
 			);
 		} 
