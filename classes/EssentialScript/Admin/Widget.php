@@ -30,6 +30,8 @@ namespace EssentialScript\Admin;
  */
 class Widget extends \WP_Widget {
 	
+	const CLASS_WIDGET = 'essential_script';
+	
 	private $options;
 
 	/**
@@ -40,24 +42,26 @@ class Widget extends \WP_Widget {
 		$this->options = new \EssentialScript\Core\Options;
 		// Widget options
 		$widget_opts = array (
-			/* According mathiasbynens.be/demo/crazy-class,
-			 * __CLASS__ is valid css name.
-			 */
-			'classname' => __CLASS__,   // Class name added to the <li> element.
-			'description' => esc_html__( // Description for the Widget Screen.
-				'Arbitrary Javascript/XML code.', 'essential-script')
+			// Class name added to the <li> element.
+			'classname' => self::CLASS_WIDGET,
+			// Description for the Widget Screen.
+			'description' => esc_html__( 
+				'Arbitrary Javascript/XML code.', 'essential-script'),
+			'customize_selective_refresh' => true
 		);
-		/* __CLASS__: ID for the tag <li>
+		/* __CLASS__: ID for the tags <div>
 		 * 'Essential Script': widget title displayed in the Widgets screen.
 		 * $widget_opts: widget options.
 		 */
-		parent::__construct( 
-				__CLASS__, 
-				esc_html__( 'Essential Script', 'essential-script' ), 
-				$widget_opts 
+		parent::__construct(
+			self::CLASS_WIDGET,
+			esc_html__( 'Essential Script', 'essential-script' ), 
+			$widget_opts
 		);
+		//if ( is_active_widget( false, false, $this->id_base ) || is_customize_preview() ) {
 		$enqueued = new \EssentialScript\Admin\Queuing;
 		$enqueued->init( 'widgets.php' );
+		 //}
 	}
 	
 	/**
@@ -81,27 +85,12 @@ class Widget extends \WP_Widget {
 		   value="<?php echo esc_attr( $title ); ?>">
 </p>
 <p>
-	<label for="<?php echo esc_attr( $this->get_field_id( 'content' ) ); ?>">
-		<?php echo esc_attr_e( 'Content', 'essential-script' ); ?>:
-	</label>
 	<textarea class="widefat code"
 			  rows="16" cols="20"
 			  id="<?php echo esc_attr( $this->get_field_id( 'content' ) ); ?>"
 			  name="<?php echo esc_attr( $this->get_field_name( 'content' ) ); ?>">
 <?php echo $this->gettextarea(); ?></textarea>
 </p>
-<!-- Codemirror -->   
-<script>
-	//var selector = "widget-essentialscript\\admin\\widget-__i__-content";
-	//var textarea_node=document.getElementById(selector);
-	var selector = 'textarea[id$="-content"';
-	var textarea_node=document.querySelectorAll(selector);
-	var editor = CodeMirror.fromTextArea(textarea_node[2], {
-		lineNumbers: true,
-		mode: { name: "xml", htmlMode: true },
-		viewportMargin: Infinity 
-});
-</script> 
 <?php
 		//return '';
 	}
@@ -150,20 +139,37 @@ class Widget extends \WP_Widget {
 	/**
 	 * Outputs the content of the Widget.
 	 * 
-	 * @param array $arg
+	 * @param array $args
 	 * @param array $instance
 	 */
-	public function widget( $arg, $instance ) {
-		echo __CLASS__;
+	public function widget( $args, $instance ) {
+		var_dump( $this->id_base );
+		var_dump( $this->number );
+		echo $args['before_widget'];
+		if ( !empty ( $instance['title'] ) ) {
+			echo $args['before_title'] . 
+				apply_filters( 'widget_title', $instance['title'] ) .
+				$args['after_title'];
+		}
+		echo $this->gettextarea();
+		echo $args['after_widget'];
 	}
 	
 	/**
 	 * Processing widget options on save.
 	 * 
-	 * @param array $new_instance The new options.
-	 * @param array $old_instance The previous options.
+	 * @see WP_Widget::update()
+	 * 
+	 * @param array $new_instance Values just sent to be saved.
+	 * @param array $old_instance Previously saved values from database.
+	 * 
+	 * @return array Updated safe values to be saved.
 	 */
 	public function update( $new_instance, $old_instance ) {
+		$instance = array ();
+		$instance['title'] = ( !empty ( $new_instance['title'] ) ) ?
+			sanitize_text_field( $new_instance['title'] ) : '';
 		
+		return $instance;
 	}
 }
