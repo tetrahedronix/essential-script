@@ -42,7 +42,18 @@ class Queuing {
 	 * @var string Current page slug. 
 	 */
 	private $slug;
-
+	/**
+	 * @var mixed Mixed data for inline script.
+	 */
+	private $extra_data;
+	/**
+	 * Setter for extra data to append.
+	 * 
+	 * @param type $value
+	 */
+	public function setdata( $value ) {
+		$this->extra_data = $value;
+	}
 	/**
 	 * Enqueue scripts.
 	 * 
@@ -99,6 +110,10 @@ class Queuing {
 				self::ESSENTIALSCRIPT_VER,
 				false 
 			);
+		}
+		// Here extra_data contains the id_base for the current active widget.
+		if ( ( 'widgets.php' === $this->slug ) && isset( $this->extra_data ) ) {
+			wp_add_inline_script( 'essential-script-widgets', sprintf( "wp.essentialScriptWidgets.init( %s );", wp_json_encode( $this->extra_data ) ) );
 		}
 		// Codemirror style
 		wp_register_style(
