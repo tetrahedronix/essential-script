@@ -2,8 +2,8 @@
 Contributors: tetravalente
 Tags: scripting, javascript, css, adsense, code, embed
 Requires at least: 4.0
-Tested up to: 4.8.1
-Stable tag: 4.8.1
+Tested up to: 4.8.2
+Stable tag: 4.8.2
 Requires PHP: 5.3
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -45,7 +45,8 @@ Sources of this plugin are available both in SVN and Git:
 
 ### TODO
 - [ ] Allow the use of wp_enqueue_scripts where is possible. It requires a checkbox.
-. [x] Support for Widgets.
+- [ ] Support for Widgets.
+- [ ] Support for Shortcodes
 
 ==Screenshots==
 1. Essential Script admin dashboard

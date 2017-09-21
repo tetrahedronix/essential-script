@@ -59,9 +59,10 @@ class Widget extends \WP_Widget {
 			$widget_opts
 		);
 		//if ( is_active_widget( false, false, $this->id_base ) || is_customize_preview() ) {
-		$enqueued = new \EssentialScript\Admin\Queuing;
-		$enqueued->init( 'widgets.php' );
-		 //}
+		$queuing = new \EssentialScript\Admin\Queuing;
+		$queuing->setdata($this->id_base);
+		$queuing->init( 'widgets.php' );
+		//} 
 	}
 	
 	/**
@@ -90,7 +91,7 @@ class Widget extends \WP_Widget {
 			  id="<?php echo esc_attr( $this->get_field_id( 'content' ) ); ?>"
 			  name="<?php echo esc_attr( $this->get_field_name( 'content' ) ); ?>">
 <?php echo $this->gettextarea(); ?></textarea>
-</p>
+</p>  
 <?php
 		//return '';
 	}
