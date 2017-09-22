@@ -182,7 +182,8 @@ final class Page {
    var editor = CodeMirror.fromTextArea(textarea_node, {
 		lineNumbers: true,
 		mode: { name: "xml", htmlMode: true },
-		viewportMargin: Infinity 
+		viewportMargin: Infinity,
+		lint: true
 });
 </script> 
 JS
