@@ -29,11 +29,21 @@ namespace EssentialScript\Admin;
  * @author docwho
  */
 class Widget extends \WP_Widget {
-	
+	/**
+	 * Id for this widget.
+	 */
 	const CLASS_WIDGET = 'essential_script';
-	
+	/**
+	 * @var object Plugin options from Wordpress DB.
+	 */
 	private $options;
-
+	/**
+	 * @var array Default fields for this widget.
+	 */
+	protected $default_instance = array(
+		'title' => '',
+		'content' => '',
+	);
 	/**
 	 * Sets up the widget.
 	 */
@@ -72,8 +82,9 @@ class Widget extends \WP_Widget {
 	 * @param array $instance Previously saved values from database.
 	 */
 	public function form( $instance ) {
-		$title = !empty( $instance['title'] ) ? $instance['title'] :
-			esc_html__( 'New Title', 'essential-script' );
+		$instance = wp_parse_args( (array) $instance, $this->default_instance );
+		$title = !empty( $instance['title'] ) ? $instance['title'] : '';
+			//esc_html__( 'New Title', 'essential-script' );
 ?>
 <p>
 	<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>">
@@ -144,8 +155,6 @@ class Widget extends \WP_Widget {
 	 * @param array $instance
 	 */
 	public function widget( $args, $instance ) {
-		var_dump( $this->id_base );
-		var_dump( $this->number );
 		echo $args['before_widget'];
 		if ( !empty ( $instance['title'] ) ) {
 			echo $args['before_title'] . 
@@ -167,7 +176,7 @@ class Widget extends \WP_Widget {
 	 * @return array Updated safe values to be saved.
 	 */
 	public function update( $new_instance, $old_instance ) {
-		$instance = array ();
+		$instance = array_merge( $this->default_instance, $old_instance );
 		$instance['title'] = ( !empty ( $new_instance['title'] ) ) ?
 			sanitize_text_field( $new_instance['title'] ) : '';
 		
