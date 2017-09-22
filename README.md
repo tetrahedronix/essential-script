@@ -12,7 +12,8 @@ For example, through Essential Script interface you can add your banner in one l
 3. Uses [Codemirror](http://codemirror.net/) for syntax highlighting.
 4. You choose where to append/include the script and where to exclude it.
 5. Support JavaScript/XML/HTML
-6. Free as in speech.
+6. With Widgets.
+7. Free as in speech.
 
 ## Contributors
 * tetravalente
@@ -39,8 +40,11 @@ Sources of this plugin are available both in SVN and Git:
 
 ### TODO
 - [ ] Allow the use of wp_enqueue_scripts where is possible. It requires a checkbox.
-- [ ] Support for Widgets API.
+- [x] Support for Widgets API.
+- [ ] Support for Shortcode.
 
 ## Screenshots
-1. Essential Script admin dashboard
-![Text block](https://ps.w.org/essential-script/assets/screenshot-1.png?rev=1723343)
+1. Essential Script admin dashboard.
+![Main panel](https://ps.w.org/essential-script/assets/screenshot-1.png?rev=1723343)
+2. Essential Script widget.
+![Widget](https://ps.w.org/essential-script/assets/screenshot-2.png?rev=1734236)

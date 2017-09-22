@@ -20,8 +20,9 @@ For example, through Essential Script interface you can add your banner in one l
 2. Setup in minutes.
 3. Uses [Codemirror](http://codemirror.net/) for syntax highlighting.
 4. You choose where to append/include the script and where to exclude it.
-5. Support JavaScript/XML/HTML
-6. Free as in speech.
+5. Support JavaScript/XML/HTML.
+6. With Widgets.
+7. Free as in speech.
 
 == Installation ==
 This section describes how to install the plugin and get it working:
@@ -45,10 +46,17 @@ Sources of this plugin are available both in SVN and Git:
 
 ### TODO
 - [ ] Allow the use of wp_enqueue_scripts where is possible. It requires a checkbox.
-- [ ] Support for Widgets.
 - [ ] Support for Shortcodes
 
 ==Screenshots==
 1. Essential Script admin dashboard
+2. Essential Script widget
 
 == Changelog ==
+= 0.3 =
+* Upgrade CodeMirror from 5.29.0 to 5.30.0
+* Introduce separate javascript file in preparation for 0.3 version
+* Initial support for Widgets API
+* Fix deprecated non-static method called statically
+= 0.2 =
+* (tag: v0.2) First release of Essential Script
