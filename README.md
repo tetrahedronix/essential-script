@@ -42,6 +42,10 @@ Sources of this plugin are available both in SVN and Git:
 - [ ] Allow the use of wp_enqueue_scripts where is possible. It requires a checkbox.
 - [x] Support for Widgets API.
 - [ ] Support for Shortcode.
+- [ ] Move the CodeEditor in its own namespace.
+- [ ] Use CodeMirror addons.
+- [ ] Improve the user interface.
+- [ ] Support for reusable components.
 
 ## Screenshots
 1. Essential Script admin dashboard.

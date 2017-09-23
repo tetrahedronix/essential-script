@@ -3,7 +3,7 @@ Contributors: tetravalente
 Tags: scripting, javascript, css, adsense, code, embed
 Requires at least: 4.0
 Tested up to: 4.8.2
-Stable tag: 4.8.2
+Stable tag: 0.3.1
 Requires PHP: 5.3
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -47,12 +47,18 @@ Sources of this plugin are available both in SVN and Git:
 ### TODO
 - [ ] Allow the use of wp_enqueue_scripts where is possible. It requires a checkbox.
 - [ ] Support for Shortcodes
+- [ ] Move the CodeEditor in its own namespace.
+- [ ] Use CodeMirror addons.
+- [ ] Improve the user interface.
+- [ ] Support for reusable components.
 
 ==Screenshots==
 1. Essential Script admin dashboard
 2. Essential Script widget
 
 == Changelog ==
+= 0.3.1=
+* Fix Missing argument in `Page.php` on line 52 which prevented the editor from working
 = 0.3 =
 * Upgrade CodeMirror from 5.29.0 to 5.30.0
 * Introduce separate javascript file in preparation for 0.3 version
