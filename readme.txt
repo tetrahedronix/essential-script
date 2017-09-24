@@ -57,7 +57,7 @@ Sources of this plugin are available both in SVN and Git:
 2. Essential Script widget
 
 == Changelog ==
-= 0.3.1=
+= 0.3.1 =
 * Fix Missing argument in `Page.php` on line 52 which prevented the editor from working
 = 0.3 =
 * Upgrade CodeMirror from 5.29.0 to 5.30.0
