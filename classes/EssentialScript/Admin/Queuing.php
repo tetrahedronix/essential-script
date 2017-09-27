@@ -31,7 +31,7 @@ class Queuing {
 	 * 
 	 * @since 0.2
 	 */
-	const CODEMIRROR_VER = '5.29.0';
+	const CODEMIRROR_VER = '5.30.0';
 	/**
 	 * Essential Script Version for upgrade purposes.
 	 * 
@@ -63,13 +63,13 @@ class Queuing {
 		
 		$this->slug = $submenu_page;
 		
-		add_action( 'admin_enqueue_scripts', array ( $this, 'register_scripts' ) );
+		add_action( 'admin_enqueue_scripts', array ( $this, 'admin_register_scripts' ) );
 	}
 	
 	/**
 	 * Load scripts and styles for the administration interface
 	 */
-	public function register_scripts( $hook ) {
+	public function admin_register_scripts( $hook ) {
 
 		if ( $this->slug !== $hook ) {
 			return;
