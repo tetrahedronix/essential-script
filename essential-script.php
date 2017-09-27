@@ -6,7 +6,7 @@
  * 
  * Plugin Name: Essential Script
  * Plugin URI: 
- * Description: Essential Script plugin offers you the ability to enqueue and manage your client-side script, which is an essential part of your website, through a versatile text editor made with <a href="http://codemirror.net/">CodeMirror</a>.
+ * Description: Essential Script plugin offers you the ability to plug and manage your client-side script, which is an essential part of your website, through a versatile text editor made with <a href="http://codemirror.net/">CodeMirror</a>.
  * Version: 0.3.1
  * Requires: 4.0
  * Tested up to: 4.8.2
@@ -75,5 +75,5 @@ add_action( 'wp', function() {
 	 */
 	$opts = new \EssentialScript\Core\Options;
 	$presenter = new \EssentialScript\Frontend\Presenter( $opts );
-	$presenter->exclusion();
+	$presenter->inclusion();
 } ); 

@@ -63,7 +63,7 @@ final class Page {
 ?>
 <fieldset>		
 <legend class="screen-reader-text">
-	<span><?php esc_html_e( 'Choose where to enqueue the script',
+	<span><?php esc_html_e( 'Choose where to plug the script',
 			'essential-script' ); ?></span></legend>
 <label>
 	<input type="radio" name="essentialscript_options[where]" value="head" 
@@ -112,7 +112,7 @@ final class Page {
 ?>
 <fieldset>
 <legend class="screen-reader-text">
-	<span><?php esc_html_e( 'Pages to exclude', 'essential-script' ); ?></span></legend>
+	<span><?php esc_html_e( 'What pages include the script', 'essential-script' ); ?></span></legend>
 <label>
 	<input type="checkbox" name="essentialscript_options[pages][index]" 
 <?php checked( $this->options['pages']['index'], true, true ); ?>/>
@@ -215,13 +215,13 @@ JS
 			'es_section_id' );
 		add_settings_field(
 			'es_radiobutton_where',
-			__( 'Choose where to enqueue the script', 'essential-script' ),  
+			__( 'Choose where to plug the script', 'essential-script' ),  
 			array ( $this, 'field_where' ),
 			$this->submenu_page,
 			'es_section_id' );
 		add_settings_field(
 			'es_checkbox_pages',
-			__( 'Pages to exclude', 'essential-script' ),
+			__( 'What pages include the script', 'essential-script' ),
 			array ( $this, 'field_pages' ),
 			$this->submenu_page,
 			'es_section_id' );

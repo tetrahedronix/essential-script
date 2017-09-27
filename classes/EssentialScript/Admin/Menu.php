@@ -95,7 +95,7 @@ class Menu {
 		?>
 <div class="wrap">
 	<h1><?= esc_html( get_admin_page_title() ); ?></h1>
-	<p><?= esc_html_e( 'Essential Script plugin offers you the ability to enqueue and manage your essential scripts through a basic input interface.', 'essential-script' ); ?></p>
+	<p><?= esc_html_e( 'Essential Script plugin offers you the ability to plug and manage your essential scripts through a basic input interface.', 'essential-script' ); ?></p>
 	<form action="options.php" method="POST">
 		<?php
 			// output security fields for the registered setting "wporg_options" 

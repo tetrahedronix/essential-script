@@ -35,6 +35,12 @@ class Presenter {
 	 */
 	private $options = array();
 	/**
+	 *
+	 * @var string Script filename.
+	 */
+	private $filename;
+	
+	/**
 	 * Setup class.
 	 * 
 	 * @param \ArrayAccess $opts Instance of the Options object.
@@ -45,32 +51,38 @@ class Presenter {
 		 * Save the options available in the class.
 		 */
 		$this->options = $opts;
+		// The filename of our script.
+		$this->filename = $this->options['path'] . '/' . $this->options['filename'];
 	}
 	
-	public function exclusion() {
+	public function inclusion() {
 		/* User typically reads one page at a time */
 		if ( ( is_front_page() && is_home() ) && 
 				true === $this->options['pages']['index'] ) {
-			// Default homepage is excluded.
-			return;
+			// Default homepage is included.
+			$this->router();
+			//return;
 		} 
 		
 		if ( is_single() && ( true === $this->options['pages']['single'] ) ) {
 			// Single post is excluded.
-			return;
+			$this->router();
+			//return;
 		}
 		
 		if ( is_page() && ( true === $this->options['pages']['page'] ) ) {
 			// Page is excluded.
-			return;
+			//return;
+			$this->router();
 		}
 		
 		if ( ( is_archive() && 
 				( true === $this->options['pages']['archive'] ) ) ) {
 			// Archive is excluded.
-			return;
+			//return;
+			$this->router();
 		}
-		$this->router();
+		//$this->router();
 	}
 	/**
 	 * Router.
@@ -80,15 +92,14 @@ class Presenter {
 	private function router() {
 		// This instance allows to manipulate the output.
 		$filter = new \EssentialScript\Frontend\Filter;
-		// The filename of our script.
-		$f = $this->options['path'] . '/' . $this->options['filename'];
 		// Initialize the filter with our data.
 		$filter->init( 
 				$this->options['script'], 
 				$this->options['storage'],
-				$f
+				$this->filename
 		);
 		// Router
+		var_dump ( $this->options['where'] );
 		switch ( $this->options['where'] ) {
 			case 'content':
 				$filter->content();

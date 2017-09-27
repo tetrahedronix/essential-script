@@ -11,7 +11,7 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Essential Script adds client-side script to individual areas of your Web site.
 
 == Description ==
-Essential Script plugin offers you the ability to enqueue and manage your client-side script, which is an essential part of your website, through a versatile text editor.
+Essential Script plugin offers you the ability to plug and manage your client-side script, which is an essential part of your website, through a versatile text editor.
 
 For example, through Essential Script interface you can add your banner in one location and configure what code is allowed to display on the Web page.
 
@@ -45,12 +45,12 @@ Sources of this plugin are available both in SVN and Git:
 * This plugin has known conflit with JetPack Embedded Shortcode. You need to disable Embedded Shortcode if you want to use Essential Script and JetPack together.
 
 ### TODO
-- [ ] Allow the use of wp_enqueue_scripts where is possible. It requires a checkbox.
-- [ ] Support for Shortcodes
-- [ ] Move the CodeEditor in its own namespace.
-- [ ] Use CodeMirror addons.
-- [ ] Improve the user interface.
-- [ ] Support for reusable components.
+- Allow the use of wp_enqueue_scripts where is possible. It requires a checkbox.
+- Support for Shortcodes
+- Move the CodeEditor in its own namespace.
+- Use CodeMirror addons.
+- Improve the user interface.
+- Support for reusable components.
 
 ==Screenshots==
 1. Essential Script admin dashboard

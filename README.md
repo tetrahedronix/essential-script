@@ -2,7 +2,7 @@
 
 Essential Script adds client-side script to individual areas of your Web site.
 
-Essential Script plugin offers you the ability to enqueue and manage your client-side script, which is an essential part of your website, through a versatile text editor.
+Essential Script plugin offers you the ability to plug and manage your client-side script, which is an essential part of your website, through a versatile text editor.
 
 For example, through Essential Script interface you can add your banner in one location and configure what code is allowed to display on the Web page.
 
