@@ -60,7 +60,6 @@ class Queuing {
 	 * @param type $submenu_page  Slug of the menu where to register the script.
 	 */
 	public function init( $submenu_page) {
-		
 		$this->slug = $submenu_page;
 		
 		add_action( 'admin_enqueue_scripts', array ( $this, 'admin_register_scripts' ) );

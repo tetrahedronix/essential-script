@@ -62,6 +62,11 @@ class Options implements \ArrayAccess {
 			$this->container['storage'] = 'file';
 			update_option( 'essentialscript_options', $this->container['storage'] );
 		} 
+		
+		if ( !array_key_exists( 'enqueue', $this->container ) ) {
+			$this->container['enqueue'] = 'false';
+			update_option( 'essentialscript_options', $this->container['enqueue'] );
+		}
 	}
 	
 	public function offsetExists( $offset ) {

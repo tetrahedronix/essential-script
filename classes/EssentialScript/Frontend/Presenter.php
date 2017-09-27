@@ -51,7 +51,8 @@ class Presenter {
 		 * Save the options available in the class.
 		 */
 		$this->options = $opts;
-		// The filename of our script.
+
+		// Full path to filename of our script.
 		$this->filename = $this->options['path'] . '/' . $this->options['filename'];
 	}
 	
@@ -60,29 +61,17 @@ class Presenter {
 		if ( ( is_front_page() && is_home() ) && 
 				true === $this->options['pages']['index'] ) {
 			// Default homepage is included.
-			$this->router();
-			//return;
-		} 
-		
-		if ( is_single() && ( true === $this->options['pages']['single'] ) ) {
-			// Single post is excluded.
-			$this->router();
-			//return;
-		}
-		
-		if ( is_page() && ( true === $this->options['pages']['page'] ) ) {
-			// Page is excluded.
-			//return;
-			$this->router();
-		}
-		
-		if ( ( is_archive() && 
+		} elseif ( is_single() && ( true === $this->options['pages']['single'] ) ) {
+			// Single post is included.
+		} elseif ( is_page() && ( true === $this->options['pages']['page'] ) ) {
+			// Page is included.
+		} elseif ( ( is_archive() && 
 				( true === $this->options['pages']['archive'] ) ) ) {
-			// Archive is excluded.
-			//return;
-			$this->router();
+			// Archive is included.
+		} else {
+			return;
 		}
-		//$this->router();
+		$this->router();
 	}
 	/**
 	 * Router.
@@ -94,12 +83,12 @@ class Presenter {
 		$filter = new \EssentialScript\Frontend\Filter;
 		// Initialize the filter with our data.
 		$filter->init( 
-				$this->options['script'], 
+				$this->options['script'],
 				$this->options['storage'],
+				$this->options['enqueue'],
 				$this->filename
 		);
 		// Router
-		var_dump ( $this->options['where'] );
 		switch ( $this->options['where'] ) {
 			case 'content':
 				$filter->content();

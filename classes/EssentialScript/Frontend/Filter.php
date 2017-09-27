@@ -28,11 +28,21 @@ namespace EssentialScript\Frontend;
 class Filter {
 	private $script;
 	private $storage;
+	private $enqueue;
 	private $filename;
 	
-	public function init( $script, $storage, $filename ) {
+	public function enqueue_script() {
+		wp_enqueue_script( 'essential-script', 
+			substr( $this->filename, strlen( ABSPATH )-1 ),
+			array(),
+			null,
+			true );
+	}
+	
+	public function init( $script, $storage, $enqueue, $filename ) {
 		$this->script = $script;
 		$this->storage = $storage;
+		$this->enqueue = $enqueue;
 		$this->filename = $filename;
 	}
 	/**
@@ -59,6 +69,18 @@ class Filter {
 	}
 	
 	public function footer() {
+		// Only use wp_enqueue_scripts with file storage.
+		if ( ( 'file' === $this->storage ) && ( true === $this->enqueue ) && 
+			file_exists( $this->filename ) ) {
+			add_action( 'wp_enqueue_scripts', function() {
+				wp_enqueue_script( 'essential-script', 
+					substr( $this->filename, strlen( ABSPATH )-1 ),
+					array(),
+					null,
+					true );
+			});
+			return;
+		}
 		/* has_action checks if any action has been registered for a 
 		 * hook. 
 		 * wp_footer may not be available on all themes, so you should 
@@ -68,10 +90,10 @@ class Filter {
 		if ( !has_action( 'wp_footer' ) ) {
 			return;
 		}
-		
+
 		if ( ( 'file' === $this->storage ) && file_exists( $this->filename ) ) {
 			$this->script = file_get_contents( $this->filename );
-		}
+		} 
 		
 		if ( $this->script === false ) {
 			$this->print_error();
@@ -82,11 +104,20 @@ class Filter {
 		 * when storage is wpdb.
 		 */
 		add_action( 'wp_footer', array ( $this, 'the_script' ), 20 );
-		
+
 		
 	}
 	
 	public function head() {
+		// Only use wp_enqueue_scripts with file storage.
+		if ( ( 'file' === $this->storage ) && ( true === $this->enqueue ) && 
+			file_exists( $this->filename ) ) {
+			add_action( 'wp_enqueue_scripts', function() {
+				wp_enqueue_script( 'essential-script', 
+					substr( $this->filename, strlen( ABSPATH )-1 ) );
+			});
+			return;
+		}
 		
 		if ( !has_action( 'wp_head' ) ) {
 			return;

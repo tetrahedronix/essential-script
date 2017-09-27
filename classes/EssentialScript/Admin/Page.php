@@ -90,21 +90,27 @@ final class Page {
 <legend class="screen-reader-text">
 	<span><?php esc_html_e( 'Choose where to store the script',
 			'essential-script' ); ?></span></legend>
-<label>
+<p><label>
 	<input type="radio" name="essentialscript_options[storage]" value="file" 
 <?php checked( $this->options['storage'], 'file', true ); ?>/>
 	<span class="input-text"><?php esc_html_e( 'File (Recommended)',
 			'essential-script' ); ?></span>
 	<input type="text" name="essentialscript_options[filename]" value="<?php echo esc_attr( $this->options['filename'] ); ?>" size="25" />
+	</label></p>
 	<p class="description"><?php esc_html_e( 'Enter the filename',
-			'essential-script' ); ?></p>
-</label><br/>
-<label>
+			'essential-script' ); ?></p>	
+<ul>
+	<li><label><input type="checkbox" name="essentialscript_options[enqueue]" <?php checked( $this->options['enqueue'], true, true ); ?> />
+<span class="input-radio"><?php esc_html_e( 'Use wp_enqueue_scripts where possible',
+		'essential-script' ); ?></span>
+	</label></li>
+</ul>
+<p><label>
 	<input type="radio" name="essentialscript_options[storage]" value="wpdb" 
 <?php checked( $this->options['storage'], 'wpdb', true ); ?>/>
 	<span class="input-radio"><?php esc_html_e( 'Wordpress DB',
 			'essential-script' ); ?></span>
-</label>
+	</label></p>
 </fieldset>
 <?php
 		}
@@ -294,6 +300,7 @@ JS
 			$f = sanitize_file_name( $input['filename'] );
 		} */
 	
+		// Sanitize the checkboxes:
 		$sane['pages']['index'] = ( 'on' === $input['pages']['index'] ) ? 
 				true : false;
 		$sane['pages']['single'] = ( 'on' === $input['pages']['single'] ) ? 
@@ -302,6 +309,7 @@ JS
 				true : false;
 		$sane['pages']['archive'] = ( 'on' === $input['pages']['archive'] ) ? 
 				true : false;
+		$sane['enqueue'] = ( 'on' === $input['enqueue'] ) ? true: false;
 		/* Equivalent to:
 		 * if ( $input['pages']['index'] === 'on' ) {
 			$sane['pages']['index'] = true;
@@ -333,7 +341,7 @@ JS
 			case 'file':
 				$dir = wp_upload_dir();
 				// Path to the file where to write the data. 
-				$path = $dir['path'] . '/' . $f;
+				$path = $dir['path'] . DIRECTORY_SEPARATOR . $f;
 				$sane['storage'] = 'file';
 				file_put_contents( $path, $sane['script'] );
 				$sane['path'] = $dir['path'];
