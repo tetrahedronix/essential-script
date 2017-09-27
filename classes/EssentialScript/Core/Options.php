@@ -37,13 +37,18 @@ class Options implements \ArrayAccess {
 	public function __construct() {
 		// Retrieves the Essentialscript options from Wordpress DB.
 		$this->container = get_option( 'essentialscript_options' );
+
+		if ( !is_array ( $this->container ) ) {
+			$this->container = array();
+		}
+		
 		// Check whether you need to update any option.
-		if ( !isset ( $this->container['where'] ) ) {
+		if ( !array_key_exists( 'where', $this->container ) ) {
 			$this->container['where'] = 'foot';  // Save default
 			update_option( 'essentialscript_options', $this->container['where'] );
 		}
 		
-		if ( !isset ( $this->container['pages'] ) ) {
+		if ( !array_key_exists( 'pages', $this->container ) ) {
 			$this->container['pages'] = array ( 
 				array (	'index' => true, 
 					'single' => false,
@@ -53,7 +58,7 @@ class Options implements \ArrayAccess {
 			update_option( 'essentialscript_options', $this->container['pages'] );
 		}		
 
-		if ( !isset ($this->container['storage'] ) ) {
+		if ( !array_key_exists( 'storage', $this->container ) ) {
 			$this->container['storage'] = 'file';
 			update_option( 'essentialscript_options', $this->container['storage'] );
 		} 
