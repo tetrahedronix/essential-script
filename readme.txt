@@ -3,7 +3,7 @@ Contributors: tetravalente
 Tags: scripting, javascript, css, adsense, code, embed
 Requires at least: 4.0
 Tested up to: 4.8.2
-Stable tag: 0.3.1
+Stable tag: 0.4
 Requires PHP: 5.3
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -45,7 +45,6 @@ Sources of this plugin are available both in SVN and Git:
 * This plugin has known conflit with JetPack Embedded Shortcode. You need to disable Embedded Shortcode if you want to use Essential Script and JetPack together.
 
 ### TODO
-- Allow the use of wp_enqueue_scripts where is possible. It requires a checkbox.
 - Support for Shortcodes
 - Move the CodeEditor in its own namespace.
 - Use CodeMirror addons.
@@ -57,6 +56,11 @@ Sources of this plugin are available both in SVN and Git:
 2. Essential Script widget
 
 == Changelog ==
+= 0.4 =
+* Add checkbox to allow the use of wp_enqueue_scripts where is possible
+* Use array_key_exists instead of isset
+* No longer it does exclude pages but includes
+* Rename register_scripts to admin_register_scripts
 = 0.3.1 =
 * Fix Missing argument in `Page.php` on line 52 which prevented the editor from working
 = 0.3 =
