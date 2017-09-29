@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Essential Script\n"
-"POT-Creation-Date: 2017-08-28 22:28+0200\n"
-"PO-Revision-Date: 2017-08-28 22:28+0200\n"
+"POT-Creation-Date: 2017-09-28 16:28+0200\n"
+"PO-Revision-Date: 2017-09-28 16:30+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: it_IT\n"
@@ -23,10 +23,10 @@ msgstr "Script salvato"
 
 #: classes/EssentialScript/Admin/Menu.php:98
 msgid ""
-"Essential Script plugin offers you the ability to enqueue and manage your "
+"Essential Script plugin offers you the ability to plug and manage your "
 "essential scripts through a basic input interface."
 msgstr ""
-"Essential Script plugin offre la possibilità di accodare e gestire i tuoi "
+"Essential Script plugin offre la possibilità di inserire e gestire i tuoi "
 "script essenziali per mezzo di una interfaccia di input basilare."
 
 #: classes/EssentialScript/Admin/Menu.php:107
@@ -34,9 +34,9 @@ msgid "Save Script"
 msgstr "Salva Script"
 
 #: classes/EssentialScript/Admin/Page.php:66
-#: classes/EssentialScript/Admin/Page.php:217
-msgid "Choose where to enqueue the script"
-msgstr "Scegli dove accodare lo script"
+#: classes/EssentialScript/Admin/Page.php:224
+msgid "Choose where to plug the script"
+msgstr "Scegli dove inserire lo script"
 
 #: classes/EssentialScript/Admin/Page.php:71
 msgid "Head"
@@ -51,7 +51,7 @@ msgid "Foot"
 msgstr "Piè di pagina"
 
 #: classes/EssentialScript/Admin/Page.php:91
-#: classes/EssentialScript/Admin/Page.php:229
+#: classes/EssentialScript/Admin/Page.php:236
 msgid "Choose where to store the script"
 msgstr "Scegli dove memorizzare lo script"
 
@@ -59,40 +59,45 @@ msgstr "Scegli dove memorizzare lo script"
 msgid "File (Recommended)"
 msgstr "File (Raccomandato)"
 
-#: classes/EssentialScript/Admin/Page.php:99
+#: classes/EssentialScript/Admin/Page.php:100
 msgid "Enter the filename"
 msgstr "Inserisci il nome del file"
 
-#: classes/EssentialScript/Admin/Page.php:105
+#: classes/EssentialScript/Admin/Page.php:104
+msgid "Use wp_enqueue_scripts where possible"
+msgstr ""
+
+#: classes/EssentialScript/Admin/Page.php:111
 msgid "Wordpress DB"
 msgstr "Wordpress DB"
 
-#: classes/EssentialScript/Admin/Page.php:115
-#: classes/EssentialScript/Admin/Page.php:223
-msgid "Pages to exclude"
-msgstr "Pagine da escludere"
+#: classes/EssentialScript/Admin/Page.php:121
+#: classes/EssentialScript/Admin/Page.php:230
+msgid "What pages include the script"
+msgstr ""
 
-#: classes/EssentialScript/Admin/Page.php:119
+#: classes/EssentialScript/Admin/Page.php:125
 msgid "Default Homepage"
 msgstr "Default pagina principale"
 
-#: classes/EssentialScript/Admin/Page.php:125
+#: classes/EssentialScript/Admin/Page.php:131
 msgid "Single Post"
 msgstr "Post Singolo"
 
-#: classes/EssentialScript/Admin/Page.php:131
+#: classes/EssentialScript/Admin/Page.php:137
 msgid "Pages"
 msgstr "Pagine"
 
-#: classes/EssentialScript/Admin/Page.php:136
+#: classes/EssentialScript/Admin/Page.php:142
 msgid "Archive"
 msgstr "Archivio\t"
 
-#: classes/EssentialScript/Admin/Page.php:160
+#: classes/EssentialScript/Admin/Page.php:166
+#: classes/EssentialScript/Admin/Widget.php:138
 msgid "File "
 msgstr "File"
 
-#: classes/EssentialScript/Admin/Page.php:175
+#: classes/EssentialScript/Admin/Page.php:181
 msgid ""
 "Max 512 chars. The allowed tags are listed in settings_sanitize(). You can "
 "add or remove tags as required."
@@ -100,13 +105,15 @@ msgstr ""
 "Massimo 512 caratteri. I tags permessi sono elencati in settings_sanitize(). "
 "Puoi aggiungere o rimuovere i tags a piacimento."
 
-#: classes/EssentialScript/Admin/Page.php:195
-msgid "Enter your script settings below: script code, position and storage."
+#: classes/EssentialScript/Admin/Page.php:202
+#, fuzzy
+#| msgid "Enter your script settings below: script code, position and storage."
+msgid "Fill your script settings below: script code, position and storage."
 msgstr ""
 "Inserisci le impostazioni per il tuo script qui sotto: codice, posizione e "
 "supporto di memoria dello script."
 
-#: classes/EssentialScript/Admin/Page.php:211
+#: classes/EssentialScript/Admin/Page.php:218
 msgid "Enter the script code here"
 msgstr "Inserisci qui il codice dello script"
 
@@ -131,3 +138,6 @@ msgid "Contact your system admin about updating your Wordpress copy"
 msgstr ""
 "Contatta l'amministratore del tuo sistema per aggiornare la tua copia di "
 "Wordpress"
+
+#~ msgid "Pages to exclude"
+#~ msgstr "Pagine da escludere"
