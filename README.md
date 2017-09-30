@@ -39,7 +39,6 @@ Sources of this plugin are available both in SVN and Git:
 * This plugin has known conflit with JetPack Embedded Shortcode. You need to disable Embedded Shortcode if you want to use Essential Script and JetPack together.
 
 ### TODO
-- [x] Allow the use of wp_enqueue_scripts where is possible. It requires a checkbox.
 - [x] Support for Widgets API.
 - [ ] Support for Shortcode.
 - [ ] Move the CodeEditor in its own namespace.
