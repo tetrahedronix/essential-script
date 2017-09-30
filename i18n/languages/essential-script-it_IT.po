@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Essential Script\n"
-"POT-Creation-Date: 2017-09-30 14:55+0200\n"
-"PO-Revision-Date: 2017-09-30 14:56+0200\n"
+"POT-Creation-Date: 2017-09-30 17:19+0200\n"
+"PO-Revision-Date: 2017-09-30 17:20+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: it_IT\n"
@@ -34,7 +34,7 @@ msgid "Save Script"
 msgstr "Salva Script"
 
 #: classes/EssentialScript/Admin/Page.php:66
-#: classes/EssentialScript/Admin/Page.php:228
+#: classes/EssentialScript/Admin/Page.php:232
 msgid "Choose where to plug the script"
 msgstr "Scegli dove inserire lo script"
 
@@ -51,7 +51,7 @@ msgid "Foot"
 msgstr "Piè di pagina"
 
 #: classes/EssentialScript/Admin/Page.php:91
-#: classes/EssentialScript/Admin/Page.php:240
+#: classes/EssentialScript/Admin/Page.php:244
 msgid "Choose where to store the script"
 msgstr "Scegli dove memorizzare lo script"
 
@@ -68,37 +68,45 @@ msgstr "Inserisci il nome del file"
 msgid "Use <a href=\"%s\">wp_enqueue_scripts</a> hook (where possible)"
 msgstr "Usa l'aggancio <a href=\"%s\">wp_enqueue_scripts</a> (dove possibile)"
 
-#: classes/EssentialScript/Admin/Page.php:115
+#: classes/EssentialScript/Admin/Page.php:112
+msgid "Note:"
+msgstr "Nota:"
+
+#: classes/EssentialScript/Admin/Page.php:113
+msgid "The external script file cannot contain the <script> tag."
+msgstr "Il file dello script esterno non può contenere i tag <script>."
+
+#: classes/EssentialScript/Admin/Page.php:119
 msgid "Wordpress DB"
 msgstr "Wordpress DB"
 
-#: classes/EssentialScript/Admin/Page.php:125
-#: classes/EssentialScript/Admin/Page.php:234
-msgid "What pages include the script"
-msgstr ""
-
 #: classes/EssentialScript/Admin/Page.php:129
+#: classes/EssentialScript/Admin/Page.php:238
+msgid "What pages include the script"
+msgstr "Quali pagine includono lo script"
+
+#: classes/EssentialScript/Admin/Page.php:133
 msgid "Default Homepage"
 msgstr "Default pagina principale"
 
-#: classes/EssentialScript/Admin/Page.php:135
+#: classes/EssentialScript/Admin/Page.php:139
 msgid "Single Post"
 msgstr "Post Singolo"
 
-#: classes/EssentialScript/Admin/Page.php:141
+#: classes/EssentialScript/Admin/Page.php:145
 msgid "Pages"
 msgstr "Pagine"
 
-#: classes/EssentialScript/Admin/Page.php:146
+#: classes/EssentialScript/Admin/Page.php:150
 msgid "Archive"
 msgstr "Archivio"
 
-#: classes/EssentialScript/Admin/Page.php:170
+#: classes/EssentialScript/Admin/Page.php:174
 #: classes/EssentialScript/Admin/Widget.php:138
 msgid "File "
 msgstr "File "
 
-#: classes/EssentialScript/Admin/Page.php:185
+#: classes/EssentialScript/Admin/Page.php:189
 msgid ""
 "Max 512 chars. The allowed tags are listed in settings_sanitize(). You can "
 "add or remove tags as required."
@@ -106,13 +114,13 @@ msgstr ""
 "Massimo 512 caratteri. I tags permessi sono elencati in settings_sanitize(). "
 "Puoi aggiungere o rimuovere i tags a piacimento."
 
-#: classes/EssentialScript/Admin/Page.php:206
+#: classes/EssentialScript/Admin/Page.php:210
 msgid "Fill your script settings below: script code, position and storage."
 msgstr ""
 "Inserisci le impostazioni per il tuo script qui sotto: codice, posizione e "
 "supporto di memoria dello script."
 
-#: classes/EssentialScript/Admin/Page.php:222
+#: classes/EssentialScript/Admin/Page.php:226
 msgid "Enter the script code here"
 msgstr "Inserisci qui il codice dello script"
 

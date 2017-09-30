@@ -3,7 +3,7 @@ Contributors: tetravalente
 Tags: scripting, javascript, css, adsense, code, embed
 Requires at least: 4.0
 Tested up to: 4.8.2
-Stable tag: 0.4
+Stable tag: 0.4.1
 Requires PHP: 5.3
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -56,6 +56,9 @@ Sources of this plugin are available both in SVN and Git:
 2. Essential Script widget
 
 == Changelog ==
+= 0.4.1 =
+* Add Note for proper use of wp_enqueue_scripts option
+* Checkbox switches off when Wordpress DB is selected
 = 0.4 =
 * Add checkbox to allow the use of wp_enqueue_scripts where is possible
 * Use array_key_exists instead of isset

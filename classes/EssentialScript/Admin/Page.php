@@ -105,9 +105,13 @@ final class Page {
 				   id="enqueue" 
 				   name="essentialscript_options[enqueue]" 
 				   <?php checked( $this->options['enqueue'], true, true ); ?> />
-			<?php printf( __( 'Use <a href="%s">wp_enqueue_scripts</a> hook (where possible)' ),
+			<?php printf( __( 'Use <a href="%s">wp_enqueue_scripts</a> hook (where possible)',
+				'essential-script' ),
 				'https://codex.wordpress.org/Plugin_API/Action_Reference/wp_enqueue_scripts'  ); ?>
 	</label></li>
+	<li><strong><?php esc_html_e( 'Note:', 'essential-script' ); ?></strong>
+		<i><?php esc_html_e( 'The external script file cannot contain the <script> tag.',
+		'essential-script') ?></i></li>
 </ul>
 <p><label>
 	<input type="radio" name="essentialscript_options[storage]" value="wpdb" 
