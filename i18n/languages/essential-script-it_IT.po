@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Essential Script\n"
-"POT-Creation-Date: 2017-09-28 16:28+0200\n"
-"PO-Revision-Date: 2017-09-28 16:30+0200\n"
+"POT-Creation-Date: 2017-09-30 14:55+0200\n"
+"PO-Revision-Date: 2017-09-30 14:56+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: it_IT\n"
@@ -12,7 +12,7 @@ msgstr ""
 "X-Generator: Poedit 2.0.1\n"
 "X-Poedit-Basepath: ../..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-KeywordsList: __;_e;esc_html_e\n"
+"X-Poedit-KeywordsList: __;_e;esc_html_e;__(\n"
 "X-Poedit-SearchPath-0: classes\n"
 "X-Poedit-SearchPath-1: lib\n"
 "X-Poedit-SearchPathExcluded-0: i18n\n"
@@ -34,7 +34,7 @@ msgid "Save Script"
 msgstr "Salva Script"
 
 #: classes/EssentialScript/Admin/Page.php:66
-#: classes/EssentialScript/Admin/Page.php:224
+#: classes/EssentialScript/Admin/Page.php:228
 msgid "Choose where to plug the script"
 msgstr "Scegli dove inserire lo script"
 
@@ -51,7 +51,7 @@ msgid "Foot"
 msgstr "Piè di pagina"
 
 #: classes/EssentialScript/Admin/Page.php:91
-#: classes/EssentialScript/Admin/Page.php:236
+#: classes/EssentialScript/Admin/Page.php:240
 msgid "Choose where to store the script"
 msgstr "Scegli dove memorizzare lo script"
 
@@ -63,41 +63,42 @@ msgstr "File (Raccomandato)"
 msgid "Enter the filename"
 msgstr "Inserisci il nome del file"
 
-#: classes/EssentialScript/Admin/Page.php:104
-msgid "Use wp_enqueue_scripts where possible"
-msgstr ""
+#: classes/EssentialScript/Admin/Page.php:108
+#, php-format
+msgid "Use <a href=\"%s\">wp_enqueue_scripts</a> hook (where possible)"
+msgstr "Usa l'aggancio <a href=\"%s\">wp_enqueue_scripts</a> (dove possibile)"
 
-#: classes/EssentialScript/Admin/Page.php:111
+#: classes/EssentialScript/Admin/Page.php:115
 msgid "Wordpress DB"
 msgstr "Wordpress DB"
 
-#: classes/EssentialScript/Admin/Page.php:121
-#: classes/EssentialScript/Admin/Page.php:230
+#: classes/EssentialScript/Admin/Page.php:125
+#: classes/EssentialScript/Admin/Page.php:234
 msgid "What pages include the script"
 msgstr ""
 
-#: classes/EssentialScript/Admin/Page.php:125
+#: classes/EssentialScript/Admin/Page.php:129
 msgid "Default Homepage"
 msgstr "Default pagina principale"
 
-#: classes/EssentialScript/Admin/Page.php:131
+#: classes/EssentialScript/Admin/Page.php:135
 msgid "Single Post"
 msgstr "Post Singolo"
 
-#: classes/EssentialScript/Admin/Page.php:137
+#: classes/EssentialScript/Admin/Page.php:141
 msgid "Pages"
 msgstr "Pagine"
 
-#: classes/EssentialScript/Admin/Page.php:142
+#: classes/EssentialScript/Admin/Page.php:146
 msgid "Archive"
-msgstr "Archivio\t"
+msgstr "Archivio"
 
-#: classes/EssentialScript/Admin/Page.php:166
+#: classes/EssentialScript/Admin/Page.php:170
 #: classes/EssentialScript/Admin/Widget.php:138
 msgid "File "
-msgstr "File"
+msgstr "File "
 
-#: classes/EssentialScript/Admin/Page.php:181
+#: classes/EssentialScript/Admin/Page.php:185
 msgid ""
 "Max 512 chars. The allowed tags are listed in settings_sanitize(). You can "
 "add or remove tags as required."
@@ -105,22 +106,20 @@ msgstr ""
 "Massimo 512 caratteri. I tags permessi sono elencati in settings_sanitize(). "
 "Puoi aggiungere o rimuovere i tags a piacimento."
 
-#: classes/EssentialScript/Admin/Page.php:202
-#, fuzzy
-#| msgid "Enter your script settings below: script code, position and storage."
+#: classes/EssentialScript/Admin/Page.php:206
 msgid "Fill your script settings below: script code, position and storage."
 msgstr ""
 "Inserisci le impostazioni per il tuo script qui sotto: codice, posizione e "
 "supporto di memoria dello script."
 
-#: classes/EssentialScript/Admin/Page.php:218
+#: classes/EssentialScript/Admin/Page.php:222
 msgid "Enter the script code here"
 msgstr "Inserisci qui il codice dello script"
 
 #: classes/EssentialScript/Core/Setup.php:90
 #, php-format
 msgid "The plugin Essential Script requires PHP %s or later. "
-msgstr "Il plugin Essential Script richiede PHP %s o superiore."
+msgstr "Il plugin Essential Script richiede PHP %s o superiore. "
 
 #: classes/EssentialScript/Core/Setup.php:92
 msgid "Contact your system admin about updating your PHP interpreter"
@@ -131,7 +130,7 @@ msgstr ""
 #: classes/EssentialScript/Core/Setup.php:109
 #, php-format
 msgid "The plugin Essential Script requires Wordpress %s or later "
-msgstr "Il plugin Essential Script richiede Wordpress %s o superiore"
+msgstr "Il plugin Essential Script richiede Wordpress %s o superiore "
 
 #: classes/EssentialScript/Core/Setup.php:111
 msgid "Contact your system admin about updating your Wordpress copy"

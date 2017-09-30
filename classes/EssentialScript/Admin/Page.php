@@ -86,23 +86,27 @@ final class Page {
 	
 	public function field_storage() {
 ?>
-<fieldset>
+<fieldset id="front-static-pages">
 <legend class="screen-reader-text">
 	<span><?php esc_html_e( 'Choose where to store the script',
 			'essential-script' ); ?></span></legend>
-<p><label>
+<label>
 	<input type="radio" name="essentialscript_options[storage]" value="file" 
 <?php checked( $this->options['storage'], 'file', true ); ?>/>
 	<span class="input-text"><?php esc_html_e( 'File (Recommended)',
 			'essential-script' ); ?></span>
 	<input type="text" name="essentialscript_options[filename]" value="<?php echo esc_attr( $this->options['filename'] ); ?>" size="25" />
-	</label></p>
+	</label>
 	<p class="description"><?php esc_html_e( 'Enter the filename',
 			'essential-script' ); ?></p>	
 <ul>
-	<li><label><input type="checkbox" name="essentialscript_options[enqueue]" <?php checked( $this->options['enqueue'], true, true ); ?> />
-<span class="input-radio"><?php esc_html_e( 'Use wp_enqueue_scripts where possible',
-		'essential-script' ); ?></span>
+	<li><label for="enqueue">
+			<input type="checkbox" 
+				   id="enqueue" 
+				   name="essentialscript_options[enqueue]" 
+				   <?php checked( $this->options['enqueue'], true, true ); ?> />
+			<?php printf( __( 'Use <a href="%s">wp_enqueue_scripts</a> hook (where possible)' ),
+				'https://codex.wordpress.org/Plugin_API/Action_Reference/wp_enqueue_scripts'  ); ?>
 	</label></li>
 </ul>
 <p><label>
@@ -331,12 +335,14 @@ JS
 		} else {
 			$sane['pages']['archive'] = false;
 		} */
-		
+		// Sanitize the radio buttons:
 		switch ( $input['storage'] ) {
 			case 'wpdb':
 				$sane['storage'] = 'wpdb';
 				$sane['filename'] = '';
 				$sane['path'] = '';
+				// Forcing enqueue checkbox to false
+				$sane['enqueue'] = false;
 				break;
 			case 'file':
 				$dir = wp_upload_dir();
