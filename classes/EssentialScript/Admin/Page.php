@@ -67,18 +67,27 @@ final class Page {
 			'essential-script' ); ?></span></legend>
 <label>
 	<input type="radio" name="essentialscript_options[where]" value="head" 
-<?php checked( $this->options['where'], 'head', true ) ?>>
-	<span class="input-text"><?php esc_html_e( 'Head', 'essential-script' ); ?></span>
+<?php checked( $this->options['where'], 'head', true ); ?>>
+	<span class="input-text">
+		<?php esc_html_e( 'Head', 'essential-script' ); ?></span>
 </label><br/>
 <label>
 	<input type="radio" name="essentialscript_options[where]" value="content" 
-<?php checked( $this->options['where'], 'content', true ) ?>>
-	<span class="input-text"><?php esc_html_e( 'Content', 'essential-script' ); ?></span>
+<?php checked( $this->options['where'], 'content', true ); ?>>
+	<span class="input-text">
+		<?php esc_html_e( 'Content', 'essential-script' ); ?></span>
+</label><br/>
+<label>
+	<input type="radio" name="essentialscript_options[where]" value="shortcode"
+<?php checked( $this->options['where'], 'shortcode', true ); ?>>
+	<span class="input-text">
+		<?php esc_html_e( 'Content with Shortcode', 'essential-script' ); ?></span>
 </label><br/>
 <label>
 	<input type="radio" name="essentialscript_options[where]" value="foot" 
-<?php checked( $this->options['where'], 'foot', true ) ?>>
-	<span class="input-text"><?php esc_html_e( 'Foot', 'essential-script' ); ?></span>
+<?php checked( $this->options['where'], 'foot', true ); ?>>
+	<span class="input-text">
+		<?php esc_html_e( 'Foot', 'essential-script' ); ?></span>
 </label>
 </fieldset>					
 <?php
@@ -286,6 +295,9 @@ JS
 				break;
 			case 'content':
 				$sane['where'] = 'content';
+				break;
+			case 'shortcode':
+				$sane['where'] = 'shortcode';
 				break;
 			case 'foot':
 				$sane['where'] = 'foot';
