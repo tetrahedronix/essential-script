@@ -20,13 +20,98 @@
 namespace EssentialScript\Frontend;
 
 /**
- * Description of Head
+ * Filter class for Head section of the Web site
  *
  * @author docwho
  */
 class Head implements \EssentialScript\Frontend\Strategy {
-	//put your code here
-	public static function filter() {
+	
+	/**
+	 * @var string The filename.
+	 */
+	private $filename;
+	/**
+	 * @var string The stript.
+	 */
+	private $script;
+	/**
+	 * @var string Where the script is saved: file or database.
+	 */
+	private $storage;
+	/**
+	 * @var bool If this filter should use wp_enqueue_scripts hook.
+	 */
+	private $enqueue;
+	
+	/**
+	 * Initialization parameters: see above for detailed descriptions.
+	 * 
+	 * @param string $filename
+	 * @param string $script
+	 * @param string $storage
+	 * @param bool $enqueue
+	 */
+	public function __construct( $filename, $script, $storage, $enqueue ) {
+		// Save the parameters in the class properties.
+		$this->filename = $filename;
+		$this->script = $script;
+		$this->storage = $storage;
+		$this->enqueue = $enqueue;
+	}
+	/**
+	 * Filter function.
+	 * 
+	 * @return null If something goes wrong or uses wp_enqueue_scripts.
+	 */
+	public function filter() {
+		// Only use wp_enqueue_scripts with file storage.
+		if ( ( 'file' === $this->storage ) && ( true === $this->enqueue ) && 
+			file_exists( $this->filename ) ) {
+			add_action( 'wp_enqueue_scripts', function() {
+				wp_enqueue_script( 'essential-script', 
+					substr( $this->filename, strlen( ABSPATH )-1 ) );
+			});
+			return;
+		}
 		
+		if ( !has_action( 'wp_head' ) ) {
+			return;
+		}
+		
+		if ( ( 'file' === $this->storage ) && file_exists( $this->filename ) ) {
+			$this->script = file_get_contents( $this->filename );
+		}
+		
+		if ( $this->script === false ) {
+			$this->print_error();
+		}
+		
+		add_action( 'wp_head', array( $this, 'the_script' ) );
+	}
+	
+	/**
+	 * Print a message error if this filter has encountered a problem.
+	 */
+	public function print_error() {
+		wp_die( get_bloginfo( 'name' ) . 
+			'has encountered a problem and needs to close. '
+			. 'We are sorry for the inconvenience.' );
+	}
+	
+	/**
+	 * Output the script.
+	 * 
+	 * @param string $content Optional: the content to be filtered.
+	 * @return string The content filtered or the script.
+	 */
+	public function the_script( $content = '' ) {
+		// Check if this method was hooked to a filter.
+		if ( 'the_content' === current_filter() ) {
+			return $content . $this->script;
+		}
+		// Output the script when Head or Footer filters are used.
+		if ( !empty( $this->script ) ) {
+			echo $this->script;
+		} 
 	}
 }
