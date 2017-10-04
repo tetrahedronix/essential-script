@@ -35,11 +35,21 @@ class Presenter {
 	 */
 	private $options = array();
 	/**
-	 *
 	 * @var string Script filename.
 	 */
 	private $filename;
-	
+	/**
+	 * @var string Script code.
+	 */
+	private $script;
+	/**
+	 * @var type Storage space where the script can be kept.
+	 */
+	private $storage;
+	/**
+	 * @var bool If the script has to appear on the front end with wp_enqueue_scripts.
+	 */
+	private $enqueue;
 	/**
 	 * Setup class.
 	 * 
@@ -51,9 +61,16 @@ class Presenter {
 		 * Save the options available in the class.
 		 */
 		$this->options = $opts;
-
 		// Full path to filename of our script.
-		$this->filename = $this->options['path'] . '/' . $this->options['filename'];
+		$file_obj = new \EssentialScript\Core\File( $opts );
+		$this->filename = $file_obj->getfilename();
+		// The script.
+		$this->script = $opts->offsetExists( 'script' ) ? 
+			$opts->offsetGet( 'script' ) : '';
+		$this->storage = $opts->offsetExists( 'storage' ) ?
+			$opts->offsetGet( 'storage' ) : '';
+		$this->enqueue = $opts->offsetExists( 'enqueue' ) ?
+			$opts->offsetGet( 'enqueue' ) : false;
 	}
 	
 	/**
@@ -62,31 +79,35 @@ class Presenter {
 	 * This function routes the data to the correct filter.
 	 */
 	public function router() {
-		// This instance allows to manipulate the output.
-		//$filter = new \EssentialScript\Frontend\Filter;
-		// Initialize the filter with our data.
-		/*$filter->init( 
-				$this->options['script'],
-				$this->options['storage'],
-				$this->options['enqueue'],
-				$this->filename
-		); */
-		// Router
+
 		switch ( $this->options['where'] ) {
 			case 'head':
-				$filter = new \EssentialScript\Frontend\Head;
+				// Initialize the filter with our data.
+				$filter = new \EssentialScript\Frontend\Head(
+					$this->filename,
+					$this->script,
+					$this->storage,
+					$this->enqueue ); 
 				break;
 			case 'content':
-				$filter = new \EssentialScript\Frontend\Content;
+				$filter = new \EssentialScript\Frontend\Content(
+					$this->filename,
+					$this->script,
+					$this->storage );
 				break;
 			case 'shortcode':
-				$filter = new \EssentialScript\Frontend\Shortcode;
+				$filter = new \EssentialScript\Frontend\Shortcode(
+					);
 				break;
 			case 'foot':
-				$filter = new \EssentialScript\Frontend\Footer;
+				$filter = new \EssentialScript\Frontend\Footer(
+					$this->filename,
+					$this->script,
+					$this->storage,
+					$this->enqueue );
 				break;
 		}
-		
+		// This instance allows to manipulate the output.
 		return $filter;
 	}
 }
