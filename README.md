@@ -51,5 +51,6 @@ Sources of this plugin are available both in SVN and Git:
 1. Essential Script admin dashboard.
 ![Main panel](https://ps.w.org/essential-script/assets/screenshot-1.png)
 2. Essential Script does use of `wp_enqueue_scripts`
-3. Essential Script widget.
 ![Widget](https://ps.w.org/essential-script/assets/screenshot-2.png)
+3. Essential Script widget.
+![Widget](https://ps.w.org/essential-script/assets/screenshot-3.png)
