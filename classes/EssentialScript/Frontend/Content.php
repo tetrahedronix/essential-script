@@ -20,13 +20,86 @@
 namespace EssentialScript\Frontend;
 
 /**
- * Description of Content
+ * Content Filter class: append the script to the post content
  *
  * @author docwho
  */
 class Content implements \EssentialScript\Frontend\Strategy {
-	//put your code here
-	public static function filter() {
+	/**
+	 * @var string The filename.
+	 */
+	private $filename;
+	/**
+	 * @var string The script.
+	 */
+	private $script;
+	/**
+	 * @var string Where the script is saved: file or database.
+	 */
+	private $storage;
+
+	/**
+	 * Initialization parameters: see above for detailed descriptions.
+	 * 
+	 * @param string $filename
+	 * @param string $script
+	 * @param string $storage
+	 */	
+	public function __construct( $filename, $script, $storage ) {
+		// Save the parameters in the class properties.		
+		$this->filename = $filename;
+		$this->script = $script;
+		$this->storage = $storage;
+	}
+	
+	/**
+	 * Filter function.
+	 * 
+	 * @return null If something goes wrong.
+	 */
+	public function filter() {
+		if ( ( 'file' === $this->storage ) && file_exists( $this->filename ) ) {
+			$this->script = file_get_contents( $this->filename );
+		} 
 		
+		if ( empty ( $this->script ) ) {
+			// Do not do nothing
+			return;
+		} 
+		
+		if ( $this->script === false ) {
+			$this->print_error();
+		}
+
+		// We can't use wp_enqueue_script.
+		add_filter( 'the_content', array ( $this, 'the_script' ) );
+
+	}
+
+	/**
+	 * Print a message error if this filter has encountered a problem.
+	 */
+	public function print_error() {
+		wp_die( get_bloginfo( 'name' ) . 
+			'has encountered a problem and needs to close. '
+			. 'We are sorry for the inconvenience.' );
+	}
+
+	/**
+	 * Output the script.
+	 * 
+	 * @param string $content The content to be filtered.
+	 * @return string The content filtered with or without the script.
+	 */
+	public function the_script( $content ) {
+		if ( 'the_content' === current_filter() ) {
+			return $content . $this->script;
+		}
+		
+		return $content;
+/*		
+		if ( !empty( $this->script ) ) {
+			echo $this->script;
+		} */
 	}
 }
