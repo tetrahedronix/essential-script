@@ -13,6 +13,7 @@ For example, through Essential Script interface you can add your banner in one l
 4. You choose where to append/include the script and where to exclude it.
 5. Support JavaScript/XML/HTML
 6. With Widgets.
+7. Now with support for Shortcodes API!
 7. Free as in speech.
 
 ## Contributors
@@ -40,7 +41,7 @@ Sources of this plugin are available both in SVN and Git:
 
 ### TODO
 - [x] Support for Widgets API.
-- [ ] Support for Shortcode.
+- [x] Support for Shortcode.
 - [ ] Move the CodeEditor in its own namespace.
 - [ ] Use CodeMirror addons.
 - [ ] Improve the user interface.
@@ -48,6 +49,7 @@ Sources of this plugin are available both in SVN and Git:
 
 ## Screenshots
 1. Essential Script admin dashboard.
-![Main panel](https://ps.w.org/essential-script/assets/screenshot-1.png?rev=1723343)
-2. Essential Script widget.
-![Widget](https://ps.w.org/essential-script/assets/screenshot-2.png?rev=1734236)
+![Main panel](https://ps.w.org/essential-script/assets/screenshot-1.png)
+2. Essential Script does use of `wp_enqueue_scripts`
+3. Essential Script widget.
+![Widget](https://ps.w.org/essential-script/assets/screenshot-2.png)

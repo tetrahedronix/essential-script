@@ -3,7 +3,7 @@ Contributors: tetravalente
 Tags: scripting, javascript, css, adsense, code, embed
 Requires at least: 4.0
 Tested up to: 4.8.2
-Stable tag: 0.4.1
+Stable tag: 0.5
 Requires PHP: 5.3
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -22,7 +22,8 @@ For example, through Essential Script interface you can add your banner in one l
 4. You choose where to append/include the script and where to exclude it.
 5. Support JavaScript/XML/HTML.
 6. With Widgets.
-7. Free as in speech.
+7· Now with support for Shortcodes API!
+8. Free as in speech.
 
 == Installation ==
 This section describes how to install the plugin and get it working:
@@ -45,7 +46,6 @@ Sources of this plugin are available both in SVN and Git:
 * This plugin has known conflit with JetPack Embedded Shortcode. You need to disable Embedded Shortcode if you want to use Essential Script and JetPack together.
 
 ### TODO
-- Support for Shortcodes
 - Move the CodeEditor in its own namespace.
 - Use CodeMirror addons.
 - Improve the user interface.
@@ -53,9 +53,15 @@ Sources of this plugin are available both in SVN and Git:
 
 ==Screenshots==
 1. Essential Script admin dashboard
-2. Essential Script widget
+2. Essential Script does use of wp_enqueue_scripts
+3. Essential Script widget
 
 == Changelog ==
+= 0.5 =
+* Add support for Shortcode API
+* Introduce `File` class for file management
+* Frontend: Restructure the code and implement Strategy pattern
+* Add new checkbox to use with Shortcode
 = 0.4.1 =
 * Add Note for proper use of wp_enqueue_scripts option
 * Checkbox switches off when Wordpress DB is selected

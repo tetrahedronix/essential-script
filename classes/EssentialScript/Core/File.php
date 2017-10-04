@@ -26,12 +26,18 @@ namespace EssentialScript\Core;
  */
 class File {
 
+	/**
+	 * @var string The filename 
+	 */
 	private $filename;
-	
+	/**
+	 * @var object \ArrayAccess Options object. 
+	 */
 	private $options;
 	/**
+	 * Initialize the class.
 	 * 
-	 * @param \ArrayAccess $opts
+	 * @param \ArrayAccess $opts The Options object.
 	 */
 	public function __construct( \ArrayAccess $opts ) {
 		/**

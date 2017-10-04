@@ -25,14 +25,26 @@ namespace EssentialScript\Frontend;
  * @author docwho
  */
 class Main {
-	
+	/**
+	 * @var object \ArrayAccess Options object.
+	 */
 	private $options;
 	
-	public function __construct( $opts ) {
+	/**
+	 * Initialize the class by saving the options.
+	 * 
+	 * @param \ArrayAccess $opts The Options object.
+	 */
+	public function __construct( \ArrayAccess $opts ) {
 		$this->options = $opts;
-		
 	}
 	
+	/**
+	 * Link the filter to the Web page.
+	 * 
+	 * @param object $filter_obj
+	 * @return null If something goes wrong.
+	 */
 	public function inclusion( $filter_obj ) {
 		/* User typically reads one page at a time */
 		if ( ( is_front_page() && is_home() ) && 
@@ -48,7 +60,7 @@ class Main {
 		} else {
 			return;
 		}
-		
+		// Apply filter.
 		$filter_obj->filter();
 	}
 }

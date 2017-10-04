@@ -2,12 +2,12 @@
 /**
  * @package Essential_Script
  * @author Giulio <giupersu@yahoo.it>
- * @version 0.4.1
+ * @version 0.5
  * 
  * Plugin Name: Essential Script
  * Plugin URI: 
  * Description: Essential Script plugin offers you the ability to plug and manage your client-side script, which is an essential part of your website, through a versatile text editor made with <a href="http://codemirror.net/">CodeMirror</a>.
- * Version: 0.4.1
+ * Version: 0.5
  * Requires: 4.0
  * Tested up to: 4.8.2
  * Requires PHP: 5.3
