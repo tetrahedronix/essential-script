@@ -20,21 +20,79 @@
 namespace EssentialScript\Frontend;
 
 /**
- * Description of Shortcode
+ * This filter class add your shortcode  by using Shortcode API.
  *
  * @author docwho
  */
 class Shortcode implements \EssentialScript\Frontend\Strategy {
+	/**
+	 * @var string Script filename.
+	 */
+	private $filename;
+	/**
+	 * @var string Uses this property when the database is selected.
+	 */	
+	private $script;
+	/**
+	 * @var type Storage space where the script can be kept.
+	 */	
+	private $storage;
+	
+	/**
+	 * Initialization parameters: see above for detailed descriptions.
+	 * 
+	 * @param type $filename
+	 * @param type $script
+	 * @param type $storage
+	 */
+	public function __construct( $filename, $script, $storage ) {
+		// Save the parameters in the class properties.
+		$this->filename = $filename;
+		$this->script = $script;
+		$this->storage = $storage;
+	}
 
+	/**
+	 * Filter function.
+	 * 
+	 * @return null If something goes wrong.
+	 */
 	public function filter() {
+		if ( ( 'file' === $this->storage ) && file_exists( $this->filename ) ) {
+			$this->script = file_get_contents( $this->filename );
+		} 
+			
+		if ( empty ( $this->script ) ) {
+			return;
+		}
 		
+		if ( $this->script === false ) {
+			$this->print_error();
+		}
+
+		add_shortcode( 'essential-script', array ( $this, 'the_script' ) ); 
 	}
 	
+	/**
+	 * Print a message error if this filter has encountered a problem.
+	 */	
 	public function print_error() {
-		
+		wp_die( get_bloginfo( 'name' ) . 
+			' has encountered a problem and needs to close. '
+			. 'We are sorry for the inconvenience.' );
 	}
-	
+
+	/**
+	 * Output the script.
+	 * 
+	 * @param string $content The original content to be filtered.
+	 * @return string The content filtered with or without the script.
+	 */	
 	public function the_script( $content ) {
-		
+		if ( !empty ( $this->script ) ) {
+			return $content . $this->script;
+		}
+
+		return $content;
 	}
 }

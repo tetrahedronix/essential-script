@@ -39,7 +39,7 @@ class Presenter {
 	 */
 	private $filename;
 	/**
-	 * @var string Script code.
+	 * @var string Uses this property when the database is selected.
 	 */
 	private $script;
 	/**
@@ -97,7 +97,9 @@ class Presenter {
 				break;
 			case 'shortcode':
 				$filter = new \EssentialScript\Frontend\Shortcode(
-					);
+					$this->filename,
+					$this->script,
+					$this->storage );
 				break;
 			case 'foot':
 				$filter = new \EssentialScript\Frontend\Footer(

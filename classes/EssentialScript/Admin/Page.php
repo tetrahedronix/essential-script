@@ -61,7 +61,7 @@ final class Page {
 
 	public function field_where () {
 ?>
-<fieldset>		
+<fieldset id="front-static-pages">		
 <legend class="screen-reader-text">
 	<span><?php esc_html_e( 'Choose where to plug the script',
 			'essential-script' ); ?></span></legend>
@@ -81,7 +81,12 @@ final class Page {
 	<input type="radio" name="essentialscript_options[where]" value="shortcode"
 <?php checked( $this->options['where'], 'shortcode', true ); ?>>
 	<span class="input-text">
-		<?php esc_html_e( 'Content with Shortcode', 'essential-script' ); ?></span>
+		<?php esc_html_e( 'Content with Shortcode', 'essential-script' ); ?>
+	</span>
+	<span>( <strong><?php esc_html_e( 'Note: ',
+			'essential-script' ); ?></strong>
+		<i><?php esc_html_e( 'Use the tag [essential-script]', 
+			'essential-script' ); ?></i> )</span>
 </label><br/>
 <label>
 	<input type="radio" name="essentialscript_options[where]" value="foot" 

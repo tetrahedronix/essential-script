@@ -20,7 +20,7 @@
 namespace EssentialScript\Frontend;
 
 /**
- * Description of Main
+ * Apply the filter to the current Web page.
  *
  * @author docwho
  */
