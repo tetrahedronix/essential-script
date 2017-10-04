@@ -67,13 +67,16 @@ add_action( 'widgets_init', function() {
 	register_widget( 'EssentialScript\Admin\Widget' );
 } );
 // If !admin then it's frontend.
-add_action( 'wp', function() { 
-	/* The wp action hook runs immediately after the global WP class
-	 * object is set up. Notice that init hook does not the job here
-	 * because we need the conditional tags on the weblog frontend
-	 * Essentialscript\Frontend.
-	 */
+$filter = null;
+add_action( 'init', function() use ( &$filter ) {
 	$opts = new \EssentialScript\Core\Options;
 	$presenter = new \EssentialScript\Frontend\Presenter( $opts );
-	$presenter->inclusion();
+	$filter = $presenter->router();
+} );
+add_action( 'wp', function() use ( &$filter ) {
+	if ( !is_null( $filter ) ) {
+		$opts = new \EssentialScript\Core\Options;
+		$main = new \EssentialScript\Frontend\Main( $opts );
+		$main->inclusion( $filter ); 
+	}
 } ); 

@@ -56,49 +56,37 @@ class Presenter {
 		$this->filename = $this->options['path'] . '/' . $this->options['filename'];
 	}
 	
-	public function inclusion() {
-		/* User typically reads one page at a time */
-		if ( ( is_front_page() && is_home() ) && 
-				true === $this->options['pages']['index'] ) {
-			// Default homepage is included.
-		} elseif ( is_single() && ( true === $this->options['pages']['single'] ) ) {
-			// Single post is included.
-		} elseif ( is_page() && ( true === $this->options['pages']['page'] ) ) {
-			// Page is included.
-		} elseif ( ( is_archive() && 
-				( true === $this->options['pages']['archive'] ) ) ) {
-			// Archive is included.
-		} else {
-			return;
-		}
-		$this->router();
-	}
 	/**
 	 * Router.
 	 * 
 	 * This function routes the data to the correct filter.
 	 */
-	private function router() {
+	public function router() {
 		// This instance allows to manipulate the output.
-		$filter = new \EssentialScript\Frontend\Filter;
+		//$filter = new \EssentialScript\Frontend\Filter;
 		// Initialize the filter with our data.
-		$filter->init( 
+		/*$filter->init( 
 				$this->options['script'],
 				$this->options['storage'],
 				$this->options['enqueue'],
 				$this->filename
-		);
+		); */
 		// Router
 		switch ( $this->options['where'] ) {
+			case 'head':
+				$filter = new \EssentialScript\Frontend\Head;
+				break;
 			case 'content':
-				$filter->content();
+				$filter = new \EssentialScript\Frontend\Content;
+				break;
+			case 'shortcode':
+				$filter = new \EssentialScript\Frontend\Shortcode;
 				break;
 			case 'foot':
-				$filter->footer();
-				break;
-			case 'head':
-				$filter->head();
+				$filter = new \EssentialScript\Frontend\Footer;
 				break;
 		}
+		
+		return $filter;
 	}
 }
