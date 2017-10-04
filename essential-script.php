@@ -76,7 +76,7 @@ add_action( 'init', function() use ( &$filter ) {
 add_action( 'wp', function() use ( &$filter ) {
 	if ( !is_null( $filter ) ) {
 		$opts = new \EssentialScript\Core\Options;
-		$main = new \EssentialScript\Frontend\Main( $opts );
-		$main->inclusion( $filter ); 
+		$context = new \EssentialScript\Frontend\Main( $opts );
+		$context->inclusion( $filter ); 
 	}
 } ); 
