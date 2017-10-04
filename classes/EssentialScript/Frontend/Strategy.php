@@ -26,5 +26,9 @@ namespace EssentialScript\Frontend;
 interface Strategy {
 	//put your code here
 	
-	public static function filter();
+	public function filter();
+	
+	public function print_error();
+	
+	public function the_script( $content );
 }
