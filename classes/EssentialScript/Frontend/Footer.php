@@ -110,15 +110,13 @@ class Footer implements \EssentialScript\Frontend\Strategy {
 	}
 
 	/**
-	 * Output the script.
-	 * 
-	 * @param string $content Optional: the content to be filtered.
-	 * @return string The content filtered or the script.
+	 * Output the script. This function shouldn't return, and shouldn't take 
+	 * any parameters. 
 	 */	
-	public function the_script($content) {
-		if ( 'the_content' === current_filter() ) {
+	public function the_script() {
+/* 		if ( 'the_content' === current_filter() ) {
 			return $content . $this->script;
-		}
+		} */
 		// Output the script only when Head or Footer filters are used.		
 		if ( !empty( $this->script ) ) {
 			echo $this->script;
