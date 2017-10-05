@@ -125,6 +125,7 @@ class Setup {
 				'single'  => false,
 				'page'    => false,
 				'archive' => false,	),
+			'enqueue' => false,
 			'storage'  => 'file',
 			'filename' => '',
 			'path'     => '',
