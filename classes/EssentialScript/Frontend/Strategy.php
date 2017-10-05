@@ -30,5 +30,5 @@ interface Strategy {
 	
 	public function print_error();
 	
-	public function the_script();
+	public function the_script( $content );
 }

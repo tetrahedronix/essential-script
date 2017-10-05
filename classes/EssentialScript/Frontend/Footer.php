@@ -113,10 +113,8 @@ class Footer implements \EssentialScript\Frontend\Strategy {
 	 * Output the script. This function shouldn't return, and shouldn't take 
 	 * any parameters. 
 	 */	
-	public function the_script() {
-/* 		if ( 'the_content' === current_filter() ) {
-			return $content . $this->script;
-		} */
+	public function the_script( $content ) {
+
 		// Output the script only when Head or Footer filters are used.		
 		if ( !empty( $this->script ) ) {
 			echo $this->script;
