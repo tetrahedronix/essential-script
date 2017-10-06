@@ -67,16 +67,16 @@ add_action( 'widgets_init', function() {
 	register_widget( 'EssentialScript\Admin\Widget' );
 } );
 // If !admin then it's frontend.
-$filter = null;
-add_action( 'init', function() use ( &$filter ) {
+$essentialscript_filter = null;
+add_action( 'init', function() use ( &$essentialscript_filter ) {
 	$opts = new \EssentialScript\Core\Options;
 	$presenter = new \EssentialScript\Frontend\Presenter( $opts );
-	$filter = $presenter->router();
+	$essentialscript_filter = $presenter->router();
 } );
-add_action( 'wp', function() use ( &$filter ) {
-	if ( !is_null( $filter ) ) {
+add_action( 'wp', function() use ( &$essentialscript_filter ) {
+	if ( !is_null( $essentialscript_filter ) ) {
 		$opts = new \EssentialScript\Core\Options;
 		$context = new \EssentialScript\Frontend\Main( $opts );
-		$context->inclusion( $filter ); 
+		$context->inclusion( $essentialscript_filter ); 
 	}
 } ); 
