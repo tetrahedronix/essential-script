@@ -22,7 +22,7 @@ For example, through Essential Script interface you can add your banner in one l
 4. You choose where to append/include the script and where to exclude it.
 5. Support JavaScript/XML/HTML.
 6. With Widgets.
-7· Now with support for Shortcodes API!
+7. Now with support for Shortcodes API!
 8. Free as in speech.
 
 == Installation ==
