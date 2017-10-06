@@ -3,7 +3,7 @@ Contributors: tetravalente
 Tags: scripting, javascript, css, adsense, code, embed
 Requires at least: 4.0
 Tested up to: 4.8.2
-Stable tag: 0.5
+Stable tag: 0.5.1
 Requires PHP: 5.3
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -57,6 +57,8 @@ Sources of this plugin are available both in SVN and Git:
 3. Essential Script widget
 
 == Changelog ==
+= 0.5.1 =
+* Fix incorrect variable name `filter` in `essential-script.php`
 = 0.5 =
 * Add support for Shortcode API
 * Introduce `File` class for file management
