@@ -108,6 +108,8 @@ class Presenter {
 					$this->storage,
 					$this->enqueue );
 				break;
+			default:
+				$filter = null;
 		}
 		// This instance allows to manipulate the output.
 		return $filter;
