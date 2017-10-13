@@ -17,14 +17,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace EssentialScript\Frontend;
+namespace EssentialScript\Frontend\Filter;
 
 /**
  * Filter class for Head section of the Web site
  *
  * @author docwho
  */
-class Head implements \EssentialScript\Frontend\Strategy {
+class Head implements \EssentialScript\Frontend\Filter\Strategy {
 	
 	/**
 	 * @var string The filename.

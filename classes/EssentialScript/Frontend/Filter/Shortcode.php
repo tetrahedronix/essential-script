@@ -17,14 +17,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace EssentialScript\Frontend;
+namespace EssentialScript\Frontend\Filter;
 
 /**
  * This filter class add your shortcode  by using Shortcode API.
  *
  * @author docwho
  */
-class Shortcode implements \EssentialScript\Frontend\Strategy {
+class Shortcode implements \EssentialScript\Frontend\Filter\Strategy {
 	/**
 	 * @var string Script filename.
 	 */

@@ -17,14 +17,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace EssentialScript\Frontend;
+namespace EssentialScript\Frontend\Filter;
 
 /**
- * Content Filter class: append the script to the post content
+ * Filter class for Footer section of the Web site.
  *
  * @author docwho
  */
-class Content implements \EssentialScript\Frontend\Strategy {
+class Footer implements \EssentialScript\Frontend\Filter\Strategy {
 	/**
 	 * @var string The filename.
 	 */
@@ -37,6 +37,10 @@ class Content implements \EssentialScript\Frontend\Strategy {
 	 * @var string Where the script is saved: file or database.
 	 */
 	private $storage;
+	/**
+	 * @var bool If this filter should use wp_enqueue_scripts hook.
+	 */	
+	private $enqueue;
 
 	/**
 	 * Initialization parameters: see above for detailed descriptions.
@@ -44,62 +48,76 @@ class Content implements \EssentialScript\Frontend\Strategy {
 	 * @param string $filename
 	 * @param string $script
 	 * @param string $storage
-	 */	
-	public function __construct( $filename, $script, $storage ) {
-		// Save the parameters in the class properties.		
+	 * @param bool $enqueue
+	 */
+	public function __construct( $filename, $script, $storage, $enqueue ) {
 		$this->filename = $filename;
 		$this->script = $script;
 		$this->storage = $storage;
+		$this->enqueue = $enqueue;
 	}
 	
 	/**
 	 * Filter function.
 	 * 
-	 * @return null If something goes wrong.
+	 * @return null If something goes wrong or uses wp_enqueue_scripts.
 	 */
 	public function filter() {
+		// Only use wp_enqueue_scripts with file storage.
+		if ( ( 'file' === $this->storage ) && ( true === $this->enqueue ) && 
+			file_exists( $this->filename ) ) {
+			add_action( 'wp_enqueue_scripts', function() {
+				wp_enqueue_script( 'essential-script', 
+					substr( $this->filename, strlen( ABSPATH )-1 ),
+					array(),
+					null,
+					true );
+			});
+			return;
+		}
+		/* has_action checks if any action has been registered for a 
+		 * hook. 
+		 * wp_footer may not be available on all themes, so you should 
+		 * take this into account when using it. has_action avoids 
+		 * the problem.
+		 */
+		if ( !has_action( 'wp_footer' ) ) {
+			return;
+		}
+
 		if ( ( 'file' === $this->storage ) && file_exists( $this->filename ) ) {
 			$this->script = file_get_contents( $this->filename );
-		} 
-		
-		if ( empty ( $this->script ) ) {
-			// Do not do nothing
-			return;
 		} 
 		
 		if ( $this->script === false ) {
 			$this->print_error();
 		}
-
-		// We can't use wp_enqueue_script.
-		add_filter( 'the_content', array ( $this, 'the_script' ) );
-
+		
+		/* The only time script code should be added to this hook is when
+		 * it's not located in a separate file. We have not a separate file
+		 * when storage is wpdb.
+		 */
+		add_action( 'wp_footer', array ( $this, 'the_script' ), 20 );
 	}
-
+	
 	/**
 	 * Print a message error if this filter has encountered a problem.
 	 */
 	public function print_error() {
 		wp_die( get_bloginfo( 'name' ) . 
-			'has encountered a problem and needs to close. '
-			. 'We are sorry for the inconvenience.' );
+				'has encountered a problem and needs to close. '
+				. 'We are sorry for the inconvenience.' );		
 	}
 
 	/**
-	 * Output the script.
-	 * 
-	 * @param string $content The content to be filtered.
-	 * @return string The content filtered with or without the script.
-	 */
+	 * Output the script. This function shouldn't return, and shouldn't take 
+	 * any parameters. 
+	 */	
 	public function the_script( $content ) {
-		if ( 'the_content' === current_filter() ) {
-			return $content . $this->script;
-		}
-		
-		return $content;
-/*		
+
+		// Output the script only when Head or Footer filters are used.		
 		if ( !empty( $this->script ) ) {
 			echo $this->script;
-		} */
+		} 
 	}
 }

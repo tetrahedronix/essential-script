@@ -83,26 +83,26 @@ class Presenter {
 		switch ( $this->options['where'] ) {
 			case 'head':
 				// Initialize the filter with our data.
-				$filter = new \EssentialScript\Frontend\Head(
+				$filter = new \EssentialScript\Frontend\Filter\Head(
 					$this->filename,
 					$this->script,
 					$this->storage,
 					$this->enqueue ); 
 				break;
 			case 'content':
-				$filter = new \EssentialScript\Frontend\Content(
+				$filter = new \EssentialScript\Frontend\Filter\Content(
 					$this->filename,
 					$this->script,
 					$this->storage );
 				break;
 			case 'shortcode':
-				$filter = new \EssentialScript\Frontend\Shortcode(
+				$filter = new \EssentialScript\Frontend\Filter\Shortcode(
 					$this->filename,
 					$this->script,
 					$this->storage );
 				break;
 			case 'foot':
-				$filter = new \EssentialScript\Frontend\Footer(
+				$filter = new \EssentialScript\Frontend\Filter\Footer(
 					$this->filename,
 					$this->script,
 					$this->storage,
