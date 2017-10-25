@@ -1,7 +1,5 @@
 <?php
-/**
- * @package Essential_Script\Admin
- */
+
 /*
  * Copyright (C) 2017 docwho
  *
@@ -25,25 +23,17 @@ namespace EssentialScript\Admin;
  *
  * @author docwho
  */
-final class Page {
-	/**
-	 * The options from Wordpress DB.
-	 * @var array 
-	 */
-	private $options = array();
+class Page {
 	/**
 	 * The submenu slug for the administration page.
 	 * @var string
 	 */
 	private $submenu_page;
-			
+	
 	/**
 	 * Setup class.
-	 * 
-	 * @param \ArrayAccess $opts The plugin options.
 	 */
-	function __construct( \ArrayAccess $opts ) {
-		$this->options = $opts;
+	public function __construct() {
 		
 		$this->submenu_page = \EssentialScript\Admin\Menu::get_slug();
 		
@@ -58,209 +48,57 @@ final class Page {
 			$this->settings();
 		}
 	}
-
-	public function field_where () {
-?>
-<fieldset id="front-static-pages">		
-<legend class="screen-reader-text">
-	<span><?php esc_html_e( 'Choose where to plug the script',
-			'essential-script' ); ?></span></legend>
-<label>
-	<input type="radio" name="essentialscript_options[where]" value="head" 
-<?php checked( $this->options['where'], 'head', true ); ?>>
-	<span class="input-text">
-		<?php esc_html_e( 'Head', 'essential-script' ); ?></span>
-</label><br/>
-<label>
-	<input type="radio" name="essentialscript_options[where]" value="content" 
-<?php checked( $this->options['where'], 'content', true ); ?>>
-	<span class="input-text">
-		<?php esc_html_e( 'Content', 'essential-script' ); ?></span>
-</label><br/>
-<label>
-	<input type="radio" name="essentialscript_options[where]" value="shortcode"
-<?php checked( $this->options['where'], 'shortcode', true ); ?>>
-	<span class="input-text">
-		<?php esc_html_e( 'Content with Shortcode', 'essential-script' ); ?>
-	</span>
-	<span>( <strong><?php esc_html_e( 'Note: ',
-			'essential-script' ); ?></strong>
-		<i><?php esc_html_e( 'Use the tag [essential-script]', 
-			'essential-script' ); ?></i> )</span>
-</label><br/>
-<label>
-	<input type="radio" name="essentialscript_options[where]" value="foot" 
-<?php checked( $this->options['where'], 'foot', true ); ?>>
-	<span class="input-text">
-		<?php esc_html_e( 'Foot', 'essential-script' ); ?></span>
-</label>
-</fieldset>					
-<?php
-	}
 	
-	public function field_storage() {
-?>
-<fieldset id="front-static-pages">
-<legend class="screen-reader-text">
-	<span><?php esc_html_e( 'Choose where to store the script',
-			'essential-script' ); ?></span></legend>
-<label>
-	<input type="radio" name="essentialscript_options[storage]" value="file" 
-<?php checked( $this->options['storage'], 'file', true ); ?>/>
-	<span class="input-text"><?php esc_html_e( 'File (Recommended)',
-			'essential-script' ); ?></span>
-	<input type="text" name="essentialscript_options[filename]" value="<?php echo esc_attr( $this->options['filename'] ); ?>" size="25" />
-	</label>
-	<p class="description"><?php esc_html_e( 'Enter the filename',
-			'essential-script' ); ?></p>	
-<ul>
-	<li><label for="enqueue">
-			<input type="checkbox" 
-				   id="enqueue" 
-				   name="essentialscript_options[enqueue]" 
-				   <?php checked( $this->options['enqueue'], true, true ); ?> />
-			<?php printf( __( 'Use <a href="%s">wp_enqueue_scripts</a> hook (where possible)',
-				'essential-script' ),
-				'https://codex.wordpress.org/Plugin_API/Action_Reference/wp_enqueue_scripts'  ); ?>
-	</label></li>
-	<li><strong><?php esc_html_e( 'Note:', 'essential-script' ); ?></strong>
-		<i><?php esc_html_e( 'The external script file cannot contain the <script> tag.',
-		'essential-script') ?></i></li>
-</ul>
-<p><label>
-	<input type="radio" name="essentialscript_options[storage]" value="wpdb" 
-<?php checked( $this->options['storage'], 'wpdb', true ); ?>/>
-	<span class="input-radio"><?php esc_html_e( 'Wordpress DB',
-			'essential-script' ); ?></span>
-	</label></p>
-</fieldset>
-<?php
-		}
-	public function field_pages() {
-?>
-<fieldset>
-<legend class="screen-reader-text">
-	<span><?php esc_html_e( 'What pages include the script', 'essential-script' ); ?></span></legend>
-<label>
-	<input type="checkbox" name="essentialscript_options[pages][index]" 
-<?php checked( $this->options['pages']['index'], true, true ); ?>/>
-	<span class="input-text"><?php esc_html_e( 'Default Homepage',
-			'essential-script' ); ?></span>
-</label><br/>
-<label>
-	<input type="checkbox" name="essentialscript_options[pages][single]" 
-<?php checked( $this->options['pages']['single'], true, true ); ?>/>
-	<span class="input-text"><?php esc_html_e( 'Single Post',
-			'essential-script' ); ?></span>	
-</label><br/>
-<label>
-	<input type="checkbox" name="essentialscript_options[pages][page]" 
-<?php checked( $this->options['pages']['page'], true, true ); ?>/>
-	<span class="input-text"><?php esc_html_e( 'Pages', 'essential-script' ); ?></span>
-</label><br/>
-<label>
-	<input type="checkbox" name="essentialscript_options[pages][archive]" 
-<?php checked( $this->options['pages']['archive'], true, true ); ?>/>
-	<span class="input-text"><?php esc_html_e( 'Archive', 'essential-script' ); ?></span>
-</label>
-</fieldset>	
-<?php		
-		}
-		
-	public function field_textarea() {
-		switch ( $this->options['storage'] ) {
-			case 'wpdb':
-				$textarea = $this->options['script'];
-				break;
-			case 'file':
-				//$dir = wp_upload_dir();
-				//$f = $dir['path'] . '/' . $options['filename'];
-				$f = $this->options['path'] . '/' . $this->options['filename'];
-				if ( file_exists( $f ) ) {
-					$textarea = file_get_contents( $f );
-				} else {
-					add_settings_error(
-						// slug title for our settings.
-						'es_messages',
-						// slug name for this error/event
-						'es_file_error',
-						// The formatted message text to display.
-						__('File ' . $f . ' Not found', 'essential-script'),
-						// The type of message it is: error/updated
-						'error'								
-					);
-					settings_errors();
-					$textarea = '';
-				}
-					break;
-			default:
-				$textarea = '';
-			}
-			
-?>
-<textarea id="textarea-script" name="essentialscript_options[script]"
-		  rows="10" cols="80"><?php echo $textarea; ?></textarea>
-<p class="description"><?php esc_html_e( 'Max 512 chars. The allowed tags are listed in settings_sanitize(). You can add or remove tags as required.',
-		'essential-script' ); ?></p>
-<?php
-		echo<<<'JS'
-<!-- Codemirror -->   
-<script>
-   var textarea_node=document.getElementById("textarea-script");
-   var editor = CodeMirror.fromTextArea(textarea_node, {
-		lineNumbers: true,
-		mode: { name: "xml", htmlMode: true },
-		viewportMargin: Infinity,
-		lint: true
-});
-</script> 
-JS
-. PHP_EOL;
-
-	}	
-
-	static function section_text() {
-		echo ( '<p>' );
-		esc_html_e( 'Fill your script settings below: script code, position and storage.',
-				'essential-script' );
-		echo ( '</p>' );
-	}
-	
-	private function settings() {
+	/**
+	 * Use the Factory Pattern to create fieldsets and sections.
+	 */
+	public function settings() {
 		// Add a new section to a settings page.
+		$section = new \EssentialScript\Admin\Settings\SectionCreator;
 		add_settings_section(
 			'es_section_id',		// HTML ID tag
 			'Script Area',			// The section title text
-			'\EssentialScript\Admin\Page::section_text',	// Callback that will echo some explanations
+			// Callback that will echo some explanations
+			$section->doFactory( new \EssentialScript\Admin\Settings\Section ),	
 			$this->submenu_page		// Settings page
-		);				
+		);
 		// Register a settings field to a settings page and section.
-		add_settings_field( 
+		$field = new \EssentialScript\Admin\Settings\FieldCreator;
+		add_settings_field(
 			'es_textarea',
 			__( 'Enter the script code here', 'essential-script' ),
-			array ( $this, 'field_textarea' ),
+			$field->doFactory( new \EssentialScript\Admin\Settings\FieldTextarea ),
 			$this->submenu_page,
-			'es_section_id' );
+			'es_section_id'			
+		);
 		add_settings_field(
 			'es_radiobutton_where',
 			__( 'Choose where to plug the script', 'essential-script' ),  
-			array ( $this, 'field_where' ),
+			$field->doFactory( new \EssentialScript\Admin\Settings\FieldWhere ),
 			$this->submenu_page,
 			'es_section_id' );
 		add_settings_field(
 			'es_checkbox_pages',
 			__( 'What pages include the script', 'essential-script' ),
-			array ( $this, 'field_pages' ),
+			$field->doFactory( new \EssentialScript\Admin\Settings\FieldPages ),
 			$this->submenu_page,
-			'es_section_id' );
+			'es_section_id'
+		);
 		add_settings_field(
 			'es_radiobutton_storage',
 			__( 'Choose where to store the script', 'essential-script' ),
-			array ( $this, 'field_storage' ),
+			$field->doFactory( new \EssentialScript\Admin\Settings\FieldStorage ),
 			$this->submenu_page,
-			'es_section_id' );
+			'es_section_id'			
+		);
 	}
 	
+	/**
+	 * Sanitize the input received from the settings page.
+	 * 
+	 * @param type $input The user input
+	 * @return string The user input safe to use.
+	 */
 	public function settings_sanitize( $input ) {
 		$sane = array ();
 		// List of allowed tags and attributes 

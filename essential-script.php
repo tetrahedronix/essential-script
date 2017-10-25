@@ -54,8 +54,7 @@ new \EssentialScript\Core\Setup;
 if ( is_admin() ) {
 	// Prepares options for the Page object
 	add_action( 'admin_init', function() {
-		$opts = new \EssentialScript\Core\Options;
-		new \EssentialScript\Admin\Page( $opts );
+		new \EssentialScript\Admin\Page;
 	} ); 
 	// Creating the menu.
 	add_action( 'admin_menu', function() {
