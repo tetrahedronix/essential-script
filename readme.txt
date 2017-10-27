@@ -3,7 +3,7 @@ Contributors: tetravalente
 Tags: scripting, javascript, css, adsense, code, embed
 Requires at least: 4.0
 Tested up to: 4.8.2
-Stable tag: 0.5.1
+Stable tag: 0.6
 Requires PHP: 5.3
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -46,10 +46,10 @@ Sources of this plugin are available both in SVN and Git:
 * This plugin has known conflit with JetPack Embedded Shortcode. You need to disable Embedded Shortcode if you want to use Essential Script and JetPack together.
 
 ### TODO
-- Move the CodeEditor in its own namespace.
 - Use CodeMirror addons.
 - Improve the user interface.
 - Support for reusable components.
+- Complete script engine with support for user-genereted content.
 
 ==Screenshots==
 1. Essential Script admin dashboard

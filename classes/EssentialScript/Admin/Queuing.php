@@ -37,7 +37,7 @@ class Queuing {
 	 * 
 	 * @since 0.2
 	 */
-	const ESSENTIALSCRIPT_VER = '0.5.1';
+	const ESSENTIALSCRIPT_VER = '0.6';
 	/**
 	 * @var string Current page slug. 
 	 */

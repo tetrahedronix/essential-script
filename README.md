@@ -42,10 +42,11 @@ Sources of this plugin are available both in SVN and Git:
 ### TODO
 - [x] Support for Widgets API.
 - [x] Support for Shortcode.
-- [ ] Move the CodeEditor in its own namespace.
+- [x] Move the CodeMirror API in its own namespace.
 - [ ] Use CodeMirror addons.
 - [ ] Improve the user interface.
 - [ ] Support for reusable components.
+- [ ] Complete script engine with support for user-genereted content.
 
 ## Screenshots
 1. Essential Script admin dashboard.
