@@ -43,7 +43,8 @@ Sources of this plugin are available both in SVN and Git:
 
 ### Known issue
 
-* This plugin has known conflit with JetPack Embedded Shortcode. You need to disable Embedded Shortcode if you want to use Essential Script and JetPack together.
+* This plugin has known conflit with JetPack Embedded Shortcode. You need to disable Embedded Shortcode if you want to use Essential Script and JetPack together ( See also: [Jetpack Shortcode Embeds](https://jetpack.com/support/shortcode-embeds/) ).
+
 
 ### TODO
 - Use CodeMirror addons.
