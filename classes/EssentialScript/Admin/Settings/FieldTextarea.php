@@ -26,14 +26,23 @@ namespace EssentialScript\Admin\Settings;
  */
 class FieldTextarea implements \EssentialScript\Admin\Settings\Setting {
 	/**
-	 * The options from Wordpress DB.
-	 * @var array 
+	 * Container for plugin options.
+	 * 
+	 * @var object The options contained in the Options object. 
 	 */
-	private $options = array ();
+	private $options;
+	/**
+	 * Object for file management.
+	 * 
+	 * @var object File object.
+	 */
+	private $file_obj;
 	
 	public function __construct() {
 		
-		$this->options = new \EssentialScript\Core\Options;
+		$this->options = new \EssentialScript\Core\Options;		
+		
+		$this->file_obj = new \EssentialScript\Core\File( $this->options );
 	}
 	
 	/**
@@ -49,60 +58,14 @@ class FieldTextarea implements \EssentialScript\Admin\Settings\Setting {
 	 */
 	public function printItem() {
 	
-		$textarea = $this->gettextarea();
+		$textarea = $this->file_obj->getcontent();
 ?>
 <textarea id="textarea-script" name="essentialscript_options[script]"
 		  rows="10" cols="80"><?php echo $textarea; ?></textarea>
 <p class="description"><?php esc_html_e( 'Max 512 chars. The allowed tags are listed in settings_sanitize(). You can add or remove tags as required.',
 		'essential-script' ); ?></p>
 <?php
-		echo<<<'JS'
-<!-- Codemirror -->   
-<script>
-   var textarea_node=document.getElementById("textarea-script");
-   var editor = CodeMirror.fromTextArea(textarea_node, {
-		lineNumbers: true,
-		mode: { name: "xml", htmlMode: true },
-		viewportMargin: Infinity,
-		lint: true
-});
-</script> 
-JS
-. PHP_EOL;
+	\EssentialScript\Core\Codemirror::fromtextarea();
 
-	}
-	
-	public function gettextarea() {
-	
-		switch ( $this->options['storage'] ) {
-			case 'wpdb':
-				$textarea = $this->options['script'];
-				break;
-			case 'file':
-				//$dir = wp_upload_dir();
-				//$f = $dir['path'] . '/' . $options['filename'];
-				$f = $this->options['path'] . '/' . $this->options['filename'];
-				if ( file_exists( $f ) ) {
-					$textarea = file_get_contents( $f );
-				} else {
-					add_settings_error(
-						// slug title for our settings.
-						'es_messages',
-						// slug name for this error/event
-						'es_file_error',
-						// The formatted message text to display.
-						__('File ' . $f . ' Not found', 'essential-script'),
-						// The type of message it is: error/updated
-						'error'								
-					);
-					settings_errors();
-					$textarea = '';
-				}
-					break;
-			default:
-				$textarea = '';
-			}
-			
-			return $textarea;
 	}
 }

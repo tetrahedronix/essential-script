@@ -20,7 +20,7 @@
 namespace EssentialScript\Core;
 
 /**
- * Description of File
+ * Helper class for file management.
  *
  * @author docwho
  */
@@ -59,4 +59,43 @@ class File {
 	public function getfilename() {
 		return is_string( $this->filename ) ? $this->filename : false;
 	}
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function getcontent() {
+		
+		switch ( $this->options['storage'] ) {
+			case 'wpdb':
+				$script = $this->options['script'];
+				break;
+			case 'file':
+				//$dir = wp_upload_dir();
+				//$f = $dir['path'] . '/' . $options['filename'];
+				$f = $this->options['path'] . '/' . $this->options['filename'];
+				if ( file_exists( $f ) ) {
+					$script = file_get_contents( $f );
+				} else {
+					add_settings_error(
+						// slug title for our settings.
+						'es_messages',
+						// slug name for this error/event
+						'es_file_error',
+						// The formatted message text to display.
+						__('File ' . $f . ' Not found', 'essential-script'),
+						// The type of message it is: error/updated
+						'error'								
+					);
+					settings_errors();
+					$script = '';
+				}
+					break;
+			default:
+				$script = '';
+			}
+			
+			return $script;
+	}
+	
 }
