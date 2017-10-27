@@ -31,9 +31,9 @@ class Presenter {
 	/**
 	 * Container for plugin options.
 	 * 
-	 * @var array The options contained in the Options object.
+	 * @var string Where the script is displayed on the page.
 	 */
-	private $options = array();
+	private $where;
 	/**
 	 * @var string Script filename.
 	 */
@@ -54,16 +54,13 @@ class Presenter {
 	 * Setup class.
 	 * 
 	 * @param \ArrayAccess $opts Instance of the Options object.
-	 * @return If a page has to be excluded.
 	 */
 	public function __construct( \ArrayAccess $opts ) {
-		/**
-		 * Save the options available in the class.
-		 */
-		$this->options = $opts;
 		// Full path to filename of our script.
 		$file_obj = new \EssentialScript\Core\File( $opts );
 		$this->filename = $file_obj->getfilename();
+		$this->where = $opts->offsetExists( 'where' ) ? 
+			$opts->offsetGet( 'where' ) : '';
 		// The script.
 		$this->script = $opts->offsetExists( 'script' ) ? 
 			$opts->offsetGet( 'script' ) : '';
@@ -77,10 +74,12 @@ class Presenter {
 	 * Router.
 	 * 
 	 * This function routes the data to the correct filter.
+	 * 
+	 * @return object The filter to use.
 	 */
 	public function router() {
 
-		switch ( $this->options['where'] ) {
+		switch ( $this->where ) {
 			case 'head':
 				// Initialize the filter with our data.
 				$filter = new \EssentialScript\Frontend\Filter\Head(
