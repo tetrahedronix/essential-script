@@ -58,6 +58,10 @@ Sources of this plugin are available both in SVN and Git:
 3. Essential Script widget
 
 == Changelog ==
+= 0.6 =
+* Upgrade CodeMirror from 5.30.0 to 5.31.0
+* Move the CodeMirror API in its own namespace
+* Improves the `Settings API` code by implementing the Factory Pattern
 = 0.5.1 =
 * Fix incorrect variable name `filter` in `essential-script.php`
 = 0.5 =
