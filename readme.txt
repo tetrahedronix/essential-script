@@ -43,7 +43,7 @@ Sources of this plugin are available both in SVN and Git:
 
 ### Known issue
 
-* This plugin has known conflit with JetPack Embedded Shortcode. You need to disable Embedded Shortcode if you want to use Essential Script and JetPack together ( See also: [Jetpack Shortcode Embeds](https://jetpack.com/support/shortcode-embeds/) ).
+* This plugin has known conflict with JetPack Embedded Shortcode. You need to disable Embedded Shortcode if you want to use Essential Script and JetPack together ( See also: [Jetpack Shortcode Embeds](https://jetpack.com/support/shortcode-embeds/) ).
 
 
 ### TODO
@@ -61,7 +61,7 @@ Sources of this plugin are available both in SVN and Git:
 == Changelog ==
 = 0.6.1 =
 * Update i18n related po files
-* Remove files and directories no longer needed
+* Remove files and directories no longer necessary
 = 0.6 =
 * Upgrade CodeMirror from 5.30.0 to 5.31.0
 * Move the CodeMirror API in its own namespace
