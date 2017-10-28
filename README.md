@@ -43,6 +43,7 @@ Sources of this plugin are available both in SVN and Git:
 - [x] Support for Widgets API.
 - [x] Support for Shortcode.
 - [x] Move the CodeMirror API in its own namespace.
+- [ ] Find a reliable solution for uploading and managing script files
 - [ ] Use CodeMirror addons.
 - [ ] Improve the user interface.
 - [ ] Support for reusable components.

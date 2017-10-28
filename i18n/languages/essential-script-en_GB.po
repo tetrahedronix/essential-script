@@ -1,96 +1,96 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Essential Script\n"
-"POT-Creation-Date: 2017-10-28 13:10+0200\n"
-"PO-Revision-Date: 2017-10-28 13:10+0200\n"
+"POT-Creation-Date: 2017-10-28 13:19+0200\n"
+"PO-Revision-Date: 2017-10-28 13:19+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: it_IT\n"
+"Language: en_GB\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.1\n"
 "X-Poedit-Basepath: ../..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-KeywordsList: __;_e;esc_html_e;__(;esc_html__\n"
+"X-Poedit-KeywordsList: __;_e;esc_html_e;esc_html__\n"
 "X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SearchPathExcluded-0: i18n\n"
+"X-Poedit-SearchPathExcluded-0: .git\n"
 "X-Poedit-SearchPathExcluded-1: lib\n"
-"X-Poedit-SearchPathExcluded-2: nbproject\n"
+"X-Poedit-SearchPathExcluded-2: i18n\n"
 "X-Poedit-SearchPathExcluded-3: css\n"
-"X-Poedit-SearchPathExcluded-4: .git\n"
+"X-Poedit-SearchPathExcluded-4: nbproject\n"
 
 #: classes/EssentialScript/Admin/Menu.php:87
 msgid "Script saved"
-msgstr "Script salvato"
+msgstr "Script saved"
 
 #: classes/EssentialScript/Admin/Menu.php:98
 msgid ""
 "Essential Script plugin offers you the ability to plug and manage your "
 "essential scripts through a basic input interface."
 msgstr ""
-"Essential Script plugin offre la possibilità di inserire e gestire i tuoi "
-"script essenziali per mezzo di una interfaccia di input basilare."
+"Essential Script plugin offers you the ability to plug and manage your "
+"essential scripts through a basic input interface."
 
 #: classes/EssentialScript/Admin/Menu.php:107
 msgid "Save Script"
-msgstr "Salva Script"
+msgstr "Save Script"
 
 #: classes/EssentialScript/Admin/Page.php:69
 msgid "Enter the script code here"
-msgstr "Inserisci qui il codice dello script"
+msgstr "Enter the script code here"
 
 #: classes/EssentialScript/Admin/Page.php:76
 #: classes/EssentialScript/Admin/Settings/FieldWhere.php:59
 msgid "Choose where to plug the script"
-msgstr "Scegli dove inserire lo script"
+msgstr "Choose where to plug the script"
 
 #: classes/EssentialScript/Admin/Page.php:82
 #: classes/EssentialScript/Admin/Settings/FieldPages.php:59
 msgid "What pages include the script"
-msgstr "Quali pagine includono lo script"
+msgstr "What pages include the script"
 
 #: classes/EssentialScript/Admin/Page.php:89
 #: classes/EssentialScript/Admin/Settings/FieldStorage.php:56
 msgid "Choose where to store the script"
-msgstr "Scegli dove memorizzare lo script"
+msgstr "Choose where to store the script"
 
 #: classes/EssentialScript/Admin/Settings/FieldPages.php:63
 msgid "Default Homepage"
-msgstr "Default pagina principale"
+msgstr "Default Homepage"
 
 #: classes/EssentialScript/Admin/Settings/FieldPages.php:69
 msgid "Single Post"
-msgstr "Post Singolo"
+msgstr "Single Post"
 
 #: classes/EssentialScript/Admin/Settings/FieldPages.php:75
 msgid "Pages"
-msgstr "Pagine"
+msgstr "Pages"
 
 #: classes/EssentialScript/Admin/Settings/FieldPages.php:80
 msgid "Archive"
-msgstr "Archivio"
+msgstr "Archive"
 
 #: classes/EssentialScript/Admin/Settings/FieldStorage.php:61
 msgid "File (Recommended)"
-msgstr "File (Raccomandato)"
+msgstr "File (Recommended)"
 
 #: classes/EssentialScript/Admin/Settings/FieldStorage.php:65
 msgid "Enter the filename"
-msgstr "Inserisci il nome del file"
+msgstr "Enter the filename"
 
 #: classes/EssentialScript/Admin/Settings/FieldStorage.php:73
 #, php-format
 msgid "Use <a href=\"%s\">wp_enqueue_scripts</a> hook (where possible)"
-msgstr "Usa l'aggancio <a href=\"%s\">wp_enqueue_scripts</a> (dove possibile)"
+msgstr "Use <a href=\"%s\">wp_enqueue_scripts</a> hook (where possible)"
 
 #: classes/EssentialScript/Admin/Settings/FieldStorage.php:77
 msgid "Note:"
-msgstr "Nota:"
+msgstr "Note:"
 
 #: classes/EssentialScript/Admin/Settings/FieldStorage.php:78
 msgid "The external script file cannot contain the <script> tag."
-msgstr "Il file dello script esterno non può contenere i tag <script>."
+msgstr "The external script file cannot contain the <script> tag."
 
 #: classes/EssentialScript/Admin/Settings/FieldStorage.php:84
 msgid "Wordpress DB"
@@ -101,73 +101,64 @@ msgid ""
 "Max 512 chars. The allowed tags are listed in settings_sanitize(). You can "
 "add or remove tags as required."
 msgstr ""
-"Massimo 512 caratteri. I tags permessi sono elencati in settings_sanitize(). "
-"Puoi aggiungere o rimuovere i tags a piacimento."
+"Max 512 chars. The allowed tags are listed in settings_sanitize(). You can "
+"add or remove tags as required."
 
 #: classes/EssentialScript/Admin/Settings/FieldWhere.php:65
 msgid "Head"
-msgstr "Intestazione"
+msgstr "Head"
 
 #: classes/EssentialScript/Admin/Settings/FieldWhere.php:71
 msgid "Content"
-msgstr "Contenuto"
+msgstr "Content"
 
 #: classes/EssentialScript/Admin/Settings/FieldWhere.php:77
 msgid "Content with Shortcode"
-msgstr "Contenuto con Shortcode"
+msgstr "Content with Shortcode"
 
 #: classes/EssentialScript/Admin/Settings/FieldWhere.php:79
 msgid "Note: "
-msgstr "Nota: "
+msgstr "Note: "
 
 #: classes/EssentialScript/Admin/Settings/FieldWhere.php:81
 msgid "Use the tag [essential-script]"
-msgstr "Usa il tag [essential-script]"
+msgstr "Use the tag [essential-script]"
 
 #: classes/EssentialScript/Admin/Settings/FieldWhere.php:88
 msgid "Foot"
-msgstr "Piè di pagina"
+msgstr "Foot"
 
 #: classes/EssentialScript/Admin/Settings/Section.php:52
 msgid "Fill your script settings below: script code, position and storage."
-msgstr ""
-"Inserisci le impostazioni per il tuo script qui sotto: codice, posizione e "
-"supporto di memoria dello script."
+msgstr "Fill your script settings below: script code, position and storage."
 
 #: classes/EssentialScript/Admin/Widget.php:59
 msgid "Arbitrary Javascript/XML code."
-msgstr "Codice Javascript/XML arbitrario."
+msgstr "Arbitrary Javascript/XML code."
 
 #: classes/EssentialScript/Admin/Widget.php:68
 msgid "Essential Script"
-msgstr "Script Essenziale"
+msgstr "Essential Script"
 
 #: classes/EssentialScript/Admin/Widget.php:138
 #: classes/EssentialScript/Core/File.php:86
 msgid "File "
-msgstr "File "
+msgstr "File"
 
 #: classes/EssentialScript/Core/Setup.php:90
 #, php-format
 msgid "The plugin Essential Script requires PHP %s or later. "
-msgstr "Il plugin Essential Script richiede PHP %s o superiore. "
+msgstr "The plugin Essential Script requires PHP %s or later. "
 
 #: classes/EssentialScript/Core/Setup.php:92
 msgid "Contact your system admin about updating your PHP interpreter"
-msgstr ""
-"Contatta l'amministratore del tuo sistema per aggiornare il tuo interprete "
-"PHP"
+msgstr "Contact your system admin about updating your PHP interpreter"
 
 #: classes/EssentialScript/Core/Setup.php:109
 #, php-format
 msgid "The plugin Essential Script requires Wordpress %s or later "
-msgstr "Il plugin Essential Script richiede Wordpress %s o superiore "
+msgstr "The plugin Essential Script requires Wordpress %s or later "
 
 #: classes/EssentialScript/Core/Setup.php:111
 msgid "Contact your system admin about updating your Wordpress copy"
-msgstr ""
-"Contatta l'amministratore del tuo sistema per aggiornare la tua copia di "
-"Wordpress"
-
-#~ msgid "Pages to exclude"
-#~ msgstr "Pagine da escludere"
+msgstr "Contact your system admin about updating your Wordpress copy"

@@ -3,7 +3,7 @@ Contributors: tetravalente
 Tags: scripting, javascript, css, adsense, code, embed
 Requires at least: 4.0
 Tested up to: 4.8.2
-Stable tag: 0.6
+Stable tag: 0.6.1
 Requires PHP: 5.3
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -47,6 +47,7 @@ Sources of this plugin are available both in SVN and Git:
 
 
 ### TODO
+- Find a reliable solution for uploading and managing script files
 - Use CodeMirror addons.
 - Improve the user interface.
 - Support for reusable components.
@@ -58,6 +59,9 @@ Sources of this plugin are available both in SVN and Git:
 3. Essential Script widget
 
 == Changelog ==
+= 0.6.1 =
+* Update i18n related po files
+* Remove files and directories no longer needed
 = 0.6 =
 * Upgrade CodeMirror from 5.30.0 to 5.31.0
 * Move the CodeMirror API in its own namespace
