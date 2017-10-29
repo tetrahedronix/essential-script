@@ -56,7 +56,7 @@ class Page {
 		// Add a new section to a settings page.
 		$section = new \EssentialScript\Admin\Settings\SectionCreator;
 		add_settings_section(
-			'es_section_id',		// HTML ID tag
+			'essentialscript_section_id',		// HTML ID tag
 			'Script Area',			// The section title text
 			// Callback that will echo some explanations
 			$section->doFactory( new \EssentialScript\Admin\Settings\Section ),	
@@ -65,31 +65,31 @@ class Page {
 		// Register a settings field to a settings page and section.
 		$field = new \EssentialScript\Admin\Settings\FieldCreator;
 		add_settings_field(
-			'es_textarea',
+			'essentialscript_textarea',
 			__( 'Enter the script code here', 'essential-script' ),
 			$field->doFactory( new \EssentialScript\Admin\Settings\FieldTextarea ),
 			$this->submenu_page,
-			'es_section_id'			
+			'essentialscript_section_id'			
 		);
 		add_settings_field(
-			'es_radiobutton_where',
+			'essentialscript_radiobutton_where',
 			__( 'Choose where to plug the script', 'essential-script' ),  
 			$field->doFactory( new \EssentialScript\Admin\Settings\FieldWhere ),
 			$this->submenu_page,
-			'es_section_id' );
+			'essentialscript_section_id' );
 		add_settings_field(
-			'es_checkbox_pages',
+			'essentialscript_checkbox_pages',
 			__( 'What pages include the script', 'essential-script' ),
 			$field->doFactory( new \EssentialScript\Admin\Settings\FieldPages ),
 			$this->submenu_page,
-			'es_section_id'
+			'essentialscript_section_id'
 		);
 		add_settings_field(
-			'es_radiobutton_storage',
+			'essentialscript_radiobutton_storage',
 			__( 'Choose where to store the script', 'essential-script' ),
 			$field->doFactory( new \EssentialScript\Admin\Settings\FieldStorage ),
 			$this->submenu_page,
-			'es_section_id'			
+			'essentialscript_section_id'			
 		);
 	}
 	

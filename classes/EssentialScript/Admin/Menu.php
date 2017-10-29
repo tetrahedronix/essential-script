@@ -80,9 +80,9 @@ class Menu {
 		    // add settings saved message with the class of "updated"
 	        add_settings_error(
 				// slug title for our settings.
-				'es_messages',
+				'essentialscript_messages',
 				// slug name for this error/event
-				'es_updated',
+				'essentialscript_updated',
 				// The formatted message text to display.
 				__( 'Script saved', 'essential-script' ),
 				// The type of message it is: error/updated
@@ -90,7 +90,7 @@ class Menu {
 			);
 	    }
 		//	Display error/update messages registered by add_settings_error(). 
-		settings_errors( 'es_messages' );
+		settings_errors( 'essentialscript_messages' );
 		
 		?>
 <div class="wrap">

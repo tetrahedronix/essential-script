@@ -131,9 +131,9 @@ class Widget extends \WP_Widget {
 				} else {
 					add_settings_error(
 						// slug title for our settings.
-						'es_messages',
+						'essentialscript_messages',
 						// slug name for this error/event
-						'es_file_error',
+						'essentialscript_file_error',
 						// The formatted message text to display.
 						__('File ' . $f . ' Not found', 'essential-script'),
 						// The type of message it is: error/updated
