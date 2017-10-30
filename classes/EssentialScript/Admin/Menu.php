@@ -180,7 +180,7 @@ class Menu {
 	/**
 	 * Setter function.
 	 * 
-	 * @param string $obj The page object.
+	 * @param object $obj The page object.
 	 * @return $this The current object instance of the class.
 	 */
 	public function slug( \EssentialScript\Admin\Page $obj ) {
