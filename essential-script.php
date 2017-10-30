@@ -55,14 +55,20 @@ new \EssentialScript\Core\Setup;
 
 // Generic actions and filters go here using anonymous function from PHP 5.3
 if ( is_admin() ) {
-	// Prepares options for the Page object
-	add_action( 'admin_init', function() {
-		new \EssentialScript\Admin\Page;
-	} ); 
-	// Creating the menu.
+	// Creating the Essential Script submenu.
 	add_action( 'admin_menu', function() {
-		\EssentialScript\Admin\Menu::init();
-	} ); 
+		$enqueued = new \EssentialScript\Admin\Queuing;
+		// Essential Script page.
+		$page_essentialscript = new \EssentialScript\Admin\PageEssentialscript( 'essentialscript' );
+		// Essential Script Submenu.
+		( new \EssentialScript\Admin\Menu() )->
+			init( $page_essentialscript )->
+			title( 'Essential Script', 'Essential Script' )->
+			capability( 'manage_options' )->
+			slug( $page_essentialscript )->
+			tools();
+		$enqueued->init( \EssentialScript\Admin\Menu::get_suffix() );
+	} );
 }
 // Registering a Wordpress Widget.
 add_action( 'widgets_init', function() {

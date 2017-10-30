@@ -20,11 +20,11 @@
 namespace EssentialScript\Admin\Settings;
 
 /**
- * Concrete fieldset: provides the radiobuttons.
+ * Concrete fieldset: provides the radiobuttons to plug the script.
  *
  * @author docwho
  */
-class FieldWhere implements \EssentialScript\Admin\Settings\Setting {
+class EssentialscriptWhere implements \EssentialScript\Admin\Settings\Setting {
 	
 	/**
 	 * The options from Wordpress DB.

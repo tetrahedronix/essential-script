@@ -24,7 +24,7 @@ namespace EssentialScript\Admin\Settings;
  *
  * @author docwho
  */
-class FieldTextarea implements \EssentialScript\Admin\Settings\Setting {
+class EssentialscriptTextarea implements \EssentialScript\Admin\Settings\Setting {
 	/**
 	 * Container for plugin options.
 	 * 
