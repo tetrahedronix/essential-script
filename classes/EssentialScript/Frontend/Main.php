@@ -49,14 +49,22 @@ class Main {
 		/* User typically reads one page at a time */
 		if ( ( is_front_page() && is_home() ) && 
 				true === $this->options['pages']['index'] ) {
-			// Default homepage is included.
+			/* Default homepage is included.
+			 * Manipulate the filter if necessary here. 
+			 */
 		} elseif ( is_single() && ( true === $this->options['pages']['single'] ) ) {
-			// Single post is included.
+			/* Single post is included.
+			 * Manipulate the filter if necessary here. 
+			 */
 		} elseif ( is_page() && ( true === $this->options['pages']['page'] ) ) {
-			// Page is included.
+			/* Page is included.
+			 * Manipulate the filter if necessary here. 
+			 */
 		} elseif ( ( is_archive() && 
 				( true === $this->options['pages']['archive'] ) ) ) {
-			// Archive is included.
+			/* Archive is included.
+			 * Manipulate the filter if necessary here.
+			 */
 		} else {
 			return;
 		}
