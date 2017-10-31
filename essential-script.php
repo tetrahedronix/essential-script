@@ -12,7 +12,7 @@
  * Description: Essential Script plugin offers you the ability to plug and manage your client-side script, which is an essential part of your website, through a versatile text editor made with <a href="http://codemirror.net/">CodeMirror</a>.
  * Version: 0.6.1
  * Requires: 4.0
- * Tested up to: 4.8.2
+ * Tested up to: 4.8.3
  * Requires PHP: 5.3
  * Author: Giulio
  * Author URI: https://www.freelancer.com/u/Tetravalente.html
@@ -81,6 +81,11 @@ add_action( 'init', function() use ( &$essentialscript_filter ) {
 	$presenter = new \EssentialScript\Frontend\Presenter( $opts );
 	$essentialscript_filter = $presenter->router();
 } );
+/* The wp action hook runs immediately after the global WP class
+ * object is set up. Notice that init hook does not the job here
+ * because we need the conditional tags on the weblog frontend
+ * Essentialscript\Frontend.
+ */
 add_action( 'wp', function() use ( &$essentialscript_filter ) {
 	if ( !is_null( $essentialscript_filter ) ) {
 		$opts = new \EssentialScript\Core\Options;
