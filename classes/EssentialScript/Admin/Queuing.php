@@ -1,7 +1,5 @@
 <?php
-/**
- * @package Essential_Script\Admin
- */
+
 /*
  * Copyright (C) 2017 docwho
  *
@@ -18,135 +16,94 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 namespace EssentialScript\Admin;
 
 /**
- * Enqueue various scripts on the administration page.
+ * Enqueue various scripts and files for the administration page.
  *
  * @author docwho
  */
 class Queuing {
+
 	/**
-	 * CodeMirror Version for upgrade purposes. 
-	 * 
-	 * @since 0.2
+	 * @var string The page slug. 
 	 */
-	const CODEMIRROR_VER = '5.30.0';
+	private $page;
+	
 	/**
-	 * Essential Script Version for upgrade purposes.
-	 * 
-	 * @since 0.2
-	 */
-	const ESSENTIALSCRIPT_VER = '0.6.1';
-	/**
-	 * @var string Current page slug. 
-	 */
-	private $slug;
-	/**
-	 * @var mixed Mixed data for inline script.
+	 * @var mixed $extra_data Extra data used by wp_add_inline_script
 	 */
 	private $extra_data;
+	
 	/**
-	 * Setter for extra data to append.
+	 * Setup class.
 	 * 
-	 * @param type $value
+	 * @param string $slug Page slug.
+	 * @param array $scripts Script requirements.
+	 * @param mixed $extra_data Extra data used by wp_add_inline_script
+	 * @return null On error
 	 */
-	public function setdata( $value ) {
-		$this->extra_data = $value;
-	}
-	/**
-	 * Enqueue scripts.
-	 * 
-	 * @param type $submenu_page  Slug of the menu where to register the script.
-	 */
-	public function init( $submenu_page) {
-		$this->slug = $submenu_page;
+	public function __construct( $slug = '', 
+								$scripts =  array(), 
+								$extra_data = '' ) {
+
+		$this->extra_data = $extra_data;
 		
-		add_action( 'admin_enqueue_scripts', array ( $this, 'admin_register_scripts' ) );
+		// Select the concrete component.
+		if ( 'tools_page_essentialscript' === $slug ) {
+			$this->page = 
+				new \EssentialScript\Admin\Scripts\Essentialscript( $slug );
+		} elseif ( 'widgets.php' === $slug ) {
+			$this->page = 
+				new \EssentialScript\Admin\Scripts\Widgets( $slug );
+			$this->page->setExtradata( $this->extra_data );
+		} else {
+			return;
+		}
+		
+		// Remove all values from $scripts which are equal to null, 0, '' or false.
+		$test_array = array_filter( $scripts );
+		
+		if ( !empty ( $test_array ) ) {
+			array_walk( $test_array, array( $this, 'accessorize' ) );
+		}
 	}
 	
 	/**
-	 * Load scripts and styles for the administration interface
+	 * Make sure the correct wrapper is called based on the requirements of the
+	 * concrete component.
+	 * 
+	 * @param string $key Current requirement
 	 */
-	public function admin_register_scripts( $hook ) {
+	public function accessorize( $key ) {
 
-		if ( $this->slug !== $hook ) {
-			return;
+		switch ( $key ) {
+			case 'codemirror-script':
+				$this->page = 
+					new \EssentialScript\Admin\Scripts\CodemirrorScript(
+						$this->page	);
+				break;
+			case 'codemirror-style':
+				$this->page =
+					new \EssentialScript\Admin\Scripts\CodemirrorStyle(
+						$this->page );
+				break;
+			case 'codemirror-mode-js':
+				$this->page =
+					new \EssentialScript\Admin\Scripts\CodemirrorModeJS(
+						$this->page );
+				break;
+			case 'codemirror-mode-xml':
+				$this->page =
+					new \EssentialScript\Admin\Scripts\CodemirrorModeXml(
+						$this->page );
+				break;
+			case 'codemirror-style-override':
+				$this->page =
+					new \EssentialScript\Admin\Scripts\CodemirrorStyleOverride(
+						$this->page );
+				break;
 		}
-
-		/* Register all core scripts and styles.
-		 * Codemirror main script.
-		 */
-		wp_register_script(
-				'codemirror-script', 
-				plugins_url( 'lib/codemirror.js', ESSENTIAL_SCRIPT1_PLUGIN_FILE ), 
-				array(), 
-				self::CODEMIRROR_VER, 
-				false 
-		);
-		// Codemirror mode script for javascript language.
-		wp_register_script(
-				'codemirror-mode-js',
-				plugins_url( 'lib/mode/javascript/javascript.js', ESSENTIAL_SCRIPT1_PLUGIN_FILE ),
-				array(),
-				self::CODEMIRROR_VER,
-				false
-		);
-		// Codemirror mode script for XML/HTML language.
-		wp_register_script(
-				'codemirror-mode-xml',
-				plugins_url( 'lib/mode/xml/xml.js', ESSENTIAL_SCRIPT1_PLUGIN_FILE ),
-				array(),
-				self::CODEMIRROR_VER,
-				false
-		);
-		// Javascript script for using with Widgets API.
-		if ( 'widgets.php' === $this-> slug ) {
-			wp_register_script(
-				'essential-script-widgets',
-				plugins_url( 'lib/essential-script-widgets.js', ESSENTIAL_SCRIPT1_PLUGIN_FILE ),
-				array( 'jquery', 'codemirror-script' ),
-				self::ESSENTIALSCRIPT_VER,
-				false 
-			);
-		}
-		// Here extra_data contains the id_base for the current active widget.
-		if ( ( 'widgets.php' === $this->slug ) && isset( $this->extra_data ) ) {
-			wp_add_inline_script( 'essential-script-widgets', sprintf( "wp.essentialScriptWidgets.init( %s );", wp_json_encode( $this->extra_data ) ) );
-		}
-		// Codemirror style
-		wp_register_style(
-				'codemirror-style',
-				plugins_url( 'lib/codemirror.css', ESSENTIAL_SCRIPT1_PLUGIN_FILE ),
-				array(),
-				self::CODEMIRROR_VER,
-				false 
-		);
-		// Doesn't register on Widgets menu.
-		if ( 'widgets.php' !== $this->slug ) {
-			wp_register_style(
-				'codemirror-style-override',
-				plugins_url( 'css/codemirror-override.css', ESSENTIAL_SCRIPT1_PLUGIN_FILE ),
-				array(),
-				self::CODEMIRROR_VER,
-				false
-			);
-			// Plugin style
-			wp_register_style(
-				'essentialscript-plugin-style',
-				plugins_url( 'css/essentialscript-admin.css', ESSENTIAL_SCRIPT1_PLUGIN_FILE ),
-				array(),
-				self::ESSENTIALSCRIPT_VER,
-				false 
-			);
-		} 
-
-		wp_enqueue_script( 'codemirror-script' );
-		wp_enqueue_script( 'codemirror-mode-js' );
-		wp_enqueue_script( 'codemirror-mode-xml' );
-		wp_enqueue_script( 'essential-script-widgets' );
-		wp_enqueue_style( 'codemirror-style' );
-		wp_enqueue_style( 'codemirror-style-override' );
-		wp_enqueue_style( 'essentialscript-plugin-style' );		
 	}
 }

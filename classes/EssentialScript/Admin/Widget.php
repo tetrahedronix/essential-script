@@ -59,6 +59,13 @@ class Widget extends \WP_Widget {
 				'Arbitrary Javascript/XML code.', 'essential-script'),
 			'customize_selective_refresh' => true
 		);
+		// Necessary dependencies to run Codemirror inside the Widget.
+		$accessories = array (
+			'codemirror-script',
+			'codemirror-mode-js',
+			'codemirror-mode-xml',
+			'codemirror-style'
+		);
 		/* __CLASS__: ID for the tags <div>
 		 * 'Essential Script': widget title displayed in the Widgets screen.
 		 * $widget_opts: widget options.
@@ -69,9 +76,7 @@ class Widget extends \WP_Widget {
 			$widget_opts
 		);
 		//if ( is_active_widget( false, false, $this->id_base ) || is_customize_preview() ) {
-		$queuing = new \EssentialScript\Admin\Queuing;
-		$queuing->setdata($this->id_base);
-		$queuing->init( 'widgets.php' );
+		new \EssentialScript\Admin\Queuing( 'widgets.php', $accessories, $this->id_base );
 		//} 
 	}
 	

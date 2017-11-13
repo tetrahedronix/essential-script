@@ -28,6 +28,21 @@ class Options implements \ArrayAccess {
 	/**
 	 * Container for options.
 	 * 
+	 * Ex:
+	 * 	a:7:{
+	 *      s:4:"name";s:0:"es59e08b5e7c4822.61452256";
+	 *      s:6:"script";s:0:"";
+	 *      s:5:"where";s:4:"head";
+	 *      s:5:"pages";a:4:{s:5:"index";b:1;
+	 *                       s:6:"single";b:1;
+	 *                       s:4:"page";b:1;
+	 *                       s:7:"archive";b:0;}
+	 *      s:7:"enqueue";b:0;
+	 *      s:7:"storage";s:4:"file";
+	 *      s:4:"path";s:53:"/var/www/sandbox/portfolio/wp-content/uploads/2017/11";
+	 *      s:8:"filename";s:25:"es59e08b5e7c4822.61452256";
+	 * }
+	 * 
 	 * @var int	 
 	 */
 	private $container = array ();
@@ -42,6 +57,10 @@ class Options implements \ArrayAccess {
 			$this->container = array();
 		}
 		
+		$this->options();
+	}	
+		
+	private function options() {	
 		// Check whether you need to update any option.
 		if ( !array_key_exists( 'where', $this->container ) ) {
 			$this->container['where'] = 'foot';  // Save default

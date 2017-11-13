@@ -53,11 +53,19 @@ require_once ( ESSENTIAL_SCRIPT1_PLUGIN_DIR . 'classes/EssentialScript/Tools/Aut
 new \EssentialScript\Tools\Autoloader;
 new \EssentialScript\Core\Setup;
 
-// Generic actions and filters go here using anonymous function from PHP 5.3
+/*
+ *  Generic actions and filters go here using anonymous function from PHP 5.3
+ *
+ *  Admin action:
+ */
 if ( is_admin() ) {
-	// Creating the Essential Script submenu.
+	/*
+	 * Settings API
+	 *
+	 * Creating the Essential Script submenu.
+	 */
 	add_action( 'admin_menu', function() {
-		$enqueued = new \EssentialScript\Admin\Queuing;
+		//$enqueued = new \EssentialScript\Admin\Queuing;
 		// Essential Script page.
 		$page_essentialscript = new \EssentialScript\Admin\PageEssentialscript( 'essentialscript' );
 		// Essential Script Submenu.
@@ -67,14 +75,23 @@ if ( is_admin() ) {
 			capability( 'manage_options' )->
 			slug( $page_essentialscript )->
 			tools();
-		$enqueued->init( \EssentialScript\Admin\Menu::get_suffix() );
+		new \EssentialScript\Admin\Queuing( \EssentialScript\Admin\Menu::get_suffix(), array ( 'codemirror-script', 'codemirror-style', 'codemirror-mode-js', 'codemirror-mode-xml', 'codemirror-style-override' ) );
+		//$enqueued->init( \EssentialScript\Admin\Menu::get_suffix() );
 	} );
 }
-// Registering a Wordpress Widget.
+/*
+ * Widget API
+ * 
+ * Registering a Wordpress Widget.
+ */
 add_action( 'widgets_init', function() {
 	register_widget( 'EssentialScript\Admin\Widget' );
 } );
-// If !admin then it's frontend.
+/*
+ * If !admin then it's frontend.
+ * 
+ * Frontend actions:
+ */
 $essentialscript_filter = null;
 add_action( 'init', function() use ( &$essentialscript_filter ) {
 	$opts = new \EssentialScript\Core\Options;
