@@ -118,6 +118,7 @@ class Setup {
 		$options = [
 			// Source code
 			'script' => '',
+			'highlighter' => 'xml',
 			// Where the script is located: head, content or foot section, etc.
 			'where'  => 'foot',
 			'pages'  => array (

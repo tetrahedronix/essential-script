@@ -75,7 +75,7 @@ class Presenter {
 	 * 
 	 * This function routes the data to the correct filter.
 	 * 
-	 * @return object The filter to use.
+	 * @return object $filter The filter to use.
 	 */
 	public function router() {
 

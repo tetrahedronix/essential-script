@@ -1,11 +1,14 @@
 <?php
 /**
+ * Essential Script
+ * 
  * @package Essential_Script
  * @author Giulio <giupersu@yahoo.it>
  * @version 0.6.1
  * 
+ * @wordpress-plugin
  * Plugin Name: Essential Script
- * Plugin URI: 
+ * Plugin URI: https://github.com/tetravalence/essential-script
  * Description: Essential Script plugin offers you the ability to plug and manage your client-side script, which is an essential part of your website, through a versatile text editor made with <a href="http://codemirror.net/">CodeMirror</a>.
  * Version: 0.6.1
  * Requires: 4.0
@@ -42,6 +45,7 @@ if ( !function_exists( 'add_action' ) ) {
 define ( 'ESSENTIAL_SCRIPT1_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define ( 'ESSENTIAL_SCRIPT1_PLUGIN_FILE', __FILE__ );
 define ( 'ESSENTIAL_SCRIPT1_PLUGIN_PACKAGE', 'EssentialScript' );
+define ( 'ESSENTIAL_SCRIPT1_DIST_CODEMIRROR', 'lib/codemirror/' );
 
 // Include or require any necessary files here.
 require_once ( ESSENTIAL_SCRIPT1_PLUGIN_DIR . 'classes/EssentialScript/Tools/Autoloader.php' );
@@ -50,28 +54,63 @@ require_once ( ESSENTIAL_SCRIPT1_PLUGIN_DIR . 'classes/EssentialScript/Tools/Aut
 new \EssentialScript\Tools\Autoloader;
 new \EssentialScript\Core\Setup;
 
-// Generic actions and filters go here using anonymous function from PHP 5.3
+/*
+ *  Generic actions and filters go here using anonymous function from PHP 5.3
+ *
+ *  Admin action:
+ */
 if ( is_admin() ) {
-	// Prepares options for the Page object
-	add_action( 'admin_init', function() {
-		new \EssentialScript\Admin\Page;
-	} ); 
-	// Creating the menu.
+	/*
+	 * Settings API
+	 *
+	 * Creating the Essential Script submenu.
+	 */
 	add_action( 'admin_menu', function() {
-		\EssentialScript\Admin\Menu::init();
-	} ); 
+		// Essential Script page.
+		$page_essentialscript = new \EssentialScript\Admin\PageEssentialscript(
+			'essentialscript' 
+		);
+		// Essential Script Submenu.
+		( new \EssentialScript\Admin\Menu() )->
+			init( $page_essentialscript )->
+			title( 'Essential Script', 'Essential Script' )->
+			capability( 'manage_options' )->
+			slug( $page_essentialscript )->
+			tools();
+		new \EssentialScript\Admin\Queuing( 
+			\EssentialScript\Admin\Menu::get_suffix(), 
+			array ( 'dist-codemirror-script', 
+				'dist-codemirror-style', 
+				'dist-codemirror-mode-js',
+				'dist-codemirror-mode-xml',
+				'codemirror-style-override' ) 
+		);
+	} );
 }
-// Registering a Wordpress Widget.
+/*
+ * Widget API
+ * 
+ * Registering a Wordpress Widget.
+ */
 add_action( 'widgets_init', function() {
 	register_widget( 'EssentialScript\Admin\Widget' );
 } );
-// If !admin then it's frontend.
+/*
+ * If !admin then it's frontend.
+ * 
+ * Frontend actions:
+ */
 $essentialscript_filter = null;
 add_action( 'init', function() use ( &$essentialscript_filter ) {
 	$opts = new \EssentialScript\Core\Options;
 	$presenter = new \EssentialScript\Frontend\Presenter( $opts );
 	$essentialscript_filter = $presenter->router();
 } );
+/* The wp action hook runs immediately after the global WP class
+ * object is set up. Notice that init hook does not the job here
+ * because we need the conditional tags on the weblog frontend
+ * Essentialscript\Frontend.
+ */
 add_action( 'wp', function() use ( &$essentialscript_filter ) {
 	if ( !is_null( $essentialscript_filter ) ) {
 		$opts = new \EssentialScript\Core\Options;

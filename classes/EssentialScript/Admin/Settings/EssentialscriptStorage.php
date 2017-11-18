@@ -24,7 +24,7 @@ namespace EssentialScript\Admin\Settings;
  *
  * @author docwho
  */
-class FieldStorage implements \EssentialScript\Admin\Settings\Setting {
+class EssentialscriptStorage implements \EssentialScript\Admin\Settings\Setting {
 	
 	/**
 	 * The options from Wordpress DB.

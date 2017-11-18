@@ -24,7 +24,7 @@ namespace EssentialScript\Admin\Settings;
  *
  * @author docwho
  */
-class FieldPages implements \EssentialScript\Admin\Settings\Setting {
+class EssentialscriptPages implements \EssentialScript\Admin\Settings\Setting {
 	
 	/**
 	 * The options from Wordpress DB.

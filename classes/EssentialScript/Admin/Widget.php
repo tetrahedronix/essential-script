@@ -59,6 +59,15 @@ class Widget extends \WP_Widget {
 				'Arbitrary Javascript/XML code.', 'essential-script'),
 			'customize_selective_refresh' => true
 		);
+		// Necessary dependencies to run Codemirror inside the Widget.
+		$accessories = array (
+/*			'dist-codemirror-script',
+			'dist-codemirror-mode-js',
+			'dist-codemirror-mode-xml',
+ 			'dist-codemirror-style',
+			'essential-script-widgets' */
+			'wp-codemirror',
+		);
 		/* __CLASS__: ID for the tags <div>
 		 * 'Essential Script': widget title displayed in the Widgets screen.
 		 * $widget_opts: widget options.
@@ -69,9 +78,7 @@ class Widget extends \WP_Widget {
 			$widget_opts
 		);
 		//if ( is_active_widget( false, false, $this->id_base ) || is_customize_preview() ) {
-		$queuing = new \EssentialScript\Admin\Queuing;
-		$queuing->setdata($this->id_base);
-		$queuing->init( 'widgets.php' );
+		new \EssentialScript\Admin\Queuing( 'widgets.php', $accessories, $this->id_base );
 		//} 
 	}
 	
@@ -131,9 +138,9 @@ class Widget extends \WP_Widget {
 				} else {
 					add_settings_error(
 						// slug title for our settings.
-						'es_messages',
+						'essentialscript_messages',
 						// slug name for this error/event
-						'es_file_error',
+						'essentialscript_file_error',
 						// The formatted message text to display.
 						__('File ' . $f . ' Not found', 'essential-script'),
 						// The type of message it is: error/updated

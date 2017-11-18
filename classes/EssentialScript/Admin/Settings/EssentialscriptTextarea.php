@@ -24,7 +24,7 @@ namespace EssentialScript\Admin\Settings;
  *
  * @author docwho
  */
-class FieldTextarea implements \EssentialScript\Admin\Settings\Setting {
+class EssentialscriptTextarea implements \EssentialScript\Admin\Settings\Setting {
 	/**
 	 * Container for plugin options.
 	 * 
@@ -57,15 +57,21 @@ class FieldTextarea implements \EssentialScript\Admin\Settings\Setting {
 	 * Outputs the textarea.
 	 */
 	public function printItem() {
-	
+		
 		$textarea = $this->file_obj->getcontent();
+		
+		if ( $this->options->offsetExists( 'highlighter') ) {
+			$highlighter = $this->options['highlighter'];
+		} else {
+			$highlighter = 'xml';
+		}
 ?>
 <textarea id="textarea-script" name="essentialscript_options[script]"
 		  rows="10" cols="80"><?php echo $textarea; ?></textarea>
 <p class="description"><?php esc_html_e( 'Max 512 chars. The allowed tags are listed in settings_sanitize(). You can add or remove tags as required.',
 		'essential-script' ); ?></p>
 <?php
-	\EssentialScript\Core\Codemirror::fromtextarea();
+	\EssentialScript\Core\Codemirror::fromtextarea( $highlighter );
 
 	}
 }

@@ -24,7 +24,7 @@ namespace EssentialScript\Admin\Settings;
  *
  * @author docwho
  */
-class Section implements \EssentialScript\Admin\Settings\Setting {
+class EssentialscriptSection implements \EssentialScript\Admin\Settings\Setting {
 	/**
 	 * The options from Wordpress DB.
 	 * @var array 

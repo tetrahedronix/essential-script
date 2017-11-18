@@ -90,3 +90,8 @@ Sources of this plugin are available both in SVN and Git:
 * Fix deprecated non-static method called statically
 = 0.2 =
 * (tag: v0.2) First release of Essential Script
+
+== Upgrade Notice ==
+
+= 0.7 =
+0.7 is a major update. Make a script backup and disable Essential Script before upgrading.
