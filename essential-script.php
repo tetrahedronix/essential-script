@@ -45,6 +45,7 @@ if ( !function_exists( 'add_action' ) ) {
 define ( 'ESSENTIAL_SCRIPT1_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define ( 'ESSENTIAL_SCRIPT1_PLUGIN_FILE', __FILE__ );
 define ( 'ESSENTIAL_SCRIPT1_PLUGIN_PACKAGE', 'EssentialScript' );
+define ( 'ESSENTIAL_SCRIPT1_DIST_CODEMIRROR', 'lib/codemirror/' );
 
 // Include or require any necessary files here.
 require_once ( ESSENTIAL_SCRIPT1_PLUGIN_DIR . 'classes/EssentialScript/Tools/Autoloader.php' );
@@ -65,9 +66,10 @@ if ( is_admin() ) {
 	 * Creating the Essential Script submenu.
 	 */
 	add_action( 'admin_menu', function() {
-		//$enqueued = new \EssentialScript\Admin\Queuing;
 		// Essential Script page.
-		$page_essentialscript = new \EssentialScript\Admin\PageEssentialscript( 'essentialscript' );
+		$page_essentialscript = new \EssentialScript\Admin\PageEssentialscript(
+			'essentialscript' 
+		);
 		// Essential Script Submenu.
 		( new \EssentialScript\Admin\Menu() )->
 			init( $page_essentialscript )->
@@ -75,8 +77,14 @@ if ( is_admin() ) {
 			capability( 'manage_options' )->
 			slug( $page_essentialscript )->
 			tools();
-		new \EssentialScript\Admin\Queuing( \EssentialScript\Admin\Menu::get_suffix(), array ( 'codemirror-script', 'codemirror-style', 'codemirror-mode-js', 'codemirror-mode-xml', 'codemirror-style-override' ) );
-		//$enqueued->init( \EssentialScript\Admin\Menu::get_suffix() );
+		new \EssentialScript\Admin\Queuing( 
+			\EssentialScript\Admin\Menu::get_suffix(), 
+			array ( 'dist-codemirror-script', 
+				'dist-codemirror-style', 
+				'dist-codemirror-mode-js',
+				'dist-codemirror-mode-xml',
+				'codemirror-style-override' ) 
+		);
 	} );
 }
 /*
