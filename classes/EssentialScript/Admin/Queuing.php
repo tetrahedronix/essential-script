@@ -79,22 +79,22 @@ class Queuing {
 	public function accessorize( $key ) {
 
 		switch ( $key ) {
-			case 'codemirror-script':
+			case 'dist-codemirror-script':
 				$this->page = 
 					new \EssentialScript\Admin\Scripts\CodemirrorScript(
 						$this->page	);
 				break;
-			case 'codemirror-style':
+			case 'dist-codemirror-style':
 				$this->page =
 					new \EssentialScript\Admin\Scripts\CodemirrorStyle(
 						$this->page );
 				break;
-			case 'codemirror-mode-js':
+			case 'dist-codemirror-mode-js':
 				$this->page =
 					new \EssentialScript\Admin\Scripts\CodemirrorModeJS(
 						$this->page );
 				break;
-			case 'codemirror-mode-xml':
+			case 'dist-codemirror-mode-xml':
 				$this->page =
 					new \EssentialScript\Admin\Scripts\CodemirrorModeXml(
 						$this->page );
@@ -104,6 +104,16 @@ class Queuing {
 					new \EssentialScript\Admin\Scripts\CodemirrorStyleOverride(
 						$this->page );
 				break;
+			case 'essential-script-widgets':
+				$this->page =
+					new \EssentialScript\Admin\Scripts\WidgetsEssentialscript(
+						$this->page );
+				break;
+			case 'wp-codemirror':
+				$this->page =
+					new \EssentialScript\Admin\Scripts\WidgetsWPCodemirror(
+						$this->page );
+				
 		}
 	}
 }
