@@ -61,10 +61,12 @@ class Widget extends \WP_Widget {
 		);
 		// Necessary dependencies to run Codemirror inside the Widget.
 		$accessories = array (
-			'codemirror-script',
-			'codemirror-mode-js',
-			'codemirror-mode-xml',
-			'codemirror-style'
+/*			'dist-codemirror-script',
+			'dist-codemirror-mode-js',
+			'dist-codemirror-mode-xml',
+ 			'dist-codemirror-style',
+			'essential-script-widgets' */
+			'wp-codemirror',
 		);
 		/* __CLASS__: ID for the tags <div>
 		 * 'Essential Script': widget title displayed in the Widgets screen.
