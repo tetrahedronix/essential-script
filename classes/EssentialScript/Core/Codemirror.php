@@ -28,20 +28,34 @@ class Codemirror {
 	
 	/**
 	 * Print the basic Codemirror script for the HTML textarea.
+	 * 
+	 * @param string $highlighter Syntax highlighter to use.
 	 */
-	static public function fromtextarea() {
-		echo<<<'JS'
+	static public function fromtextarea( $highlighter ) {
+		
+		switch ( $highlighter ) {
+			case 'javascript':
+				$mode = '{ name: "javascript" }';
+				break;
+			case 'xml':
+			default:
+				$mode = '{ name: "xml", htmlMode: true }';
+				break;
+		}
+		$jscode=<<<'JS'
 <!-- Codemirror -->   
 <script>
    var textarea_node=document.getElementById("textarea-script");
    var editor = CodeMirror.fromTextArea(textarea_node, {
 		lineNumbers: true,
-		mode: { name: "xml", htmlMode: true },
+		mode: %s,
 		viewportMargin: Infinity,
 		lint: true
 });
 </script> 
 JS
 . PHP_EOL;
+		echo sprintf( $jscode, $mode );
+		
 	}
 }
