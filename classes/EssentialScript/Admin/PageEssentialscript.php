@@ -87,6 +87,13 @@ class PageEssentialscript extends \EssentialScript\Admin\Page {
 		// Register a settings field to a settings page and section.
 		$field = new \EssentialScript\Admin\Settings\FieldCreator;
 		add_settings_field(
+			'essentialscript_highlighter',
+			__( 'What syntax highlighter to use', 'essential-script' ),
+			$field->doFactory( new \EssentialScript\Admin\Settings\EssentialscriptHighlighter ),
+			$this->submenu_page,
+			'essentialscript_section_id'
+		);
+		add_settings_field(
 			'essentialscript_textarea',
 			__( 'Enter the script code here', 'essential-script' ),
 			$field->doFactory( new \EssentialScript\Admin\Settings\EssentialscriptTextarea ),
@@ -151,9 +158,26 @@ class PageEssentialscript extends \EssentialScript\Admin\Page {
 				'async' => true,
 				'src' => true ),
 		);
-		// Sanitize the script
+		/*
+		 * Sanitize the highlighter
+		 */
+		switch ( $input['highlighter'] ) {
+			case 'xml':
+				$sane['highlighter'] = 'xml';
+				break;
+			case 'javascript':
+				$sane['highlighter'] = 'javascript';
+				break;
+			default:
+				$sane['highlighter'] = 'xml'; 
+		}
+		/*
+		 *  Sanitize the script
+		 */
 		$sane['script'] = substr( wp_kses( $input['script'], $allow_html ), 0, 511 );
-		// Sanitize where we want the script
+		/*
+		 *  Sanitize where we want the script
+		 */
  		switch ( $input['where'] ) {
 			case 'head':
 				$sane['where'] = 'head';
@@ -170,7 +194,9 @@ class PageEssentialscript extends \EssentialScript\Admin\Page {
 			default:
 				$sane['where'] = 'foot';
 		} 
-		/* Sanitize the filename: 
+		/* 
+		 * Sanitize the filename: 
+		 * 
 		 * if no name was specified then it creates a hash for the filename, else
 		 * sanitize the user input.
 		 */
@@ -184,8 +210,9 @@ class PageEssentialscript extends \EssentialScript\Admin\Page {
 		} else {
 			$f = sanitize_file_name( $input['filename'] );
 		} */
-	
-		// Sanitize the checkboxes:
+		/*
+		 *  Sanitize the checkboxes:
+		 */
 		$sane['pages']['index'] = ( 'on' === $input['pages']['index'] ) ? 
 				true : false;
 		$sane['pages']['single'] = ( 'on' === $input['pages']['single'] ) ? 
@@ -216,7 +243,9 @@ class PageEssentialscript extends \EssentialScript\Admin\Page {
 		} else {
 			$sane['pages']['archive'] = false;
 		} */
-		// Sanitize the radio buttons:
+		/*
+		 *  Sanitize the radio buttons:
+		 */
 		switch ( $input['storage'] ) {
 			case 'wpdb':
 				$sane['storage'] = 'wpdb';
