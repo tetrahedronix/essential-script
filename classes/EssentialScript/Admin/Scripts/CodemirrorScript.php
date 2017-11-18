@@ -52,13 +52,15 @@ class CodemirrorScript extends \EssentialScript\Admin\Scripts\Decorator {
 		
 		// Codemirror main javascript file
 		wp_register_script( 
-			'codemirror-script',
-			plugins_url( 'lib/codemirror.js', ESSENTIAL_SCRIPT1_PLUGIN_FILE ),
+			'dist-codemirror-script',
+			plugins_url( ESSENTIAL_SCRIPT1_DIST_CODEMIRROR . 
+				'lib/codemirror.js', 
+				ESSENTIAL_SCRIPT1_PLUGIN_FILE ),
 			array (),
 			self::CODEMIRROR_VER,
 			false
 		);
-		wp_enqueue_script( 'codemirror-script' );
+		wp_enqueue_script( 'dist-codemirror-script' );
 	}
 
 	/**

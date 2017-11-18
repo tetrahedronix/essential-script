@@ -54,13 +54,15 @@ class CodemirrorStyle extends \EssentialScript\Admin\Scripts\Decorator {
 
 		// CodeMirror style
 		wp_register_style(
-				'codemirror-style',
-				plugins_url( 'lib/codemirror.css', ESSENTIAL_SCRIPT1_PLUGIN_FILE ),
+				'dist-codemirror-style',
+				plugins_url( ESSENTIAL_SCRIPT1_DIST_CODEMIRROR .
+					'lib/codemirror.css', 
+					ESSENTIAL_SCRIPT1_PLUGIN_FILE ),
 				array(),
 				self::CODEMIRROR_VER,
 				false 
 		);
-		wp_enqueue_style( 'codemirror-style' );
+		wp_enqueue_style( 'dist-codemirror-style' );
 
 	}
 

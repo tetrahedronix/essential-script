@@ -53,13 +53,15 @@ class CodemirrorModeXml extends \EssentialScript\Admin\Scripts\Decorator {
 		
 		// Codemirror mode script for XML/HTML language.
 		wp_register_script(
-				'codemirror-mode-xml',
-				plugins_url( 'lib/mode/xml/xml.js', ESSENTIAL_SCRIPT1_PLUGIN_FILE ),
-				array(),
+				'dist-codemirror-mode-xml',
+				plugins_url( ESSENTIAL_SCRIPT1_DIST_CODEMIRROR . 
+					'lib/mode/xml/xml.js',
+					ESSENTIAL_SCRIPT1_PLUGIN_FILE ),
+				array( 'dist-codemirror-script' ),
 				self::CODEMIRROR_VER,
 				false
 		);
-		wp_enqueue_script( 'codemirror-mode-xml' );
+		wp_enqueue_script( 'dist-codemirror-mode-xml' );
 	}
 
 	/**

@@ -53,13 +53,15 @@ class CodemirrorModeJS extends \EssentialScript\Admin\Scripts\Decorator {
 		
 		// Codemirror mode script for javascript language.
 		wp_register_script(
-				'codemirror-mode-js',
-				plugins_url( 'lib/mode/javascript/javascript.js', ESSENTIAL_SCRIPT1_PLUGIN_FILE ),
-				array( 'codemirror-script' ),
+				'dist-codemirror-mode-js',
+				plugins_url( ESSENTIAL_SCRIPT1_DIST_CODEMIRROR .
+					'lib/mode/javascript/javascript.js',
+					ESSENTIAL_SCRIPT1_PLUGIN_FILE ),
+				array( 'dist-codemirror-script' ),
 				self::CODEMIRROR_VER,
 				false
 		);
-		wp_enqueue_script( 'codemirror-mode-js' );		
+		wp_enqueue_script( 'dist-codemirror-mode-js' );		
 
 	}
 
