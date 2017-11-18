@@ -31,6 +31,7 @@ class Options implements \ArrayAccess {
 	 * Ex:
 	 * 	a:7:{
 	 *      s:4:"name";s:0:"es59e08b5e7c4822.61452256";
+	 *		s:11:"highlighter";s:3:"xml";	  
 	 *      s:6:"script";s:0:"";
 	 *      s:5:"where";s:4:"head";
 	 *      s:5:"pages";a:4:{s:5:"index";b:1;
@@ -56,38 +57,8 @@ class Options implements \ArrayAccess {
 		if ( !is_array ( $this->container ) ) {
 			$this->container = array();
 		}
-		
-		$this->options();
 	}	
-		
-	private function options() {	
-		// Check whether you need to update any option.
-		if ( !array_key_exists( 'where', $this->container ) ) {
-			$this->container['where'] = 'foot';  // Save default
-			update_option( 'essentialscript_options', $this->container['where'] );
-		}
-		
-		if ( !array_key_exists( 'pages', $this->container ) ) {
-			$this->container['pages'] = array ( 
-				array (	'index' => true, 
-					'single' => false,
-					'page' => false,
-					'archive' => false ),
-			);
-			update_option( 'essentialscript_options', $this->container['pages'] );
-		}		
 
-		if ( !array_key_exists( 'storage', $this->container ) ) {
-			$this->container['storage'] = 'file';
-			update_option( 'essentialscript_options', $this->container['storage'] );
-		} 
-		
-		if ( !array_key_exists( 'enqueue', $this->container ) ) {
-			$this->container['enqueue'] = 'false';
-			update_option( 'essentialscript_options', $this->container['enqueue'] );
-		}
-	}
-	
 	public function offsetExists( $offset ) {
 		return isset( $this->container[$offset] );
 	}
