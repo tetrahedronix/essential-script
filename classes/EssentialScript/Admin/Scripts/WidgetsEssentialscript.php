@@ -20,54 +20,56 @@
 namespace EssentialScript\Admin\Scripts;
 
 /**
- * Concrete component for Widget: 
+ * Description of WidgetsEssentialscript
  *
  * @author docwho
  */
-class Widgets extends \EssentialScript\Admin\Scripts\Component {
+class WidgetsEssentialscript extends \EssentialScript\Admin\Scripts\Decorator {
+	//put your code here
 	
-	/**
-	 * Setup class.
-	 * 
-	 * @param string $page_slug The page slug
-	 */
-	public function __construct( $page_slug = '' ) {
+	public function __construct( Component $page ) {
 		
-		$this->slug = $page_slug;
+		$this->slug = $page;
 		add_action( 'admin_enqueue_scripts', array ( $this, 'enqueueScript' ) );
 	}
 	
-	/**
-	 * Adds necessary JavaScript file for using CodeMirror in Widget
-	 * @param type $hook
-	 * @return type
-	 */
 	public function enqueueScript( $hook ) {
 		
-		if ( $this->slug !== $hook ) {
+		if ( $this->slug->getSlug() !== $hook ) {
 			return;
 		}
+		
+		// Essential Script JavaScript script for use with Widgets API.
+		wp_register_script(
+			'essential-script-widgets',
+			plugins_url( 'lib/essential-script-widgets.js',
+				ESSENTIAL_SCRIPT1_PLUGIN_FILE ),
+			// This will have to depend on the settings in the future.
+			array( 'jquery', 'dist-codemirror-script' ),
+			self::ESSENTIALSCRIPT_VER,
+			false 
+		); 
+		wp_add_inline_script( 'essential-script-widgets', 
+			sprintf( "wp.essentialScriptWidgets.init( %s );", 
+					wp_json_encode( $this->getExtradata() ) ) 
+		);		 
+		wp_enqueue_script( 'essential-script-widgets' );  
 
 	}
-
-	/**
-	 * Getter
-	 * 
-	 * @return mixed Extra data
-	 */
+	
 	public function getExtradata() {
-
-		return $this->extra_data;
+		
+		return $this->slug->getExtradata();
 	}
 
 	/**
 	 * Getter
 	 * 
 	 * @return string The page slug
-	 */
+	 */	
 	public function getSlug() {
-		
-		return $this->slug;
+
+		return $this->slug->getSlug();
 	}
 
 	/**
@@ -78,6 +80,6 @@ class Widgets extends \EssentialScript\Admin\Scripts\Component {
 	public function setExtradata( $data ) {
 
 		$this->extra_data = $data;
-	}
-
+	}	
+	
 }
