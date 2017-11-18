@@ -20,24 +20,38 @@
 namespace EssentialScript\Admin\Settings;
 
 /**
- * Description of EssentialscriptHighlighter
+ * Concrete fieldset: provides the radiobuttons to select the
+ * syntax highlighter.
  *
  * @author docwho
  */
 class EssentialscriptHighlighter implements \EssentialScript\Admin\Settings\Setting {
 	
+	/**
+	 * The options from Wordpress DB.
+	 * @var array 
+	 */
 	private $options = array ();
 	
+	/**
+	 * Setup class.
+	 */
 	public function __construct() {
 
 		$this->options = new \EssentialScript\Core\Options;
 	}
 	
+	/**
+	 * @return array Used by add_settings_field().
+	 */
 	public function provideItem() {
 
 		return array ( $this, 'printItem' );
 	}
-	
+
+	/**
+	 * Outputs the radiobuttons.
+	 */
 	public function printItem() {
 ?>		
 <fieldset id="front-static-page">

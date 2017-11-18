@@ -20,19 +20,31 @@
 namespace EssentialScript\Admin\Scripts;
 
 /**
- * Description of WidgetsEssentialscript
+ * Concrete decoretor: wraps the Widgets concrete component with necessary
+ * code to activate Codemirror provided by Essential Script.
  *
  * @author docwho
  */
 class WidgetsEssentialscript extends \EssentialScript\Admin\Scripts\Decorator {
-	//put your code here
 	
+	/**
+	 * Setup Class.
+	 * 
+	 * @param \EssentialScript\Admin\Scripts\Component $page Wrapped component
+	 */
 	public function __construct( Component $page ) {
 		
 		$this->slug = $page;
 		add_action( 'admin_enqueue_scripts', array ( $this, 'enqueueScript' ) );
 	}
 	
+	/**
+	 * Registers the Codemirror Javascript file provided by Essential Script to
+	 * be enqueued afterwards with wp_enqueue_script.
+	 * 
+	 * @param string $hook The hook suffix for the current admin page.
+	 * @return null If current page is not the widgets administration panel.
+	 */
 	public function enqueueScript( $hook ) {
 		
 		if ( $this->slug->getSlug() !== $hook ) {
@@ -57,6 +69,11 @@ class WidgetsEssentialscript extends \EssentialScript\Admin\Scripts\Decorator {
 
 	}
 	
+	/**
+	 * Getter
+	 * 
+	 * @return mixed Extra data
+	 */
 	public function getExtradata() {
 		
 		return $this->slug->getExtradata();

@@ -20,18 +20,31 @@
 namespace EssentialScript\Admin\Scripts;
 
 /**
- * Description of WPCodemirror
+ * Concrete decorator: wraps the Widgets concrete component with the necessary
+ * code to use the Code Editor API introduced in Wordpress 4.9.
  *
  * @author docwho
  */
 class WidgetsWPCodemirror extends \EssentialScript\Admin\Scripts\Decorator {
 	
+	/**
+	 * Setup class.
+	 * 
+	 * @param \EssentialScript\Admin\Scripts\Component $page Wrapped component
+	 */
 	public function __construct( Component $page ) {
 		
 		$this->slug = $page;
 		add_action( 'admin_enqueue_scripts', array ( $this, 'enqueueScript' ) );
 	}
 	
+	/**
+	 * Registers the Codemirror Javascript file provided by Wordpress to be
+	 * enqueued afterwards with wp_enqueue_script.
+	 * 
+	 * @param string $hook The hook suffix for the current admin page.
+	 * @return null If current page is not the widgets administration panel.
+	 */
 	public function enqueueScript( $hook ) {
 		
 		if ( $this->slug->getSlug() !== $hook ) {
@@ -43,7 +56,7 @@ class WidgetsWPCodemirror extends \EssentialScript\Admin\Scripts\Decorator {
 		 * Prepare Code Editor settings. 
 		 * See https://make.wordpress.org/core/2017/10/22/code-editing-improvements-in-wordpress-4-9/
 		 */
-		$settings = wp_enqueue_editor(
+/*		$settings = wp_enqueue_editor(
 			array ( 'codemirror' => array (
 					'lineNumbers' => true,
 					'mode' => array ( 'name' => 'xml', 'htmlMode' => true ),
@@ -52,14 +65,15 @@ class WidgetsWPCodemirror extends \EssentialScript\Admin\Scripts\Decorator {
 					'autofocus' => true,
 					'readOnly' => true,
 					'dragDrop' => false,
+					'lint' => true
 				)
 			)
-		);
+		); */
 		
 		// Bail if user disabled CodeMirror.
-		if ( false === $settings ) {
+		/*if ( false === $settings ) {
 			return;
-		}
+		} */
 		
 		wp_register_script(
 	'wp-codemirror-widgets',
@@ -87,6 +101,11 @@ JCODE; */
 		); */
 	}
 	
+	/**
+	 * Getter
+	 * 
+	 * @return mixed Extra data
+	 */
 	public function getExtradata() {
 		
 		return $this->slug->getExtradata();

@@ -39,8 +39,9 @@ class Widgets extends \EssentialScript\Admin\Scripts\Component {
 	
 	/**
 	 * Adds necessary JavaScript file for using CodeMirror in Widget
-	 * @param type $hook
-	 * @return type
+	 * 
+	 * @param string $hook The hook suffix for the current administration page.
+	 * @return null If current page is not the widgets administration panel.
 	 */
 	public function enqueueScript( $hook ) {
 		
