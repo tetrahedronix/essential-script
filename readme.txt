@@ -2,8 +2,8 @@
 Contributors: tetravalente
 Tags: scripting, javascript, css, adsense, code, embed
 Requires at least: 4.0
-Tested up to: 4.8.3
-Stable tag: 0.6.1
+Tested up to: 4.9
+Stable tag: 0.7
 Requires PHP: 5.3
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -59,6 +59,13 @@ Sources of this plugin are available both in SVN and Git:
 3. Essential Script widget
 
 == Changelog ==
+= 0.7 =
+* Widgets: start support for Code Editor API
+* Move Codemirror code to a more suitable directory
+* Introduce decorator for the new Code Editor API with Wordpress 4.9
+* Fix if statements causing `Undefined index` error in `Main.php`
+* Add option for syntax higlighter
+* Improve the `Queuing` code by implementing the Decorator Pattern
 = 0.6.1 =
 * Update i18n related po files
 * Remove files and directories no longer necessary

@@ -4,13 +4,13 @@
  * 
  * @package Essential_Script
  * @author Giulio <giupersu@yahoo.it>
- * @version 0.6.1
+ * @version 0.7
  * 
  * @wordpress-plugin
  * Plugin Name: Essential Script
  * Plugin URI: https://github.com/tetravalence/essential-script
  * Description: Essential Script plugin offers you the ability to plug and manage your client-side script, which is an essential part of your website, through a versatile text editor made with <a href="http://codemirror.net/">CodeMirror</a>.
- * Version: 0.6.1
+ * Version: 0.7
  * Requires: 4.0
  * Tested up to: 4.8.3
  * Requires PHP: 5.3
