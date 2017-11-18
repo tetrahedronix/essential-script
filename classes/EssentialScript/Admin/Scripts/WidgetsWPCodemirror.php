@@ -60,17 +60,31 @@ class WidgetsWPCodemirror extends \EssentialScript\Admin\Scripts\Decorator {
 		if ( false === $settings ) {
 			return;
 		}
-	
+		
+		wp_register_script(
+	'wp-codemirror-widgets',
+			plugins_url( 'lib/wp-codemirror-widgets.js',
+				ESSENTIAL_SCRIPT1_PLUGIN_FILE ),
+			// This will have to depend on the settings in the future.
+			array( 'jquery', 'wp-codemirror' ),
+			self::ESSENTIALSCRIPT_VER,
+			false 
+		); 
+		wp_enqueue_script( 'wp-codemirror-widgets' );
+		wp_add_inline_script( 'wp-codemirror-widgets', 
+			sprintf( "wp.essentialScriptWidgets.init( %s );", 
+					wp_json_encode( $this->getExtradata() ) ) 
+		);		 
 		// Javascript Code
-		$jcode=<<<'JCODE'
+/*		$jcode=<<<'JCODE'
 node = document.querySelector('[id^="widget-essential_script"]');
 jQuery( function() { wp.codeEditor.initialize( node, %s ); } );,
-JCODE;
+JCODE; */
 		// Load Wordpress Code Editor API.
-		wp_add_inline_script(
+/*		wp_add_inline_script(
 			'code-editor',
 			sprintf( $jcode, wp_json_encode( $settings ) )
-		);
+		); */
 	}
 	
 	public function getExtradata() {
