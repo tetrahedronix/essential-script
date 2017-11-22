@@ -56,7 +56,7 @@ class WidgetsWPCodemirror extends \EssentialScript\Admin\Scripts\Decorator {
 		 * Prepare Code Editor settings. 
 		 * See https://make.wordpress.org/core/2017/10/22/code-editing-improvements-in-wordpress-4-9/
 		 */
-/*		$settings = wp_enqueue_editor(
+/*		$settings = wp_enqueue_code_editor(
 			array ( 'codemirror' => array (
 					'lineNumbers' => true,
 					'mode' => array ( 'name' => 'xml', 'htmlMode' => true ),
@@ -69,14 +69,31 @@ class WidgetsWPCodemirror extends \EssentialScript\Admin\Scripts\Decorator {
 				)
 			)
 		); */
-		
+		$extra_data = $this->getExtradata();
+		switch ( $extra_data[0] ) {
+			case 'javascript':
+				$mode = array ( 'name' => "javascript" );
+				break;
+			case 'xml':
+			default:
+				$mode = array ( 'name' => 'xml', 'htmlMode' => true );
+				break;
+		}
+		$settings = array ( 
+					'lineNumbers' => true,
+					'mode' => $mode,
+					'lineWrapping' => true,
+					'autofocus' => true,
+					'readOnly' => true,
+					'dragDrop' => false,
+					'lint' => true
+		);
 		// Bail if user disabled CodeMirror.
-		/*if ( false === $settings ) {
+/*		if ( false === $settings ) {
 			return;
 		} */
-		
 		wp_register_script(
-	'wp-codemirror-widgets',
+			'wp-codemirror-widgets',
 			plugins_url( 'lib/wp-codemirror-widgets.js',
 				ESSENTIAL_SCRIPT1_PLUGIN_FILE ),
 			// This will have to depend on the settings in the future.
@@ -86,19 +103,10 @@ class WidgetsWPCodemirror extends \EssentialScript\Admin\Scripts\Decorator {
 		); 
 		wp_enqueue_script( 'wp-codemirror-widgets' );
 		wp_add_inline_script( 'wp-codemirror-widgets', 
-			sprintf( "wp.essentialScriptWidgets.init( %s );", 
-					wp_json_encode( $this->getExtradata() ) ) 
+			sprintf( "wp.essentialScriptWidgets.init( %s, %s );",
+				wp_json_encode( $settings ),
+				wp_json_encode( $extra_data[1] ) ) 
 		);		 
-		// Javascript Code
-/*		$jcode=<<<'JCODE'
-node = document.querySelector('[id^="widget-essential_script"]');
-jQuery( function() { wp.codeEditor.initialize( node, %s ); } );,
-JCODE; */
-		// Load Wordpress Code Editor API.
-/*		wp_add_inline_script(
-			'code-editor',
-			sprintf( $jcode, wp_json_encode( $settings ) )
-		); */
 	}
 	
 	/**

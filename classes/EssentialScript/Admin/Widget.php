@@ -61,12 +61,7 @@ class Widget extends \WP_Widget {
 		);
 		// Necessary dependencies to run Codemirror inside the Widget.
 		$accessories = array (
-/*			'dist-codemirror-script',
-			'dist-codemirror-mode-js',
-			'dist-codemirror-mode-xml',
- 			'dist-codemirror-style',
-			'essential-script-widgets' */
-			'wp-codemirror',
+			'widget-wp-codemirror',
 		);
 		/* __CLASS__: ID for the tags <div>
 		 * 'Essential Script': widget title displayed in the Widgets screen.
@@ -78,7 +73,13 @@ class Widget extends \WP_Widget {
 			$widget_opts
 		);
 		//if ( is_active_widget( false, false, $this->id_base ) || is_customize_preview() ) {
-		new \EssentialScript\Admin\Queuing( 'widgets.php', $accessories, $this->id_base );
+		$highlighter = 'xml';
+		
+		if ( $this->options->offsetExists( 'highlighter' ) ) {
+			$highlighter = $this->options['highlighter'];
+		} 
+
+		new \EssentialScript\Admin\Queuing( 'widgets.php', $accessories, array ( $highlighter, $this->id_base ) );
 		//} 
 	}
 	

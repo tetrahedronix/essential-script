@@ -104,12 +104,7 @@ class Queuing {
 					new \EssentialScript\Admin\Scripts\CodemirrorStyleOverride(
 						$this->page );
 				break;
-			case 'essential-script-widgets':
-				$this->page =
-					new \EssentialScript\Admin\Scripts\WidgetsEssentialscript(
-						$this->page );
-				break;
-			case 'wp-codemirror':
+			case 'widget-wp-codemirror':
 				$this->page =
 					new \EssentialScript\Admin\Scripts\WidgetsWPCodemirror(
 						$this->page );

@@ -26,36 +26,42 @@ namespace EssentialScript\Core;
  */
 class Codemirror {
 	
+	static private $main_settings = array ( 
+		'lineNumbers' => true,
+		'mode' => array ( 'name' => 'xml', 'htmlMode' => true ),
+		'lint' => true
+	);
 	/**
 	 * Print the basic Codemirror script for the HTML textarea.
 	 * 
 	 * @param string $highlighter Syntax highlighter to use.
 	 */
-	static public function fromtextarea( $highlighter ) {
+	static public function fromTextarea( $highlighter ) {
 		
 		switch ( $highlighter ) {
 			case 'javascript':
-				$mode = '{ name: "javascript" }';
+				$mode = array ( 'name' => "javascript" );
 				break;
 			case 'xml':
 			default:
-				$mode = '{ name: "xml", htmlMode: true }';
+				$mode = array ( 'name' => 'xml', 'htmlMode' => true );
 				break;
 		}
+		
+		self::$main_settings['mode'] = $mode;
+		
+		$settings = json_encode( self::$main_settings );
 		$jscode=<<<'JS'
 <!-- Codemirror -->   
 <script>
-   var textarea_node=document.getElementById("textarea-script");
-   var editor = CodeMirror.fromTextArea(textarea_node, {
-		lineNumbers: true,
-		mode: %s,
-		viewportMargin: Infinity,
-		lint: true
-});
+(function($,settings) {
+	var textarea_node=document.getElementById("textarea-script");
+	var editor = CodeMirror.fromTextArea(textarea_node,settings);
+	console.log(settings);
+})(window.jQuery, %s); 
 </script> 
 JS
 . PHP_EOL;
-		echo sprintf( $jscode, $mode );
-		
+		echo sprintf( $jscode, $settings );
 	}
 }

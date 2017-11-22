@@ -60,7 +60,7 @@ class EssentialscriptTextarea implements \EssentialScript\Admin\Settings\Setting
 		
 		$textarea = $this->file_obj->getcontent();
 		
-		if ( $this->options->offsetExists( 'highlighter') ) {
+		if ( $this->options->offsetExists( 'highlighter' ) ) {
 			$highlighter = $this->options['highlighter'];
 		} else {
 			$highlighter = 'xml';
@@ -71,7 +71,7 @@ class EssentialscriptTextarea implements \EssentialScript\Admin\Settings\Setting
 <p class="description"><?php esc_html_e( 'Max 512 chars. The allowed tags are listed in settings_sanitize(). You can add or remove tags as required.',
 		'essential-script' ); ?></p>
 <?php
-	\EssentialScript\Core\Codemirror::fromtextarea( $highlighter );
+	\EssentialScript\Core\Codemirror::fromTextarea( $highlighter );
 
 	}
 }
