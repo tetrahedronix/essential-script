@@ -57,7 +57,6 @@ class Codemirror {
 (function($,settings) {
 	var textarea_node=document.getElementById("textarea-script");
 	var editor = CodeMirror.fromTextArea(textarea_node,settings);
-	console.log(settings);
 })(window.jQuery, %s); 
 </script> 
 JS
