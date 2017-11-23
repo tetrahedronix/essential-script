@@ -70,6 +70,9 @@ class WidgetsWPCodemirror extends \EssentialScript\Admin\Scripts\Decorator {
 			)
 		); */
 		$extra_data = $this->getExtradata();
+		/*
+		 * Enable an option under certain conditions 
+		 */		
 		switch ( $extra_data[0] ) {
 			case 'javascript':
 				$mode = array ( 'name' => "javascript" );
@@ -79,6 +82,7 @@ class WidgetsWPCodemirror extends \EssentialScript\Admin\Scripts\Decorator {
 				$mode = array ( 'name' => 'xml', 'htmlMode' => true );
 				break;
 		}
+		
 		$settings = array ( 
 					'lineNumbers' => true,
 					'mode' => $mode,

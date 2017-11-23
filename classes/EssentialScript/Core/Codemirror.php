@@ -37,7 +37,10 @@ class Codemirror {
 	 * @param string $highlighter Syntax highlighter to use.
 	 */
 	static public function fromTextarea( $highlighter ) {
-		
+
+		/*
+		 * Enable an option under certain conditions 
+		 */		
 		switch ( $highlighter ) {
 			case 'javascript':
 				$mode = array ( 'name' => "javascript" );

@@ -50,6 +50,19 @@ class EssentialscriptStorage implements \EssentialScript\Admin\Settings\Setting 
 	 */
 	public function printItem() {
 
+		$disabled = '';
+		/* 
+		 * Disables the option under certain conditions 
+		 */
+		if ( ( false === $this->options['enqueue'] ) && 
+			( 'wpdb' === $this->options['storage'] ) ) {
+			$disabled = ' disabled';
+		}
+		
+		if ( ( false === $this->options['enqueue'] ) &&
+			( 'xml' === $this->options['highlighter'] ) ) {
+			$disabled = ' disabled';
+		}
 ?>
 <fieldset id="front-static-pages">
 <legend class="screen-reader-text">
@@ -69,7 +82,8 @@ class EssentialscriptStorage implements \EssentialScript\Admin\Settings\Setting 
 			<input type="checkbox" 
 				   id="enqueue" 
 				   name="essentialscript_options[enqueue]" 
-				   <?php checked( $this->options['enqueue'], true, true ); ?> />
+				   <?php checked( $this->options['enqueue'], true, true ); ?> 
+				   <?php echo $disabled ?>/>
 			<?php printf( __( 'Use <a href="%s">wp_enqueue_scripts</a> hook (where possible)',
 				'essential-script' ),
 				'https://codex.wordpress.org/Plugin_API/Action_Reference/wp_enqueue_scripts'  ); ?>
