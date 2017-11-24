@@ -30,13 +30,13 @@ abstract class Component {
 	 * 
 	 * @since 0.2
 	 */
-	const CODEMIRROR_VER = '5.31.0';
+	const CODEMIRROR_VER = '5.32.0';
 	/**
 	 * Essential Script Version for upgrade purposes.
 	 * 
 	 * @since 0.2
 	 */
-	const ESSENTIALSCRIPT_VER = '0.7';	
+	const ESSENTIALSCRIPT_VER = '0.7.1';	
 	
 	/**
 	 * Page slug

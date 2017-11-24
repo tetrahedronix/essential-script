@@ -3,7 +3,7 @@ Contributors: tetravalente
 Tags: scripting, javascript, css, adsense, code, embed
 Requires at least: 4.0
 Tested up to: 4.9
-Stable tag: 0.7
+Stable tag: 0.7.1
 Requires PHP: 5.3
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -59,6 +59,10 @@ Sources of this plugin are available both in SVN and Git:
 3. Essential Script widget
 
 == Changelog ==
+= 0.7.1 =
+* Upgrade CodeMirror from 5.31.0 to 5.32.0
+* Fix problem with `wp_enqueue_scripts` option was enabled with XML mode
+* Fix Syntax highlighter doesn't match Essential Script option when run in Widget
 = 0.7 =
 * Widgets: start support for Code Editor API
 * Move Codemirror code to a more suitable directory
