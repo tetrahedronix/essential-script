@@ -175,42 +175,8 @@ class PageEssentialscript extends \EssentialScript\Admin\Page {
 		 *  Sanitize the script
 		 */
 		$sane['script'] = substr( wp_kses( $input['script'], $allow_html ), 0, 511 );
-		/*
-		 *  Sanitize where we want the script
-		 */
- 		switch ( $input['where'] ) {
-			case 'head':
-				$sane['where'] = 'head';
-				break;
-			case 'content':
-				$sane['where'] = 'content';
-				break;
-			case 'shortcode':
-				$sane['where'] = 'shortcode';
-				break;
-			case 'foot':
-				$sane['where'] = 'foot';
-				break;
-			default:
-				$sane['where'] = 'foot';
-		} 
-		/* 
-		 * Sanitize the filename: 
-		 * 
-		 * if no name was specified then it creates a hash for the filename, else
-		 * sanitize the user input.
-		 */
-		$f = ( '' === $input['filename'] ) ?
-				uniqid( 'es', true ) : sanitize_file_name( $input['filename'] );
-		/* Equivalent to:
-		if ( $input['filename'] === '' ) {
-			// Creates a 23 character hash for the filename
-			//$f = md5( time() . mt_rand() );
-			$f = uniqid( 'es', true );
-		} else {
-			$f = sanitize_file_name( $input['filename'] );
-		} */
-		/*
+		
+				/*
 		 *  Sanitize the checkboxes:
 		 */
 		$sane['pages']['index'] = ( 'on' === $input['pages']['index'] ) ? 
@@ -243,6 +209,44 @@ class PageEssentialscript extends \EssentialScript\Admin\Page {
 		} else {
 			$sane['pages']['archive'] = false;
 		} */
+		
+		/*
+		 *  Sanitize where we want the script
+		 */
+ 		switch ( $input['where'] ) {
+			case 'head':
+				$sane['where'] = 'head';
+				break;
+			case 'content':
+				$sane['where'] = 'content';
+				break;
+			case 'shortcode':
+				$sane['where'] = 'shortcode';
+				$sane['enqueue'] = false;
+				break;
+			case 'foot':
+				$sane['where'] = 'foot';
+				break;
+			default:
+				$sane['where'] = 'foot';
+		} 
+		/* 
+		 * Sanitize the filename: 
+		 * 
+		 * if no name was specified then it creates a hash for the filename, else
+		 * sanitize the user input.
+		 */
+		$f = ( '' === $input['filename'] ) ?
+				uniqid( 'es', true ) : sanitize_file_name( $input['filename'] );
+		/* Equivalent to:
+		if ( $input['filename'] === '' ) {
+			// Creates a 23 character hash for the filename
+			//$f = md5( time() . mt_rand() );
+			$f = uniqid( 'es', true );
+		} else {
+			$f = sanitize_file_name( $input['filename'] );
+		} */
+
 		/*
 		 *  Sanitize the radio buttons:
 		 */
