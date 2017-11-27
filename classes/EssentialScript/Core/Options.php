@@ -42,6 +42,9 @@ class Options implements \ArrayAccess {
 	 *      s:7:"storage";s:4:"file";
 	 *      s:4:"path";s:53:"/var/www/sandbox/portfolio/wp-content/uploads/2017/11";
 	 *      s:8:"filename";s:25:"es59e08b5e7c4822.61452256";
+	 *		s:11: "filefeature";a:2:{
+	 *						s:5:"async";b:0;
+	 *						s:5:"defer";b:0;}
 	 * }
 	 * 
 	 * @var int	 

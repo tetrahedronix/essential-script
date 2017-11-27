@@ -78,7 +78,10 @@ class EssentialscriptStorage implements \EssentialScript\Admin\Settings\Setting 
 <?php checked( $this->options['storage'], 'file', true ); ?>/>
 	<span class="input-text"><?php esc_html_e( 'File (Recommended)',
 			'essential-script' ); ?></span>
-	<input type="text" name="essentialscript_options[filename]" value="<?php echo esc_attr( $this->options['filename'] ); ?>" size="25" />
+	<input type="text"
+		   name="essentialscript_options[filename]"
+		   value="<?php echo esc_attr( $this->options['filename'] ); ?>"
+		   size="25" />
 	</label>
 	<p class="description"><?php esc_html_e( 'Enter the filename',
 			'essential-script' ); ?></p>	
@@ -96,6 +99,17 @@ class EssentialscriptStorage implements \EssentialScript\Admin\Settings\Setting 
 	<li><strong><?php esc_html_e( 'Note:', 'essential-script' ); ?></strong>
 		<i><?php esc_html_e( 'The external script file cannot contain the <script> tag.',
 		'essential-script') ?></i></li>
+<?php 
+if ( has_filter( 'essentialscript_filefeature' ) ) {
+	$filefeature = '<li>'.
+		esc_html_e( 'Available features:', 'essential-script' ) . '</li>';
+	echo apply_filters( 'essentialscript_filefeature',
+		$filefeature, 
+		$enqueue_disabled,
+		$this->options['filefeature'] );
+} else { 
+	echo ''; 
+} ?>	
 </ul>
 <p><label>
 	<input type="radio" name="essentialscript_options[storage]" value="wpdb" 

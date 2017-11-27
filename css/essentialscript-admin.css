@@ -23,3 +23,21 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     display: inherit;
     min-width: 10em;
 }
+
+.input-indicator {
+    display: inline-block;
+    min-width: 20px;
+    vertical-align: baseline;
+    margin-left: 10px;
+    border-radius: 2px;
+    border-left: 4px solid;
+    padding: .45em .35em .3em;
+    font-family: Helvetica, arial, sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: normal;
+    background: #e4f0f5;
+    border-color: #3f87a6;
+    color: #3f87a6;
+    
+}

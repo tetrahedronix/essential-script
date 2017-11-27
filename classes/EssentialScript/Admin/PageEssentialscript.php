@@ -118,7 +118,26 @@ class PageEssentialscript extends \EssentialScript\Admin\Page {
 			__( 'Choose where to store the script', 'essential-script' ),
 			$field->doFactory( new \EssentialScript\Admin\Settings\EssentialscriptStorage ),
 			$this->submenu_page,
-			'essentialscript_section_id'			
+			'essentialscript_section_id'
+		);
+		// Add the Async feature to File option
+		add_filter( 'essentialscript_filefeature',
+			// The callback to be run when the filter is applied.
+			array (
+				new \EssentialScript\Admin\Settings\Feature\Async,
+				'templateMethod' ),
+			// Used to specify the order in which the function is executed
+			10,
+			// The number of arguments the function accepts. Default value: 1
+			3
+		);
+		// Add the Defer feature to File option
+		add_filter( 'essentialscript_filefeature',
+			array (
+				new \EssentialScript\Admin\Settings\Feature\Defer,
+				'templateMethod' ),
+			10,
+			3
 		);
 	}
 	
@@ -188,6 +207,17 @@ class PageEssentialscript extends \EssentialScript\Admin\Page {
 		$sane['pages']['archive'] = ( 'on' === $input['pages']['archive'] ) ? 
 				true : false;
 		$sane['enqueue'] = ( 'on' === $input['enqueue'] ) ? true: false;
+		
+		if ( $sane['enqueue'] ) {
+			$sane['filefeature']['async'] = ( 
+				'on' === $input['filefeature']['async'] ) ? true: false;
+			$sane['filefeature']['defer'] = (
+				'on' === $input['filefeature']['defer'] ) ? true: false;
+		} else {
+			$sane['filefeature']['async'] = false;
+			$sane['filefeature']['defer'] = false;
+		}
+			
 		/* Equivalent to:
 		 * if ( $input['pages']['index'] === 'on' ) {
 			$sane['pages']['index'] = true;

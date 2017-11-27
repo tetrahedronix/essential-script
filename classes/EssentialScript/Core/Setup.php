@@ -130,6 +130,9 @@ class Setup {
 			'storage'  => 'file',
 			'filename' => '',
 			'path'     => '',
+			'filefeature' => array (
+				'async'    => false,
+				'defer'    => false	),
 		];
 		add_option( 'essentialscript_options', $options );
 	}
