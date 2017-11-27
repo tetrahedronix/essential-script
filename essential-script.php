@@ -13,7 +13,7 @@
  * Version: 0.7.1
  * Requires: 4.0
  * Tested up to: 4.9
- * Requires PHP: 5.3
+ * Requires PHP: 5.4
  * Author: Giulio
  * Author URI: https://www.freelancer.com/u/Tetravalente.html
  * License: GPL

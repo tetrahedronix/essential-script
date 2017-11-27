@@ -37,7 +37,7 @@ class Setup {
 	 * 
 	 * @var int Minimum PHP version required.
 	 */
-	const MIN_PHP_VERSION = '5.3';
+	const MIN_PHP_VERSION = '5.4';
 	/**
 	 * Wordpress version.
 	 * 
