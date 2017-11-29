@@ -24,7 +24,7 @@ namespace EssentialScript\Frontend\Filter;
  *
  * @author docwho
  */
-class Footer implements \EssentialScript\Frontend\Filter\Strategy {
+class Foot implements \EssentialScript\Frontend\Filter\Strategy {
 	/**
 	 * @var string The filename.
 	 */
