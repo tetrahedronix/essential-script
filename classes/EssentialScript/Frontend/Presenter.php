@@ -29,44 +29,27 @@ namespace EssentialScript\Frontend;
  */
 class Presenter {
 	/**
-	 * Container for plugin options.
-	 * 
-	 * @var string Where the script is displayed on the page.
+	 * @var array Array container for essential options to filter.
 	 */
-	private $where;
-	/**
-	 * @var string Script filename.
-	 */
-	private $filename;
-	/**
-	 * @var string Uses this property when the database is selected.
-	 */
-	private $script;
-	/**
-	 * @var type Storage space where the script can be kept.
-	 */
-	private $storage;
-	/**
-	 * @var bool If the script has to appear on the front end with wp_enqueue_scripts.
-	 */
-	private $enqueue;
+	private $options = array ();
 	/**
 	 * Setup class.
 	 * 
 	 * @param \ArrayAccess $opts Instance of the Options object.
 	 */
-	public function __construct( \ArrayAccess $opts ) {
+	public function __construct() {
+		
+		$opts = new \EssentialScript\Core\Options;
 		// Full path to filename of our script.
 		$file_obj = new \EssentialScript\Core\File( $opts );
-		$this->filename = $file_obj->getfilename();
-		$this->where = $opts->offsetExists( 'where' ) ? 
+		$this->options['filename'] = $file_obj->getfilename();
+		$this->options['where'] = $opts->offsetExists( 'where' ) ? 
 			$opts->offsetGet( 'where' ) : '';
-		// The script.
-		$this->script = $opts->offsetExists( 'script' ) ? 
+		$this->options['script'] = $opts->offsetExists( 'script' ) ? 
 			$opts->offsetGet( 'script' ) : '';
-		$this->storage = $opts->offsetExists( 'storage' ) ?
+		$this->options['storage'] = $opts->offsetExists( 'storage' ) ?
 			$opts->offsetGet( 'storage' ) : '';
-		$this->enqueue = $opts->offsetExists( 'enqueue' ) ?
+		$this->options['enqueue'] = $opts->offsetExists( 'enqueue' ) ?
 			$opts->offsetGet( 'enqueue' ) : false;
 	}
 	
@@ -79,38 +62,14 @@ class Presenter {
 	 */
 	public function router() {
 
-		switch ( $this->where ) {
-			case 'head':
-				// Initialize the filter with our data.
-				$filter = new \EssentialScript\Frontend\Filter\Head(
-					$this->filename,
-					$this->script,
-					$this->storage,
-					$this->enqueue ); 
-				break;
-			case 'content':
-				$filter = new \EssentialScript\Frontend\Filter\Content(
-					$this->filename,
-					$this->script,
-					$this->storage );
-				break;
-			case 'shortcode':
-				$filter = new \EssentialScript\Frontend\Filter\Shortcode(
-					$this->filename,
-					$this->script,
-					$this->storage );
-				break;
-			case 'foot':
-				$filter = new \EssentialScript\Frontend\Filter\Footer(
-					$this->filename,
-					$this->script,
-					$this->storage,
-					$this->enqueue );
-				break;
-			default:
-				$filter = null;
-		}
+		$func = "\\EssentialScript\\Frontend\Filter\\" . 
+			ucwords( $this->options['where'] );
+		$context_filter = new $func( $this->options );
+		/*$context_filter = new \EssentialScript\Frontend\Filter\Context(
+			new $func( $this->options )
+		); */
+		
 		// This instance allows to manipulate the output.
-		return $filter;
+		return $context_filter;
 	}
 }

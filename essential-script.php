@@ -102,8 +102,7 @@ add_action( 'widgets_init', function() {
  */
 $essentialscript_filter = null;
 add_action( 'init', function() use ( &$essentialscript_filter ) {
-	$opts = new \EssentialScript\Core\Options;
-	$presenter = new \EssentialScript\Frontend\Presenter( $opts );
+	$presenter = new \EssentialScript\Frontend\Presenter;
 	$essentialscript_filter = $presenter->router();
 } );
 /* The wp action hook runs immediately after the global WP class

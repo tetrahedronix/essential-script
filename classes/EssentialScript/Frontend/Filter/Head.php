@@ -51,12 +51,12 @@ class Head implements \EssentialScript\Frontend\Filter\Strategy {
 	 * @param string $storage
 	 * @param bool $enqueue
 	 */
-	public function __construct( $filename, $script, $storage, $enqueue ) {
+	public function __construct( $array_options ) {
 		// Save the parameters in the class properties.
-		$this->filename = $filename;
-		$this->script = $script;
-		$this->storage = $storage;
-		$this->enqueue = $enqueue;
+		$this->filename = $array_options['filename'];
+		$this->script = $array_options['script'];
+		$this->storage = $array_options['storage'];
+		$this->enqueue = $array_options['enqueue'];
 	}
 	/**
 	 * Filter function.
