@@ -18,12 +18,19 @@
  */
 namespace EssentialScript\Admin\Settings\Feature;
 /**
- * Description of FileFeature
+ * Concrete class that uses the template method to display the Defer option.
  *
  * @author docwho
  */
 class Defer extends \EssentialScript\Admin\SettingsFeature {
 	
+	/**
+	 * Includes the code that can be used to display the Defer option.
+	 * 
+	 * @param string $feature Original value being filtered.
+	 * @param string $state Additional param for checkbox state: enabled/disabled.
+	 * @param array $option Array with boolean values to mark the input.
+	 */
 	protected function doFeature( $feature, $state, $option ) {
 		$this->feature = $feature;
 		$this->state = $state;

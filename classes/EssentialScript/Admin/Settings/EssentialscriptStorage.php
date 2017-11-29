@@ -100,6 +100,7 @@ class EssentialscriptStorage implements \EssentialScript\Admin\Settings\Setting 
 		<i><?php esc_html_e( 'The external script file cannot contain the <script> tag.',
 		'essential-script') ?></i></li>
 <?php 
+// Uses the filter hook to add the file features
 if ( has_filter( 'essentialscript_filefeature' ) ) {
 	$filefeature = '<li>'.
 		esc_html_e( 'Available features:', 'essential-script' ) . '</li>';

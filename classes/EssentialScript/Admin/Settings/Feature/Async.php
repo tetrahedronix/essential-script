@@ -17,13 +17,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 namespace EssentialScript\Admin\Settings\Feature;
+
 /**
- * Description of FileFeature
+ * Concrete class that uses the template method to display the Async option.
  *
  * @author docwho
  */
 class Async extends \EssentialScript\Admin\SettingsFeature {
 	
+	/**
+	 * Includes the code that can be used to display the Async option.
+	 * 
+	 * @param string $feature Original value being filtered.
+	 * @param string $state Additional param for checkbox state: enabled/disabled.
+	 * @param array $option Array with boolean values to mark the input.
+	 */
 	protected function doFeature( $feature, $state, $option ) {
 		$this->feature = $feature;
 		$this->state = $state;

@@ -20,16 +20,33 @@
 namespace EssentialScript\Admin;
 
 /**
- * Description of Features
+ * Provides the concrete template method and the feature to implement in
+ * form of abstract method.
  *
  * @author docwho
  */
 abstract class SettingsFeature {
-	
+	/**
+	 * @var string String as passed by Wordpress filter hook.
+	 */
 	protected $feature;
+	/**
+	 * @var string Additional param for checkbox state: enabled/disabled.
+	 */
 	protected $state;
+	/**
+	 * @var array Array with boolean values to mark the input.
+	 */
 	protected $option;
 	
+	/**
+	 * Concrete template method.
+	 * 
+	 * @param string $infeature
+	 * @param string $state
+	 * @param array $option
+	 * @return object Object reference for using with the filter hook.
+	 */
 	public function templateMethod( $infeature, $state, $option ) {
 
 		$this->feature = $infeature;
