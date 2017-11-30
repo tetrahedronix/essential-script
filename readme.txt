@@ -2,7 +2,7 @@
 Contributors: tetravalente
 Tags: scripting, javascript, css, adsense, code, embed
 Requires at least: 4.0
-Tested up to: 4.9
+Tested up to: 4.9.1
 Stable tag: 0.7.1
 Requires PHP: 5.4
 License: GPLv3 or later
@@ -33,6 +33,10 @@ This section describes how to install the plugin and get it working:
 3. Access the 'Tools' menu in Wordpress to configure the plugin.
 
 Or install the plugin through the WordPress plugins screen directly.
+
+== Frequently Asked Questions ==
+= Will I lose all of my custom scripts if I uninstall the plugin? =
+No, you won't. If you use the option `File` to store the script then you can find it saved in the upload directory of Wordpress.
 
 == Development ==
 
