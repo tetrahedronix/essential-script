@@ -112,8 +112,7 @@ add_action( 'init', function() use ( &$essentialscript_filter ) {
  */
 add_action( 'wp', function() use ( &$essentialscript_filter ) {
 	if ( !is_null( $essentialscript_filter ) ) {
-		$opts = new \EssentialScript\Core\Options;
-		$context = new \EssentialScript\Frontend\Main( $opts );
-		$context->inclusion( $essentialscript_filter ); 
+		$context = new \EssentialScript\Frontend\Main();
+		$context->trigger( $essentialscript_filter );
 	}
 } ); 

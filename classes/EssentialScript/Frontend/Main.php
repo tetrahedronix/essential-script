@@ -29,46 +29,74 @@ class Main {
 	 * @var object \ArrayAccess Options object.
 	 */
 	private $options;
+	/**
+	 * @var object	The object reference of the concrete filter
+	 */
+	private $filter_obj;
 	
 	/**
 	 * Initialize the class by saving the options.
-	 * 
-	 * @param \ArrayAccess $opts The Options object.
 	 */
-	public function __construct( \ArrayAccess $opts ) {
-		$this->options = $opts;
+	public function __construct() {
+		
+		$this->options = new \EssentialScript\Core\Options;
+	}
+
+	/**
+	 * Requires the concrete strategy for Archive page.
+	 */
+	public function displayArchive() {
+		
+		$context_page = new \EssentialScript\Frontend\Pages\Context(
+			new Pages\Archive );
+		$context_page->display( $this->filter_obj );
 	}
 	
 	/**
-	 * Link the filter to the Web page.
-	 * 
-	 * @param object $filter_obj
-	 * @return null If something goes wrong.
+	 * Requires the concrete strategy for Index page.
 	 */
-	public function inclusion( $filter_obj ) {
-		/* User typically reads one page at a time */
-		if ( ( is_front_page() && is_home() ) && 
-				true === $this->options['pages']['index'] ) {
-			/* Default homepage is included.
-			 * Manipulate the filter if necessary here. 
-			 */
-		} elseif ( is_single() && ( true === $this->options['pages']['single'] ) ) {
-			/* Single post is included.
-			 * Manipulate the filter if necessary here. 
-			 */
-		} elseif ( is_page() && ( true === $this->options['pages']['page'] ) ) {
-			/* Page is included.
-			 * Manipulate the filter if necessary here. 
-			 */
-		} elseif ( ( is_archive() && 
-				( true === $this->options['pages']['archive'] ) ) ) {
-			/* Archive is included.
-			 * Manipulate the filter if necessary here.
-			 */
-		} else {
-			return;
+	public function displayIndex() {
+		
+		$context_page = new \EssentialScript\Frontend\Pages\Context(
+			new Pages\Index );
+		$context_page->display( $this->filter_obj );
+	}
+	
+	/**
+	 * Requires the concrete strategy for the single Page.
+	 */
+	public function displayPage() {
+		
+		$context_page = new \EssentialScript\Frontend\Pages\Context(
+			new Pages\Page );
+		$context_page->display( $this->filter_obj );
+	}
+	
+	/**
+	 * Requires the concrete strategy for the single Post.
+	 */
+	public function displaySingle() {
+		
+		$context_page = new \EssentialScript\Frontend\Pages\Context(
+			new Pages\Single );
+		$context_page->display( $this->filter_obj );
+	}
+	
+	/**
+	 * Fires the methods for the different concrete strategies.
+	 * 
+	 * @param type $filter_obj
+	 */
+	public function trigger( $filter_obj ) {
+		
+		$this->filter_obj = $filter_obj;
+		// Finds each page triggered to the options with boolean true.
+		$triggered = array_keys( $this->options['pages'], true );
+		// Calls each trigger separately using variable function.
+		foreach ( $triggered as $func ) {
+			$func = 'display' . ucwords( $func );
+			$this->$func();
 		}
-		// Apply filter.
-		$filter_obj->filter();
+		
 	}
 }

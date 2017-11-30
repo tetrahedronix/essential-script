@@ -29,7 +29,7 @@ namespace EssentialScript\Frontend;
  */
 class Presenter {
 	/**
-	 * @var array Array container for essential options to filter.
+	 * @var array Array container with essential options for use the filter.
 	 */
 	private $options = array ();
 	/**
@@ -61,13 +61,14 @@ class Presenter {
 	 * @return object $filter The filter to use.
 	 */
 	public function router() {
-
+		
+		// Trigger: does use of variable function to fire the correct method.
 		$func = "\\EssentialScript\\Frontend\Filter\\" . 
 			ucwords( $this->options['where'] );
-		$context_filter = new $func( $this->options );
-		/*$context_filter = new \EssentialScript\Frontend\Filter\Context(
+		// Uses Strategy pattern.
+		$context_filter = new \EssentialScript\Frontend\Filter\Context(
 			new $func( $this->options )
-		); */
+		);
 		
 		// This instance allows to manipulate the output.
 		return $context_filter;
