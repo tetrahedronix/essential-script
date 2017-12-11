@@ -41,21 +41,31 @@ class Foot implements \EssentialScript\Frontend\Filter\Strategy {
 	 * @var bool If this filter should use wp_enqueue_scripts hook.
 	 */	
 	private $enqueue;
+	/**
+	 * @var array Attributes for the script tag.
+	 */
+	private $features;	
 
 	/**
+	 * Setup class.
+	 * 
 	 * Initialization parameters: see above for detailed descriptions.
 	 * 
-	 * @param string $filename
-	 * @param string $script
-	 * @param string $storage
-	 * @param bool $enqueue
+	 * @param $array_options Array object.
 	 */
 	public function __construct( $array_options ) {
-		
-		$this->filename = $array_options['filename'];
-		$this->script = $array_options['script'];
-		$this->storage = $array_options['storage'];
-		$this->enqueue = $array_options['enqueue'];
+		// Save the parameters in the class properties.
+		$file_obj = new \EssentialScript\Core\File( $array_options );
+		// Full path to filename of our script.		
+		$this->filename = $file_obj->getfilename();
+		$this->script = $array_options->offsetExists( 'script' ) ? 
+			$array_options->offsetGet( 'script' ) : '';
+		$this->storage = $array_options->offsetExists( 'storage' ) ?
+			$array_options->offsetGet( 'storage' ) : '';
+		$this->enqueue = $array_options->offsetExists( 'enqueue' ) ?
+			$array_options->offsetGet( 'enqueue' ) : false;
+		$this->features = $array_options->offsetExists( 'filefeature' ) ?
+			$array_options->offsetGet( 'filefeature' ) : array ();
 	}
 	
 	/**
@@ -67,13 +77,8 @@ class Foot implements \EssentialScript\Frontend\Filter\Strategy {
 		// Only use wp_enqueue_scripts with file storage.
 		if ( ( 'file' === $this->storage ) && ( true === $this->enqueue ) && 
 			file_exists( $this->filename ) ) {
-			add_action( 'wp_enqueue_scripts', function() {
-				wp_enqueue_script( 'essential-script', 
-					substr( $this->filename, strlen( ABSPATH )-1 ),
-					array(),
-					null,
-					true );
-			});
+			new \EssentialScript\Frontend\Queuing( 'essential-script-foot',
+				$this->features );			
 			return;
 		}
 		/* has_action checks if any action has been registered for a 

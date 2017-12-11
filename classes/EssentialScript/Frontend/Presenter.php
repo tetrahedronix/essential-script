@@ -39,18 +39,7 @@ class Presenter {
 	 */
 	public function __construct() {
 		
-		$opts = new \EssentialScript\Core\Options;
-		// Full path to filename of our script.
-		$file_obj = new \EssentialScript\Core\File( $opts );
-		$this->options['filename'] = $file_obj->getfilename();
-		$this->options['where'] = $opts->offsetExists( 'where' ) ? 
-			$opts->offsetGet( 'where' ) : '';
-		$this->options['script'] = $opts->offsetExists( 'script' ) ? 
-			$opts->offsetGet( 'script' ) : '';
-		$this->options['storage'] = $opts->offsetExists( 'storage' ) ?
-			$opts->offsetGet( 'storage' ) : '';
-		$this->options['enqueue'] = $opts->offsetExists( 'enqueue' ) ?
-			$opts->offsetGet( 'enqueue' ) : false;
+		$this->options = new \EssentialScript\Core\Options;
 	}
 	
 	/**
@@ -67,7 +56,7 @@ class Presenter {
 			ucwords( $this->options['where'] );
 		// Uses Strategy pattern.
 		$context_filter = new \EssentialScript\Frontend\Filter\Context(
-			new $func( $this->options )
+			new $func( clone ( $this->options ) )
 		);
 		
 		// This instance allows to manipulate the output.
