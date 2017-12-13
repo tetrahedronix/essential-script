@@ -149,34 +149,42 @@ class PageEssentialscript extends \EssentialScript\Admin\Page {
 	 */
 	public function settings_sanitize( $input ) {
 		$sane = array ();
-		// List of allowed tags and attributes 
-		add_filter( 'safe_style_css', function( $styles ) {
-			$styles[] = 'display';
-			return $styles;
-		} );
-		$allow_html = array (
-			'a' => array (
-				'href' => true,
-			),
-			'center' => array(),
-			'img' => array (
-				'src' => true,
-				'alt' => true,
-				'style' => true,
-			),
-			'ins' => array ( 
-				'class' => true,
-				'style' => array (
-					'display' => true, 
-					'width'=> true, 
-					'height'=> true ), 
-				'data-ad-client' => true,
-				'data-ad-slot' => true ),
-			'noscript' => true,
-			'script' => array (
-				'async' => true,
-				'src' => true ),
-		);
+		/* Allows for untrusted users to post a limited set of HTML markup
+		 * even JavaScript code */
+		if ( ! current_user_can( 'unfiltered_html' ) ) {
+			// List of allowed tags and attributes 
+			add_filter( 'safe_style_css', function( $styles ) {
+				$styles[] = 'display';
+				return $styles;
+			} );
+			$allow_html = array (
+				'a' => array (
+					'href' => true,
+				),
+				'center' => array(),
+				'img' => array (
+					'src' => true,
+					'alt' => true,
+					'style' => true,
+				),
+				'ins' => array ( 
+					'class' => true,
+					'style' => array (
+						'display' => true, 
+						'width'=> true, 
+						'height'=> true ), 
+					'data-ad-client' => true,
+					'data-ad-slot' => true ),
+				'noscript' => true,
+				'script' => array (
+					'async' => true,
+					'src' => true ),
+			);
+			$sane['script'] = substr( wp_kses( $input['script'], $allow_html ), 0, 511 );
+		} else {
+			$sane['script'] = $input['script'];
+		}
+		//	$sane['script'] = $input['script'];
 		/*
 		 * Sanitize the highlighter
 		 */
@@ -193,7 +201,8 @@ class PageEssentialscript extends \EssentialScript\Admin\Page {
 		/*
 		 *  Sanitize the script
 		 */
-		$sane['script'] = substr( wp_kses( $input['script'], $allow_html ), 0, 511 );
+		//$sane['script'] = substr( wp_kses( $input['script'], $allow_html ), 0, 511 );
+		
 		
 				/*
 		 *  Sanitize the checkboxes:
