@@ -46,10 +46,14 @@ class Content implements \EssentialScript\Frontend\Filter\Strategy {
 	 * @param string $storage
 	 */	
 	public function __construct( $array_options ) {
-		// Save the parameters in the class properties.		
-		$this->filename = $array_options['filename'];
-		$this->script = $array_options['script'];
-		$this->storage = $array_options['storage'];
+		// Save the parameters in the class properties.
+		$file_obj = new \EssentialScript\Core\File( $array_options );
+		// Full path to filename of our script.
+		$this->filename = $file_obj->getfilename();
+		$this->script = $array_options->offsetExists( 'script' ) ? 
+			$array_options->offsetGet( 'script' ) : '';
+		$this->storage = $array_options->offsetExists( 'storage' ) ?
+			$array_options->offsetGet( 'storage' ) : '';		
 	}
 	
 	/**
