@@ -14,7 +14,8 @@ For example, through Essential Script interface you can add your banner in one l
 5. Support JavaScript/XML/HTML
 6. With Widgets.
 7. Now with support for Shortcodes API!
-7. Free as in speech.
+8. New! Include options for async and defer attributes
+9. Free as in speech.
 
 ## Contributors
 * tetravalente
@@ -27,6 +28,14 @@ This section describes how to install the plugin and get it working:
 3. Access the 'Tools' menu in Wordpress to configure the plugin.
 
 Or install the plugin through the WordPress plugins screen directly.
+
+## Frequently Asked Questions
+
+### Will I lose all of my custom scripts if I uninstall the plugin?
+No, you won't. If you use the option `File` to store the script then you can find it saved in the upload directory of Wordpress.
+
+### Why does this plugin work for untrusted users?
+Wordpress includes the ability to create a network of sites. If you install a multisite network, then you can allow end users to use Essential Scripts. In this case they are able to post a limited set of HTML markup and even JavaScript code. See `PageEssentialscript.php` for more info and settings.
 
 ## Development
 

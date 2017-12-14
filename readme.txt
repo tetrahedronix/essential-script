@@ -3,7 +3,7 @@ Contributors: tetravalente
 Tags: scripting, javascript, css, adsense, code, embed
 Requires at least: 4.0
 Tested up to: 4.9.1
-Stable tag: 0.7.1
+Stable tag: 0.8
 Requires PHP: 5.4
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -23,7 +23,8 @@ For example, through Essential Script interface you can add your banner in one l
 5. Support JavaScript/XML/HTML.
 6. With Widgets.
 7. Now with support for Shortcodes API!
-8. Free as in speech.
+8. New! Include options for async and defer attributes
+9. Free as in speech.
 
 == Installation ==
 This section describes how to install the plugin and get it working:
@@ -37,6 +38,8 @@ Or install the plugin through the WordPress plugins screen directly.
 == Frequently Asked Questions ==
 = Will I lose all of my custom scripts if I uninstall the plugin? =
 No, you won't. If you use the option `File` to store the script then you can find it saved in the upload directory of Wordpress.
+= Why does this plugin work for untrusted users? =
+Wordpress includes the ability to create a network of sites. If you install a multisite network, then you can allow end users to use Essential Scripts. In this case they are able to post a limited set of HTML markup and even JavaScript code. See `PageEssentialscript.php` for more info and settings.
 
 == Development ==
 
@@ -63,6 +66,18 @@ Sources of this plugin are available both in SVN and Git:
 3. Essential Script widget
 
 == Changelog ==
+= 0.8 =
+* Save properties with array object instead of array
+* Untrusted users are allowed to post only a limited set of HTML markup
+* Implement the Decorator pattern for enqueuing scripts to the front page
+* Frontend: Refactoring the `Strategy` pattern to remove conditional statements
+* Add FAQ section and tested up to Wordpress 4.9.1
+* Improve the documentation about the `Template Method` pattern
+* Add Context class to separate a request from a concrete strategy
+* Rename class name from `footer` to `foot` for using variable functions
+* Update minimum PHP version requirement
+* Add `async` and `defer` options to Settings page
+* Fix improper use of wp_enqueue_scripts with Shortcode
 = 0.7.1 =
 * Upgrade CodeMirror from 5.31.0 to 5.32.0
 * Fix problem with `wp_enqueue_scripts` option was enabled with XML mode
@@ -108,5 +123,5 @@ Sources of this plugin are available both in SVN and Git:
 
 == Upgrade Notice ==
 
-= 0.7 =
-0.7 is a major update. Make a script backup and disable Essential Script before upgrading.
+= 0.8 =
+0.8 is a major update. Make a script backup and disable Essential Script before upgrading.
