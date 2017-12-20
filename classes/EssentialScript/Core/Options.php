@@ -29,8 +29,8 @@ class Options implements \ArrayAccess {
 	 * Container for options.
 	 * 
 	 * Ex:
-	 * 	a:7:{
-	 *      s:4:"name";s:0:"es59e08b5e7c4822.61452256";
+	 * 	a:10:{
+	 *      s:4:"name";s:25:"es59e08b5e7c4822.61452256";
 	 *		s:11:"highlighter";s:3:"xml";	  
 	 *      s:6:"script";s:0:"";
 	 *      s:5:"where";s:4:"head";
@@ -47,7 +47,7 @@ class Options implements \ArrayAccess {
 	 *						s:5:"defer";b:0;}
 	 * }
 	 * 
-	 * @var int	 
+	 * @var array
 	 */
 	private $container = array ();
 	/**
