@@ -51,6 +51,10 @@ class Presenter {
 	 */
 	public function router() {
 		
+		// Prevents uncaught error if class name is an invalid string.
+		if ( ! isset( $this->options['where'] ) ) {
+			return null;
+		}
 		// Trigger: does use of variable function to fire the correct method.
 		$func = "\\EssentialScript\\Frontend\Filter\\" . 
 			ucwords( $this->options['where'] );
