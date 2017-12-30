@@ -56,7 +56,7 @@ class CodemirrorStyleOverride extends \EssentialScript\Admin\Scripts\Decorator {
 			'codemirror-style-override',
 			plugins_url( 'css/codemirror-override.css', ESSENTIAL_SCRIPT1_PLUGIN_FILE ),
 			array(),
-			self::CODEMIRROR_VER,
+			self::ESSENTIALSCRIPT_VER,
 			false
 		);
 		wp_enqueue_style( 'codemirror-style-override' );

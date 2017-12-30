@@ -45,7 +45,6 @@ if ( !function_exists( 'add_action' ) ) {
 define ( 'ESSENTIAL_SCRIPT1_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define ( 'ESSENTIAL_SCRIPT1_PLUGIN_FILE', __FILE__ );
 define ( 'ESSENTIAL_SCRIPT1_PLUGIN_PACKAGE', 'EssentialScript' );
-define ( 'ESSENTIAL_SCRIPT1_DIST_CODEMIRROR', 'lib/codemirror/' );
 
 // Include or require any necessary files here.
 require_once ( ESSENTIAL_SCRIPT1_PLUGIN_DIR . 'classes/EssentialScript/Tools/Autoloader.php' );

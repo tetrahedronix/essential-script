@@ -21,7 +21,7 @@ namespace EssentialScript\Admin\Scripts;
 
 /**
  * Concrete decorator: wraps the Essential Script concrete component with
- * necessary code to add XML mode to CodeMirror.
+ * necessary code to add HTML/XML lint to CodeMirror.
  *
  * @author docwho
  */
@@ -52,16 +52,9 @@ class CodemirrorModeXml extends \EssentialScript\Admin\Scripts\Decorator {
 		}
 		
 		// Codemirror mode script for XML/HTML language.
-		wp_register_script(
-				'dist-codemirror-mode-xml',
-				plugins_url( ESSENTIAL_SCRIPT1_DIST_CODEMIRROR . 
-					'lib/mode/xml/xml.js',
-					ESSENTIAL_SCRIPT1_PLUGIN_FILE ),
-				array( 'dist-codemirror-script' ),
-				self::CODEMIRROR_VER,
-				false
-		);
-		wp_enqueue_script( 'dist-codemirror-mode-xml' );
+		if ( !wp_script_is( 'htmlhint', 'enqueued' ) ) {		
+			wp_enqueue_script( 'htmlhint' );
+		}
 	}
 
 	/**

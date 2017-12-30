@@ -21,7 +21,7 @@ namespace EssentialScript\Admin\Scripts;
 
 /**
  * Concrete decorator: wraps the Essential Script concrete component with
- * necessary code to add JavaScript mode to CodeMirror.
+ * necessary code to add JavaScript Lint to CodeMirror.
  *
  * @author docwho
  */
@@ -50,19 +50,11 @@ class CodemirrorModeJS extends \EssentialScript\Admin\Scripts\Decorator {
 		if ( $this->slug->getSlug() !== $hook ) {
 			return;
 		}
-		
-		// Codemirror mode script for javascript language.
-		wp_register_script(
-				'dist-codemirror-mode-js',
-				plugins_url( ESSENTIAL_SCRIPT1_DIST_CODEMIRROR .
-					'lib/mode/javascript/javascript.js',
-					ESSENTIAL_SCRIPT1_PLUGIN_FILE ),
-				array( 'dist-codemirror-script' ),
-				self::CODEMIRROR_VER,
-				false
-		);
-		wp_enqueue_script( 'dist-codemirror-mode-js' );		
 
+		// Codemirror mode script for javascript language.
+		if ( !wp_script_is( 'jshint', 'enqueued' ) ) {
+			wp_enqueue_script( 'jshint' );
+		}
 	}
 
 	/**

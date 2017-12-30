@@ -21,7 +21,7 @@ namespace EssentialScript\Admin\Scripts;
 
 /**
  * Concrete decorator: wraps the Essential Script concrete component with
- * necessary code to add CSS file supplied by CodeMirror.
+ * necessary code to add CSS file for Codemirror supplied by WordPress.
  *
  * @author docwho
  */
@@ -52,18 +52,8 @@ class CodemirrorStyle extends \EssentialScript\Admin\Scripts\Decorator {
 			return;
 		}
 
-		// CodeMirror style
-		wp_register_style(
-				'dist-codemirror-style',
-				plugins_url( ESSENTIAL_SCRIPT1_DIST_CODEMIRROR .
-					'lib/codemirror.css', 
-					ESSENTIAL_SCRIPT1_PLUGIN_FILE ),
-				array(),
-				self::CODEMIRROR_VER,
-				false 
-		);
-		wp_enqueue_style( 'dist-codemirror-style' );
-
+		// CodeMirror main style
+		wp_enqueue_style( 'wp-codemirror' );
 	}
 
 	/**

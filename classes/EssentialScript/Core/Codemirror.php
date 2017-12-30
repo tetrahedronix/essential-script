@@ -59,7 +59,7 @@ class Codemirror {
 <script>
 (function($,settings) {
 	var textarea_node=document.getElementById("textarea-script");
-	var editor = CodeMirror.fromTextArea(textarea_node,settings);
+	var editor = wp.CodeMirror.fromTextArea(textarea_node,settings);
 })(window.jQuery, %s); 
 </script> 
 JS
