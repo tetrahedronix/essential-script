@@ -1,7 +1,7 @@
 === Essential Script ===
 Contributors: tetravalente
 Tags: scripting, javascript, css, adsense, code, embed
-Requires at least: 4.0
+Requires at least: 4.9
 Tested up to: 4.9.1
 Stable tag: 0.8.1
 Requires PHP: 5.4
@@ -66,7 +66,7 @@ Sources of this plugin are available both in SVN and Git:
 3. Essential Script widget
 
 == Changelog ==
-= 0.8.1=
+= 0.8.1 =
 * Remove incorrect try-catch implementation
 * Updated to re-use CodeMirror as bundled with Wordpress core library
 * Prevents uncaught error if class name is an invalid string
