@@ -30,7 +30,7 @@ abstract class Component {
 	 * 
 	 * @since 0.2
 	 */
-	const ESSENTIALSCRIPT_VER = '0.8';	
+	const ESSENTIALSCRIPT_VER = '0.8.1';	
 	
 	/**
 	 * Page slug

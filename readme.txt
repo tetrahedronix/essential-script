@@ -3,7 +3,7 @@ Contributors: tetravalente
 Tags: scripting, javascript, css, adsense, code, embed
 Requires at least: 4.0
 Tested up to: 4.9.1
-Stable tag: 0.8
+Stable tag: 0.8.1
 Requires PHP: 5.4
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -66,6 +66,11 @@ Sources of this plugin are available both in SVN and Git:
 3. Essential Script widget
 
 == Changelog ==
+= 0.8.1=
+* Remove incorrect try-catch implementation
+* Updated to re-use CodeMirror as bundled with Wordpress core library
+* Prevents uncaught error if class name is an invalid string
+* Document `Options`, fix some inconsistencies
 = 0.8 =
 * Save properties with array object instead of array
 * Untrusted users are allowed to post only a limited set of HTML markup
