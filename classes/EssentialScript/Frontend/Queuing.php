@@ -39,15 +39,14 @@ class Queuing {
 	 */
 	public function __construct( $handle, $accessories ) {
 
-		try {
-			$func = "\\EssentialScript\\Frontend\Scripts\\" . 
-				str_replace( '-', '', ucwords( $handle, '-' ) );
-			// Select the concrete component using variable function syntax.
-			$this->script = new $func();
-		} catch ( Exception $exc ) {
-			echo $exc->getTraceAsString();
+		if ( !is_string( $handle ) ) {
 			return;
 		}
+		
+		$func = "\\EssentialScript\\Frontend\Scripts\\" . 
+				str_replace( '-', '', ucwords( $handle, '-' ) );
+		// Select the concrete component using variable function syntax.
+		$this->script = new $func();
 		
 		// Remove all accessories which are equal to null, 0, '' or false.
 		$test_accessories = array_filter( $accessories );
