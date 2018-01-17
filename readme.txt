@@ -2,7 +2,7 @@
 Contributors: tetravalente
 Tags: scripting, javascript, css, adsense, code, embed
 Requires at least: 4.9
-Tested up to: 4.9.1
+Tested up to: 4.9.2
 Stable tag: 0.8.1
 Requires PHP: 5.4
 License: GPLv3 or later
