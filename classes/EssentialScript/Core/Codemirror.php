@@ -36,7 +36,7 @@ class Codemirror {
 	 * 
 	 * @param string $highlighter Syntax highlighter to use.
 	 */
-	static public function fromTextarea( $highlighter ) {
+	static public function fromTextarea( $id, $highlighter ) {
 
 		/*
 		 * Enable an option under certain conditions 
@@ -58,12 +58,12 @@ class Codemirror {
 <!-- Codemirror -->   
 <script>
 (function($,settings) {
-	var textarea_node=document.getElementById("textarea-script");
+	var textarea_node=document.getElementById("%s");
 	var editor = wp.CodeMirror.fromTextArea(textarea_node,settings);
 })(window.jQuery, %s); 
 </script> 
 JS
 . PHP_EOL;
-		echo sprintf( $jscode, $settings );
+		echo sprintf( $jscode, $id, $settings );
 	}
 }

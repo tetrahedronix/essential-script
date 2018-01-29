@@ -76,7 +76,7 @@ if ( ! current_user_can( 'unfiltered_html' ) ) {
 <p class="description"><?php esc_html_e( 'Max 512 chars. The allowed tags are listed in settings_sanitize(). You can add or remove tags as required.',
 		'essential-script' ); ?></p>
 <?php }
-	\EssentialScript\Core\Codemirror::fromTextarea( $highlighter );
+	\EssentialScript\Core\Codemirror::fromTextarea( 'textarea-script', $highlighter );
 
 	}
 }
