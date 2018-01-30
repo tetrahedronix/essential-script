@@ -75,6 +75,25 @@ class PageEssentialscript extends \EssentialScript\Admin\Page {
 	 * Use the Factory Pattern to create fieldsets and sections.
 	 */
 	public function settings() {
+	    /* get_current_screen() is defined on most admin pages, but not all.
+	     * Thus there are cases where is_admin() will return true, but attempting
+	     * to call get_current_screen() will result in a fatal error because it is
+	     * not defined. It's OK to use in a later hook such as current_screen.
+	     */
+	    add_action( 'current_screen', function( $current_screen ) {
+	      // Queues the dependencies only when they are required.
+		if ( 'tools_page_essentialscript' === $current_screen->id ) {
+	        new \EssentialScript\Admin\Queuing(
+				'essentialscript',	// Script
+				// Accessories
+				array ( 'codemirror-style-override',
+					'codemirror-mode-xml',
+					'codemirror-mode-js',
+					'codemirror-style',
+					'codemirror-script' )
+			);
+	      } 
+	    } );    		
 		// Add a new section to a settings page.
 		$section = new \EssentialScript\Admin\Settings\SectionCreator;
 		add_settings_section(
@@ -199,12 +218,6 @@ class PageEssentialscript extends \EssentialScript\Admin\Page {
 				$sane['highlighter'] = 'xml'; 
 		}
 		/*
-		 *  Sanitize the script
-		 */
-		//$sane['script'] = substr( wp_kses( $input['script'], $allow_html ), 0, 511 );
-		
-		
-				/*
 		 *  Sanitize the checkboxes:
 		 */
 		$sane['pages']['index'] = ( 'on' === $input['pages']['index'] ) ? 

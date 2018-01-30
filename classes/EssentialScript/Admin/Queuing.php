@@ -27,9 +27,9 @@ namespace EssentialScript\Admin;
 class Queuing {
 
 	/**
-	 * @var string The page slug. 
+	 * @var object Instance of the concrete component.
 	 */
-	private $page;
+	private $script;
 	
 	/**
 	 * @var mixed $extra_data Extra data used by wp_add_inline_script
@@ -39,19 +39,34 @@ class Queuing {
 	/**
 	 * Setup class.
 	 * 
-	 * @param string $slug Page slug.
-	 * @param array $scripts Script requirements.
+	 * @param string $handle Name of the script. Should be unique.
+	 * @param array $accessories An array of accessories to wrap.
 	 * @param mixed $extra_data Extra data used by wp_add_inline_script
 	 * @return null On error
 	 */
-	public function __construct( $slug = '', 
-								$scripts =  array(), 
-								$extra_data = '' ) {
+	public function __construct( $handle, $accessories,
+		$extra_data = array () ) {
 
-		$this->extra_data = $extra_data;
+		if ( !is_string( $handle ) ) {
+			return;
+		}
 		
-		// Select the concrete component.
-		if ( 'tools_page_essentialscript' === $slug ) {
+		$this->extra_data = $extra_data;
+		$func = "\\EssentialScript\\Admin\\Scripts\\" .
+			str_replace( '-', '', ucwords( $handle, '-') );
+		// Select the concrete component by using variable function syntax.
+		$this->script = new $func( $extra_data );
+		// Remove all accessories which are equal to null, 0, '' or false.
+		$test_accessories = array_filter( $accessories );		
+
+	    if ( ! empty( $test_accessories ) ) {
+	      array_walk( $test_accessories, array ( $this, 'accessorize' ) );
+	    }
+	    // Recursively enqueue the script together all his accessories.
+	    add_action( 'admin_enqueue_scripts',
+	        array ( $this->script, 'enqueueScript' ) );
+			
+/*		if ( 'tools_page_essentialscript' === $slug ) {
 			$this->page = 
 				new \EssentialScript\Admin\Scripts\Essentialscript( $slug );
 		} elseif ( 'widgets.php' === $slug ) {
@@ -60,14 +75,14 @@ class Queuing {
 			$this->page->setExtradata( $this->extra_data );
 		} else {
 			return;
-		}
+		} 
 		
 		// Remove all values from $scripts which are equal to null, 0, '' or false.
 		$test_array = array_filter( $scripts );
 		
 		if ( !empty ( $test_array ) ) {
 			array_walk( $test_array, array( $this, 'accessorize' ) );
-		}
+		} */
 	}
 	
 	/**
@@ -78,37 +93,8 @@ class Queuing {
 	 */
 	public function accessorize( $key ) {
 
-		switch ( $key ) {
-			case 'dist-codemirror-script':
-				$this->page = 
-					new \EssentialScript\Admin\Scripts\CodemirrorScript(
-						$this->page	);
-				break;
-			case 'dist-codemirror-style':
-				$this->page =
-					new \EssentialScript\Admin\Scripts\CodemirrorStyle(
-						$this->page );
-				break;
-			case 'dist-codemirror-mode-js':
-				$this->page =
-					new \EssentialScript\Admin\Scripts\CodemirrorModeJS(
-						$this->page );
-				break;
-			case 'dist-codemirror-mode-xml':
-				$this->page =
-					new \EssentialScript\Admin\Scripts\CodemirrorModeXml(
-						$this->page );
-				break;
-			case 'codemirror-style-override':
-				$this->page =
-					new \EssentialScript\Admin\Scripts\CodemirrorStyleOverride(
-						$this->page );
-				break;
-			case 'widget-wp-codemirror':
-				$this->page =
-					new \EssentialScript\Admin\Scripts\WidgetsWPCodemirror(
-						$this->page );
-				
-		}
+		$func = "\\EssentialScript\\Admin\\Scripts\\" .
+			str_replace( '-', '', ucwords( $key, '-' ) );
+		$this->script = new $func( $this->script );
 	}
 }

@@ -76,14 +76,6 @@ if ( is_admin() ) {
 			capability( 'manage_options' )->
 			slug( $page_essentialscript )->
 			tools();
-		new \EssentialScript\Admin\Queuing( 
-			\EssentialScript\Admin\Menu::get_suffix(), 
-			array ( 'dist-codemirror-script', 
-				'dist-codemirror-style', 
-				'dist-codemirror-mode-js',
-				'dist-codemirror-mode-xml',
-				'codemirror-style-override' ) 
-		);
 	} );
 }
 /*

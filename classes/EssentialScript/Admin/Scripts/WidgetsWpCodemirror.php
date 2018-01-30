@@ -26,31 +26,27 @@ namespace EssentialScript\Admin\Scripts;
  * @author docwho
  */
 class WidgetsWPCodemirror extends \EssentialScript\Admin\Scripts\Decorator {
-	
+	/**
+     * @var object  Object reference of the concrete component.
+     */	
+	private $script;
 	/**
 	 * Setup class.
 	 * 
-	 * @param \EssentialScript\Admin\Scripts\Component $page Wrapped component
+	 * @param \EssentialScript\Admin\Scripts\Component $script Wrapped component
 	 */
-	public function __construct( Component $page ) {
-		
-		$this->slug = $page;
-		add_action( 'admin_enqueue_scripts', array ( $this, 'enqueueScript' ) );
+	public function __construct( Component $script ) {
+
+		$this->script = $script;
 	}
 	
 	/**
 	 * Registers the Codemirror Javascript file provided by Wordpress to be
 	 * enqueued afterwards with wp_enqueue_script.
 	 * 
-	 * @param string $hook The hook suffix for the current admin page.
-	 * @return null If current page is not the widgets administration panel.
+	 * @return object The current object handle
 	 */
-	public function enqueueScript( $hook ) {
-		
-		if ( $this->slug->getSlug() !== $hook ) {
-			return;
-		}
-		
+	public function enqueueScript() {
 		/*
 		 * New in Wordpress 4.9
 		 * Prepare Code Editor settings. 
@@ -69,7 +65,7 @@ class WidgetsWPCodemirror extends \EssentialScript\Admin\Scripts\Decorator {
 				)
 			)
 		); */
-		$extra_data = $this->getExtradata();
+		$extra_data = $this->script->extra_data;
 		/*
 		 * Enable an option under certain conditions 
 		 */		
@@ -111,36 +107,18 @@ class WidgetsWPCodemirror extends \EssentialScript\Admin\Scripts\Decorator {
 				wp_json_encode( $settings ),
 				wp_json_encode( $extra_data[1] ) ) 
 		);		 
+		// Used with admin_enqueue_scripts hook 
+		return $this->script->enqueueScript();		
 	}
-	
 	/**
 	 * Getter
 	 * 
-	 * @return mixed Extra data
-	 */
-	public function getExtradata() {
-		
-		return $this->slug->getExtradata();
-	}
-	
-	/**
-	 * Getter
-	 * 
-	 * @return string The page slug
+	 * @return string The current script handle
 	 */	
-	public function getSlug() {
+	public function getHandle() {
 
-		return $this->slug->getSlug();
-	}
-
-	/**
-	 * Setter
-	 * 
-	 * @param mixed $data Extra data
-	 */
-	public function setExtradata( $data ) {
-
-		$this->extra_data = $data;
+		return $this->script->getHandle();
 	}	
+
 	
 }

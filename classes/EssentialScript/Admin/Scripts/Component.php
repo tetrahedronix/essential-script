@@ -31,25 +31,14 @@ abstract class Component {
 	 * @since 0.2
 	 */
 	const ESSENTIALSCRIPT_VER = '0.8.1';	
+	/**
+	 * @var string Name of the script. Should be unique.
+	 * @since 0.9
+	 */
+	protected $handle;
 	
-	/**
-	 * Page slug
-	 * 
-	 * @var string
-	 * @since 0.7
-	 */
-	protected $slug;
-
-	/**
-	 * Extra data
-	 * 
-	 * @var mixed
-	 * @since 0.7
-	 */
 	protected $extra_data;
 	
-	abstract public function enqueueScript( $hook );
-	abstract public function getExtradata();
-	abstract public function getSlug();
-	abstract public function setExtradata( $data );
+	abstract public function enqueueScript();
+	abstract public function getHandle();
 }

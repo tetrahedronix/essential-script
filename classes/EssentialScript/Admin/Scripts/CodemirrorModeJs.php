@@ -26,65 +26,41 @@ namespace EssentialScript\Admin\Scripts;
  * @author docwho
  */
 class CodemirrorModeJS extends \EssentialScript\Admin\Scripts\Decorator {
-	
+   /**
+    * @var object  Object reference of the concrete component.
+    */	
+	private $script;
 	/**
 	 * Setup class.
 	 * 
-	 * @param \EssentialScript\Admin\Scripts\Component $page Wrapped component
+	 * @param \EssentialScript\Admin\Scripts\Component $script Wrapped component
 	 */
-	public function __construct( Component $page ) {
+	public function __construct( Component $script ) {
 
-		$this->slug = $page ;
-		add_action( 'admin_enqueue_scripts', array ( $this, 'enqueueScript' ) );
+		$this->script = $script ;
 	}
-    
-	/**
+    /**
 	 * Registers the Codemirror script to be enqueued afterwards with 
 	 * wp_enqueue_script.
 	 * 
-	 * @param string $hook The hook suffix for the current admin page
-	 * @return null If current page is not plugin administration.
+	 * @return object The current object handle
 	 */
-	public function enqueueScript( $hook ) {
+	public function enqueueScript() {
 		
-		if ( $this->slug->getSlug() !== $hook ) {
-			return;
-		}
-
 		// Codemirror mode script for javascript language.
 		if ( !wp_script_is( 'jshint', 'enqueued' ) ) {
 			wp_enqueue_script( 'jshint' );
 		}
+		// Used with admin_enqueue_scripts hook 		
+	    return $this->script->enqueueScript();
 	}
-
 	/**
 	 * Getter
 	 * 
-	 * @return mixed Extra data
+	 * @return string The current script handle
 	 */
-	public function getExtradata() {
+	public function getHandle() {
 		
-		return $this->slug->getExtradata();
+		return $this->script->getHandle();
 	}
-	
-	/**
-	 * Getter
-	 * 
-	 * @return string The page slug
-	 */
-	public function getSlug() {
-		
-		return $this->slug->getSlug();
-	}
-
-	/**
-	 * Setter
-	 * 
-	 * @param mixed $data Extra data
-	 */
-	public function setExtradata( $data ) {
-
-		$this->extra_data = $data;
-	}	
-
 }

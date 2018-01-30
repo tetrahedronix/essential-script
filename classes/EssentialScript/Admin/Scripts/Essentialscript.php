@@ -31,62 +31,36 @@ class Essentialscript extends \EssentialScript\Admin\Scripts\Component {
 	 * 
 	 * @param string $page_slug The page slug
 	 */
-	public function __construct( $page_slug = '' ) {
+	public function __construct() {
 
-		$this->slug = $page_slug;
-		add_action( 'admin_enqueue_scripts', array ( $this, 'enqueueScript' ) );
+		$this->handle = 'essentialscript-plugin-style';
+		
 	}
 	
 	/**
 	 * Add the plugin admin CSS.
-	 * 
-	 * @param type $hook
 	 */
-	public function enqueueScript( $hook ) {
-		
-		if ( $this->slug !== $hook ) {
-			return;
-		}
+	public function enqueueScript() {
 		
 		// Essential Script main CSS file
 		wp_register_style(
-			'essentialscript-plugin-style',
+			$this->handle,
 			plugins_url( 'css/essentialscript-admin.css', 
 				ESSENTIAL_SCRIPT1_PLUGIN_FILE ),
 			array (),
 			self::ESSENTIALSCRIPT_VER,
 			false
 		);
-		wp_enqueue_style( 'essentialscript-plugin-style' );
+		wp_enqueue_style( $this->handle );
 	}
 
 	/**
 	 * Getter
 	 * 
-	 * @return mixed Extra data
+	 * @return string The current script handle
 	 */	
-	public function getExtradata() {
+	public function getHandle() {
 		
-		return $this->extra_data;
-	}
-
-	/**
-	 * Getter
-	 * 
-	 * @return string The page slug
-	 */	
-	public function getSlug() {
-		
-		return $this->slug;
-	}
-
-	/**
-	 * Setter
-	 * 
-	 * @param mixed $data Extra data
-	 */	
-	public function setExtradata( $data ) {
-		
-		$this->extra_data = $data;
+		return $this->handle;
 	}
 }

@@ -29,12 +29,12 @@ class Widgets extends \EssentialScript\Admin\Scripts\Component {
 	/**
 	 * Setup class.
 	 * 
-	 * @param string $page_slug The page slug
+	 * @param array $extra_data Extra data
 	 */
-	public function __construct( $page_slug = '' ) {
+	public function __construct( $extra_data = array() ) {
 		
-		$this->slug = $page_slug;
-		add_action( 'admin_enqueue_scripts', array ( $this, 'enqueueScript' ) );
+		$this->extra_data = $extra_data;
+		$this->handle = 'essentialscript-widgets';
 	}
 	
 	/**
@@ -43,42 +43,17 @@ class Widgets extends \EssentialScript\Admin\Scripts\Component {
 	 * @param string $hook The hook suffix for the current administration page.
 	 * @return null If current page is not the widgets administration panel.
 	 */
-	public function enqueueScript( $hook ) {
-		
-		if ( $this->slug !== $hook ) {
-			return;
-		}
+	public function enqueueScript() {
 
 	}
-
 	/**
 	 * Getter
 	 * 
-	 * @return mixed Extra data
-	 */
-	public function getExtradata() {
-
-		return $this->extra_data;
-	}
-
-	/**
-	 * Getter
-	 * 
-	 * @return string The page slug
-	 */
-	public function getSlug() {
+	 * @return string The current script handle
+	 */	
+	public function getHandle() {
 		
-		return $this->slug;
-	}
-
-	/**
-	 * Setter
-	 * 
-	 * @param mixed $data Extra data
-	 */
-	public function setExtradata( $data ) {
-
-		$this->extra_data = $data;
+		return $this->handle;
 	}
 
 }

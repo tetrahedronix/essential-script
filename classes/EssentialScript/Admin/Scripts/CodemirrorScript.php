@@ -24,66 +24,42 @@ namespace EssentialScript\Admin\Scripts;
  * @author docwho
  */
 class CodemirrorScript extends \EssentialScript\Admin\Scripts\Decorator {
-	
+	/**
+     * @var object  Object reference of the concrete component.
+     */	
+	private $script;
 	/**
 	 * Setup class.
 	 * 
-	 * @param \EssentialScript\Admin\Scripts\Component $page Wrapped component
+	 * @param \EssentialScript\Admin\Scripts\Component $script Wrapped component
 	 */
-	public function __construct( Component $page ) {
+	public function __construct( Component $script ) {
 		
-		$this->slug = $page;
-		add_action( 'admin_enqueue_scripts', array ( $this, 'enqueueScript' ) );
-		
+		$this->script = $script;
 	}
 	
 	/**
 	 * Registers the Codemirror Core script to be enqueued afterwards with 
 	 * wp_enqueue_script.
 	 * 
-	 * @param string $hook The hook suffix for the current admin page.
-	 * @return null If current page is not plugin administration.
+	 * @return object The current object handle
 	 */
-	public function enqueueScript( $hook ) {
+	public function enqueueScript() {
 
-		if ( $this->slug->getSlug() !== $hook ) {
-			return;
-		}
-		
 		// Codemirror main javascript file
 		if ( !wp_script_is( 'wp-codemirror', 'enqueued' ) ) {
 			wp_enqueue_script( 'wp-codemirror' );
 		}
+		// Used with admin_enqueue_scripts hook 		
+		return $this->script->enqueueScript();
 	}
-	
 	/**
 	 * Getter
 	 * 
-	 * @return mixed Extra data
-	 */
-	public function getExtradata() {
-		
-		return $this->slug->getExtradata();
-	}
-
-	/**
-	 * Getter
-	 * 
-	 * @return string The page slug
+	 * @return string The current script handle
 	 */	
-	public function getSlug() {
+	public function getHandle() {
 
-		return $this->slug->getSlug();
+		return $this->script->getHandle();
 	}
-
-	/**
-	 * Setter
-	 * 
-	 * @param mixed $data Extra data
-	 */
-	public function setExtradata( $data ) {
-
-		$this->extra_data = $data;
-	}	
-	
 }
