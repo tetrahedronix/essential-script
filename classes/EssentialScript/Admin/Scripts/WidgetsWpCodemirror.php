@@ -65,11 +65,10 @@ class WidgetsWPCodemirror extends \EssentialScript\Admin\Scripts\Decorator {
 				)
 			)
 		); */
-		$extra_data = $this->script->extra_data;
 		/*
 		 * Enable an option under certain conditions 
 		 */		
-		switch ( $extra_data[0] ) {
+		switch ( $this->script->extra_data[0] ) {
 			case 'javascript':
 				$mode = array ( 'name' => "javascript" );
 				break;
@@ -105,7 +104,7 @@ class WidgetsWPCodemirror extends \EssentialScript\Admin\Scripts\Decorator {
 		wp_add_inline_script( 'wp-codemirror-widgets', 
 			sprintf( "wp.essentialScriptWidgets.init( %s, %s );",
 				wp_json_encode( $settings ),
-				wp_json_encode( $extra_data[1] ) ) 
+				wp_json_encode( $this->script->extra_data[1] ) ) 
 		);		 
 		// Used with admin_enqueue_scripts hook 
 		return $this->script->enqueueScript();		
