@@ -59,27 +59,16 @@ class Widget extends \WP_Widget {
 				'Arbitrary Javascript/XML code.', 'essential-script'),
 			'customize_selective_refresh' => true
 		);
-		// Necessary dependencies to run Codemirror inside the Widget.
-		$accessories = array (
-			'widgets-wp-codemirror',
-		);
 		/* __CLASS__: ID for the tags <div>
 		 * 'Essential Script': widget title displayed in the Widgets screen.
 		 * $widget_opts: widget options.
 		 */
-		parent::__construct(
-			self::CLASS_WIDGET,
+		parent::__construct( self::CLASS_WIDGET,
 			esc_html__( 'Essential Script', 'essential-script' ), 
 			$widget_opts
 		);
 		//if ( is_active_widget( false, false, $this->id_base ) || is_customize_preview() ) {
-		$highlighter = 'xml';
-		
-		if ( $this->options->offsetExists( 'highlighter' ) ) {
-			$highlighter = $this->options['highlighter'];
-		} 
-
-		new \EssentialScript\Admin\Queuing( 'widgets', $accessories, array ( $highlighter, $this->id_base ) );
+		add_action( 'current_screen', array( $this, 'enqueue_admin_scripts') );
 		//} 
 	}
 	
@@ -189,5 +178,27 @@ class Widget extends \WP_Widget {
 			sanitize_text_field( $new_instance['title'] ) : '';
 		
 		return $instance;
+	}
+	/**
+	 * Loads the required scripts and styles for the widget control.
+	 * 
+	 * @param object $current_screen Current WP_Screen object.
+	 * @since 0.9
+	 */
+	public function enqueue_admin_scripts( $current_screen ) {
+		$highlighter = 'xml';
+		
+		if ( $this->options->offsetExists( 'highlighter' ) ) {
+			$highlighter = $this->options['highlighter'];
+		} 
+		
+		if ( 'widgets' === $current_screen->id ) {
+			new \EssentialScript\Admin\Queuing(
+				'widgets',
+				// Necessary dependencies to run Codemirror inside the Widget.
+				array ( 'widgets-wp-codemirror' ),
+				array ( $highlighter, $this->id_base ) );
+		}
+		
 	}
 }
