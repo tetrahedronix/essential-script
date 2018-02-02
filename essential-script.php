@@ -77,6 +77,21 @@ if ( is_admin() ) {
 			slug( $page_essentialscript )->
 			tools();
 	} );
+	/*
+	 * From http://codex.wordpress.org
+	 * 
+	 * get_current_screen() is defined on most admin pages, but not all. Thus
+	 * there are cases where is_admin() will return true, but attempting to call
+	 * get_current_screen() will result in a fatal error because it is not
+	 * defined. It should be OK to use in a later hook such as current_screen.
+	 */
+	add_action( 'current_screen', function( $current_screen ) {
+		if ( \EssentialScript\Admin\Menu::get_suffix() === $current_screen->id ) {
+			//  Attach the Essential Script Pointer to the admin page.
+			new \EssentialScript\Admin\PointerEssentialscript(
+			\EssentialScript\Admin\Menu::get_suffix() );
+		}
+	} );			
 }
 /*
  * Widget API
