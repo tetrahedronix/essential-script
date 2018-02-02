@@ -35,7 +35,7 @@ class PageEssentialscript extends \EssentialScript\Admin\Page {
 		if ( !current_user_can( 'manage_options' ) ) {
 			return;
 		}
-		
+
 		// check if the user have submitted the settings
 	    if ( isset( $_GET['settings-updated'] ) ) {
 		    // add settings saved message with the class of "updated"
@@ -69,7 +69,9 @@ class PageEssentialscript extends \EssentialScript\Admin\Page {
 		?>
 	</form>	
 </div>
-<?php		
+<?php
+	// Display a pointer that highlights a warning message.
+	do_action( 'essentialscript_pointer' );
 	}
 	/**
 	 * Use the Factory Pattern to create fieldsets and sections.
