@@ -22,7 +22,7 @@ namespace EssentialScript\Admin\Settings\Feature;
  *
  * @author docwho
  */
-class Defer extends \EssentialScript\Admin\SettingsFeature {
+class Defer extends \EssentialScript\Admin\Settings\SettingsFeature {
 	
 	/**
 	 * Includes the code that can be used to display the Defer option.

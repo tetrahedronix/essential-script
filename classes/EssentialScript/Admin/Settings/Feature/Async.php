@@ -23,7 +23,7 @@ namespace EssentialScript\Admin\Settings\Feature;
  *
  * @author docwho
  */
-class Async extends \EssentialScript\Admin\SettingsFeature {
+class Async extends \EssentialScript\Admin\Settings\SettingsFeature {
 	
 	/**
 	 * Includes the code that can be used to display the Async option.

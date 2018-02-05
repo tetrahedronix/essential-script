@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace EssentialScript\Admin;
+namespace EssentialScript\Admin\Settings;
 
 /**
  * Provides the concrete template method and the feature to implement in
