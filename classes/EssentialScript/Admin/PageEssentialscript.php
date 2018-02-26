@@ -18,6 +18,14 @@
  */
 namespace EssentialScript\Admin;
 
+use EssentialScript\Admin\Settings\EssentialscriptSection as Section;
+use EssentialScript\Admin\Settings\EssentialscriptHighlighter as Highlighter;
+use EssentialScript\Admin\Settings\EssentialscriptTextarea as Textarea;
+use EssentialScript\Admin\Settings\EssentialscriptWhere as Where;
+use EssentialScript\Admin\Settings\EssentialscriptPages as Pages;
+use EssentialScript\Admin\Settings\EssentialscriptStorage as Storage;
+use EssentialScript\Admin\Settings\Feature\Async as Async;
+use EssentialScript\Admin\Settings\Feature\Defer as Defer;
 /**
  * Manages the administration page, print the fields.
  *
@@ -101,65 +109,46 @@ class PageEssentialscript extends \EssentialScript\Admin\Page {
 		add_settings_section(
 			'essentialscript_section_id',		// HTML ID tag
 			'Script Area',			// The section title text
-			// Callback that will echo some explanations
-			$section->doFactory( new \EssentialScript\Admin\Settings\EssentialscriptSection ),	
-			$this->submenu_page		// Settings page
-		);
+			// Callback that will echo some explanations and Settings page
+			$section->doFactory( new Section ), $this->submenu_page	);
 		// Register a settings field to a settings page and section.
 		$field = new \EssentialScript\Admin\Settings\FieldCreator;
 		add_settings_field(
 			'essentialscript_highlighter',
 			__( 'What syntax highlighter to use', 'essential-script' ),
-			$field->doFactory( new \EssentialScript\Admin\Settings\EssentialscriptHighlighter ),
-			$this->submenu_page,
-			'essentialscript_section_id'
-		);
+			$field->doFactory( new Highlighter ), $this->submenu_page,
+			'essentialscript_section_id' );
 		add_settings_field(
 			'essentialscript_textarea',
 			__( 'Enter the script code here', 'essential-script' ),
-			$field->doFactory( new \EssentialScript\Admin\Settings\EssentialscriptTextarea ),
-			$this->submenu_page,
-			'essentialscript_section_id'			
-		);
+			$field->doFactory( new Textarea ),	$this->submenu_page,
+			'essentialscript_section_id' );
 		add_settings_field(
 			'essentialscript_radiobutton_where',
 			__( 'Choose where to plug the script', 'essential-script' ),  
-			$field->doFactory( new \EssentialScript\Admin\Settings\EssentialscriptWhere ),
-			$this->submenu_page,
+			$field->doFactory( new Where ), $this->submenu_page,
 			'essentialscript_section_id' );
 		add_settings_field(
 			'essentialscript_checkbox_pages',
 			__( 'What pages include the script', 'essential-script' ),
-			$field->doFactory( new \EssentialScript\Admin\Settings\EssentialscriptPages ),
-			$this->submenu_page,
-			'essentialscript_section_id'
-		);
+			$field->doFactory( new Pages ),	$this->submenu_page,
+			'essentialscript_section_id' );
 		add_settings_field(
 			'essentialscript_radiobutton_storage',
 			__( 'Choose where to store the script', 'essential-script' ),
-			$field->doFactory( new \EssentialScript\Admin\Settings\EssentialscriptStorage ),
-			$this->submenu_page,
-			'essentialscript_section_id'
-		);
+			$field->doFactory( new Storage ), $this->submenu_page,
+			'essentialscript_section_id' );
 		// Add the Async feature to File option
 		add_filter( 'essentialscript_filefeature',
 			// The callback to be run when the filter is applied.
-			array (
-				new \EssentialScript\Admin\Settings\Feature\Async,
-				'templateMethod' ),
+			array (	new Async, 'templateMethod' ),
 			// Used to specify the order in which the function is executed
 			10,
 			// The number of arguments the function accepts. Default value: 1
-			3
-		);
+			3 );
 		// Add the Defer feature to File option
 		add_filter( 'essentialscript_filefeature',
-			array (
-				new \EssentialScript\Admin\Settings\Feature\Defer,
-				'templateMethod' ),
-			10,
-			3
-		);
+			array (	new Defer, 'templateMethod' ), 10, 3 );
 	}
 	
 	/**
@@ -300,7 +289,7 @@ class PageEssentialscript extends \EssentialScript\Admin\Page {
 		} else {
 			$f = sanitize_file_name( $input['filename'] );
 		} */
-
+		
 		/*
 		 *  Sanitize the radio buttons:
 		 */
@@ -322,8 +311,8 @@ class PageEssentialscript extends \EssentialScript\Admin\Page {
 				$sane['filename'] = $f;
 				$sane['script'] = '';
 				break;
-		} 
-
+		} 		
+		
 		return $sane;
 	}
 }
